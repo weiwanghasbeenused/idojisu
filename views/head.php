@@ -3,9 +3,6 @@
 require_once('open-records-generator/config/config.php');
 require_once('open-records-generator/config/url.php');
 
-// site
-require_once('static/php/config.php');
-
 $db = db_connect("guest");
 $oo = new Objects();
 $mm = new Media();
@@ -31,59 +28,11 @@ if($uu->id) {
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title><? echo $site; ?></title>
+		<title>I DO JISU</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/static/css/main.css">
-		<link rel="stylesheet" href="/static/css/sf-text.css">
-		<link rel="stylesheet" href="/static/css/sf-mono.css">
 		<link rel="apple-touch-icon" href="/media/png/touchicon.png" />
 	</head>
-	<body><?
-	    if(!$uu->id) {
-    	    ?><header id="menu" class="hidden homepage"><?
-	    }
-	    else if($show_menu) {
-    	    ?><header id="menu" class="visible"><?
-	    }
-	    else {
-    	    ?><header id="menu" class="hidden"><?
-	    }
-	    ?><ul>
-		    <li><?
-			    if($uu->id) {
-				    ?><a href="<? echo $host; ?>"><?= $head; ?></a><?
-			    }
-			    else { 
-                    echo $head; 
-                }
-		    ?></li>
-		    <ul class="nav-level"><?
-	    $prevd = $nav[0]['depth'];
-	    foreach($nav as $n) {
-		    $d = $n['depth'];
-		    if($d > $prevd) {
-    		    ?><ul class="nav-level"><?
-		    }
-		    else {
-			    for($i = 0; $i < $prevd - $d; $i++) { 
-                    ?></ul><? 
-                }
-		    }
-		    ?><li><?
-			    if($n['o']['id'] != $uu->id) {
-    			    ?><a href="<? echo $host.$n['url']; ?>"><?
-				    echo $n['o']['name1'];
-                    if ($n['o']['url'] !== "about")
-    				    echo ', ' . $n['o']['deck'];
-	    		    ?></a><?
-			    }
-			    else {
-    			    ?><span><?= $n['o']['name1']; ?></span><?
-			    }
-		    ?></li><?
-		    $prevd = $d;
-	    }
-	    ?></ul>
-	    </ul>
-    </header>
+	<body>
+		<script src="/static/js/_touchScreen.js"></script>
