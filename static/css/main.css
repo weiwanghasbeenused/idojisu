@@ -15,6 +15,7 @@ body {
 	line-height: 22px;	
 	-webkit-font-smoothing: subpixel-antialiased;
 	-webkit-text-size-adjust: 100%;
+    font-family: chapman, sans-serif;
 }
 
 p {
@@ -43,7 +44,8 @@ header {
     z-index: 1000;
     width: 100vw;
     max-width: 100%;
-    background-color: rgba(0,0,0,.75);
+    /*background-color: rgba(0,0,0,.75);*/
+    background-color: #000;
 }
 
 ul {
@@ -54,6 +56,35 @@ ul {
 /* ids */
 
 #main {
+}
+#logo
+{
+    width: 130px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#logo-container
+{
+    position: relative;
+    /*background: url(../../media/svg/logo-light-grey.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;*/
+    height: 60px;
+}
+
+#header-wrapper #logo-container
+{
+    border-left: 1px solid var(--light-grey);
+    border-top: 1px solid var(--light-grey);
+    border-bottom: 1px solid var(--light-grey); 
+    height: auto;  
+}
+#header-wrapper #logo
+{
+    width: 80px;
 }
 
 
@@ -71,7 +102,7 @@ ul {
 .menu-item
 {
     color: var(--light-grey);
-    padding: 5px 0;
+    padding: 8px 0;
     text-align: center;
     display: block;
     cursor: pointer;
@@ -81,14 +112,85 @@ ul {
     border-top: 1px solid var(--light-grey);
     border-bottom: 1px solid var(--light-grey);   
 }
+
+.menu-version-2 .menu-item
+{
+    padding: 5px 0;
+}
+.menu-item > .blink-container
+{
+    margin-top: 4px;
+    vertical-align: top;
+}
 .menu-item-container:first-child .menu-item
 {
     border-left: none;
 }
 
+.blink-container
+{
+    position: relative;
+    min-width: 50px;
+    display: inline-block;
+    height: 5px;
+
+}
+.blink
+{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('../../media/svg/blink_1.svg');
+    display: none;
+}
+.blink-hover-zone:hover .blink,
+.blink-hover-zone.active .blink
+{
+    display: block;
+    animation: blinking_1 .75s infinite linear;
+}
+
+@keyframes blinking_1 {
+    0%
+    {
+        background-image: url('../../media/svg/blink_1.svg');
+    }
+    24.5%
+    {
+        background-image: url('../../media/svg/blink_1.svg');
+    }
+    25%
+    {
+        background-image: url('../../media/svg/blink_2.svg');
+    }
+    49.5%
+    {
+        background-image: url('../../media/svg/blink_2.svg');
+    }
+    50%
+    {
+        background-image: url('../../media/svg/blink_3.svg');
+    }
+    74.5%
+    {
+        background-image: url('../../media/svg/blink_3.svg');
+    }
+    75%
+    {
+        background-image: url('../../media/svg/blink_4.svg');
+    }
+    100%
+    {
+        background-image: url('../../media/svg/blink_4.svg');
+    }
+
+}
 /* laptop / tablet */
 @media screen and (min-width: 768px) {
-    header
+    #header-wrapper
     {
         display: flex;
     }
@@ -103,7 +205,8 @@ ul {
     }
     .noTouchScreen header:hover
     {
-        background-color: rgba(0,0,0,.75);
+        /*background-color: rgba(0,0,0,.75);*/
+        background-color: #000;
     }
     .noTouchScreen .menu-item:hover
     {

@@ -25,6 +25,9 @@ if($uu->id) {
     if ($uri[1])  
         $uu->id = -1; 
 
+$isHome = $uri[1] ? false : true;
+
+
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -33,6 +36,7 @@ if($uu->id) {
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/static/css/main.css">
 		<link rel="apple-touch-icon" href="/media/png/touchicon.png" />
+		<link rel="stylesheet" href="https://use.typekit.net/hpl4nwi.css">
 	</head>
 	<body>
 		<script src="/static/js/_touchScreen.js"></script>
