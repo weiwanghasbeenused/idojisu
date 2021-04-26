@@ -1,0 +1,13 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <rect x="17" y="1.02" width="2" height="2"/>
+  <rect x="1" y="1.02" width="2" height="2"/>
+  <rect x="17" y="16.94" width="2" height="2"/>
+  <rect x="1" y="16.94" width="2" height="2"/>
+  <rect x="9" y="9" width="2" height="2"/>
+  <g>
+    <rect x="9" y="1.06" width="2" height="5.93"/>
+    <polygon points="7 8.99 5 8.99 3 8.99 1 8.99 1 10.99 3 10.99 5 10.99 7 10.99 7 8.99"/>
+    <polygon points="9 13 9 14.94 9 14.99 9 16.94 9 18.94 11 18.94 11 16.94 11 14.99 11 14.94 11 13 9 13"/>
+    <polygon points="17 8.99 15 8.99 13 8.99 13 10.99 15 10.99 17 10.99 19 10.99 19 8.99 17 8.99"/>
+  </g>
+</svg>
