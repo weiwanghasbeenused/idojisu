@@ -35,3 +35,12 @@ function checkCookie(name) {
 	else
 		return false;
 }
+
+
+var wW = window.innerWidth;
+var wH = window.innerHeight;
+
+var critical_w_menu = 768;
+isOnePageMenu = false;
+if(wW < critical_w_menu)
+	isOnePageMenu = true;

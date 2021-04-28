@@ -46,6 +46,7 @@ header {
     max-width: 100%;
     /*background-color: rgba(0,0,0,.75);*/
     background-color: #000;
+    font-family: ibm_plex_mono, sans-serif;
 }
 
 ul {
@@ -99,32 +100,39 @@ ul {
     display: block;
 }
 
-.menu-item
+.menu-item,
+.submenu-item
 {
     color: var(--light-grey);
-    padding: 8px 0;
+    padding: 12px 0;
     text-align: center;
     display: block;
     cursor: pointer;
     font-size: 14px;
     line-height: 14px;
-    border-left: 1px solid var(--light-grey);
     border-top: 1px solid var(--light-grey);
-    border-bottom: 1px solid var(--light-grey);   
 }
-
-.menu-version-2 .menu-item
+.submenu-container
 {
-    padding: 5px 0;
+    display: none;
 }
-.menu-item > .blink-container
+.submenu-parent.expanded .submenu-container
+{
+    display: block;
+}
+.submenu-item-container
+{
+    padding: 0 12%;
+}
+.menu-item > .blink-container,
+.submenu-item > .blink-container
 {
     margin-top: 4px;
     vertical-align: top;
 }
-.menu-item-container:first-child .menu-item
+.menu-item-container:last-child .menu-item
 {
-    border-left: none;
+    border-bottom: 1px solid var(--light-grey);
 }
 
 .blink-container
@@ -146,7 +154,8 @@ ul {
     background-image: url('../../media/svg/blink_1.svg');
     display: none;
 }
-.blink-hover-zone:hover .blink,
+.noTouchScreen .blink-hover-zone:hover > .menu-item .blink,
+.noTouchScreen .blink-hover-zone:hover > .submenu-item .blink,
 .blink-hover-zone.active .blink
 {
     display: block;
@@ -190,6 +199,19 @@ ul {
 }
 /* laptop / tablet */
 @media screen and (min-width: 768px) {
+    .menu-item,
+    .submenu-item
+    {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border-right: 1px solid var(--light-grey);
+        border-bottom: 1px solid var(--light-grey);
+    }
+    .submenu-item
+    {
+        border-top: none;
+        border-left: 1px solid var(--light-grey);
+    }
     #header-wrapper
     {
         display: flex;
@@ -208,12 +230,38 @@ ul {
         /*background-color: rgba(0,0,0,.75);*/
         background-color: #000;
     }
-    .noTouchScreen .menu-item:hover
+    .noTouchScreen .menu-item-container:hover > .menu-item,
+    .noTouchScreen .submenu-item:hover
     {
         color: #000;
     }
-    .noTouchScreen .menu-item-container:hover
+    .noTouchScreen .menu-item-container:hover,
+    .noTouchScreen .submenu-item-container:hover
     {
         background-color: var(--sky-blue);
+    }
+    .submenu-parent
+    {
+        position: relative;
+    }
+    .submenu-container
+    {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: -1px;
+    }
+    .menu-item-container:first-child .menu-item
+    {
+        border-left: none;
+    }
+    .noTouchScreen .submenu-parent:hover .submenu-container
+    {
+        display: block;
+    }
+    .submenu-item-container
+    {
+        background-color: #000;
+        padding: 0;
     }
 }

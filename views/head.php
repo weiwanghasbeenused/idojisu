@@ -34,9 +34,12 @@ $isHome = $uri[1] ? false : true;
 		<title>I DO JISU</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" href="/static/css/ibm-plex-mono.css">
 		<link rel="stylesheet" href="/static/css/main.css">
 		<link rel="apple-touch-icon" href="/media/png/touchicon.png" />
 		<link rel="stylesheet" href="https://use.typekit.net/hpl4nwi.css">
 	</head>
 	<body>
 		<script src="/static/js/_touchScreen.js"></script>
+		<script src="/static/js/_global.js"></script>
+		<script src="/static/js/_resize.js"></script>
