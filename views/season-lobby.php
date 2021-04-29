@@ -12,28 +12,23 @@
 	<? if(count($children) > 0){
 		?><div id="looks-container" class="slideshow-container horizontal-slideshow-container"><div class="hidden"><?
 		$children_count = count($children) > 10 ? count($children) : '0' . count($children);
-		foreach($children as $key => $child)
+		foreach($children as $key => $look)
 		{
-			var_dump($child['name1']);
-			$media = $oo->media($child['id']);
-			var_dump($media);
+			$media = $oo->media($look['id']);
 			$thumbnail = false;
 			if(count($media) > 0)
 			{
 				foreach( $media as $m ){
-					var_dump($m['caption']);
-					var_dump(strpos($m['caption'], $tag_thumbnail));
-					die();
 					if(strpos($m['caption'], $tag_thumbnail) !== false ){
 						$thumbnail = m_url($m);
 						$thumbnail_alt = substr($media['caption'], strpos($media['caption'], $tag_thumbnail) + strlen($tag_thumbnail));
-						$thumbnail_alt = $thumbnail_alt == '' ? 'Thumbnail of '.$child['name1'] : $thumbnail_alt;
+						$thumbnail_alt = $thumbnail_alt == '' ? 'Thumbnail of '.$look['name1'] : $thumbnail_alt;
 					}
 				}
 			}
 				
 
-			$url = implode('/', $uri) . '/' . $child['url'];
+			$url = implode('/', $uri) . '/' . $look['url'];
 			$blink_count = rand(4, 7);
 			$idx = ($key+1) >= 10 ? $key+1 : '0' . ($key+1);
 
@@ -47,9 +42,9 @@
 				}
 				else
 				{
-					?><p><?= $child['name1']; ?></p><?
+					?><p><?= $look['name1']; ?></p><?
 				}
-				?><p class="look-idx"><?= $idx; ?>/<?= $children_count; ?></p><?
+				?><p class="look-idx"><?= $idx; ?> / <?= $children_count; ?></p><?
 			?></a><?
 		}
 		?></div></div></div><?
