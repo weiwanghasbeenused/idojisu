@@ -14,7 +14,7 @@
 		$children_count = count($children) > 10 ? count($children) : '0' . count($children);
 		foreach($children as $key => $child)
 		{
-			var_dump($child['id']);
+			var_dump($child['name1']);
 			$media = $oo->media($child['id']);
 			var_dump($media);
 			$thumbnail = false;
