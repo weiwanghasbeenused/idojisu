@@ -11,7 +11,7 @@
 <main id="season-lobby-container" class="container">
 	<? if(count($children) > 0){
 		?><div id="looks-container" class="slideshow-container horizontal-slideshow-container"><div class="hidden"><?
-		$children_count = count($children) + 1 > 10 ? count($children) + 1 : '0' . (count($children) + 1);
+		$children_count = count($children) > 10 ? count($children) : '0' . count($children);
 		foreach($children as $key => $child)
 		{
 			$media = $oo->media($child['id']);
@@ -19,6 +19,9 @@
 			if(count($media) > 0)
 			{
 				foreach( $media as $m ){
+					var_dump($m['caption']);
+					var_dump(strpos($m['caption'], $tag_thumbnail));
+					die();
 					if(strpos($m['caption'], $tag_thumbnail) !== false ){
 						$thumbnail = m_url($m);
 						$thumbnail_alt = substr($media['caption'], strpos($media['caption'], $tag_thumbnail) + strlen($tag_thumbnail));
