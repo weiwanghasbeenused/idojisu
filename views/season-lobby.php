@@ -28,7 +28,7 @@
 			}
 				
 
-			$url = implode($uri, '/') . '/' . $child['url'];
+			$url = implode('/', $uri) . '/' . $child['url'];
 			$blink_count = rand(4, 7);
 			$idx = ($key+1) >= 10 ? $key+1 : '0' . ($key+1);
 
