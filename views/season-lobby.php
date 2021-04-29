@@ -15,6 +15,7 @@
 		foreach($children as $key => $child)
 		{
 			$media = $oo->media($child['id']);
+			var_dump($media);
 			$thumbnail = false;
 			if(count($media) > 0)
 			{
