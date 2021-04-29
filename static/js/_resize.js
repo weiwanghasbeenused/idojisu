@@ -23,6 +23,7 @@ window.addEventListener('resize', function(){
 					el.classList.remove('expanded');
 				});
 			}
+			body.classList.remove('viewing-menu');
 		}
 	}
 });

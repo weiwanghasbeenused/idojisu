@@ -14,7 +14,7 @@
 	<? if($menu_version == 1){
 		?><div id="logo-container"><a href = '/'><img id="logo" src = "/media/svg/logo-light-grey.svg"></a></div><?
 	} ?>
-	<div id="header-wrapper">
+	<nav id="menu">
 		<? foreach($menu_items as $m_item){
 			$url = '/' . $m_item['url'];
 			$isDropdown = !(strpos($m_item['deck'], '[dropdown]') === false);
@@ -43,23 +43,31 @@
 		<? if($menu_version == 2){
 			?><div id="logo-container"><a href = '/'><img id="logo" src = "/media/svg/logo-light-grey.svg"></a></div><?
 		} ?>
+	</nav>
+	<div id="menu-toggle">
+		<div class="menu-icon-bar"></div>
+		<div class="menu-icon-bar"></div>
+		<div class="menu-icon-bar"></div>
 	</div>
 </header>
+<div id="menu-background" class="fullpage"></div>
 <script>
+	var sSubmenu_parent = document.getElementsByClassName('submenu-parent');
 	
-
-		var sSubmenu_parent = document.getElementsByClassName('submenu-parent');
-		
-		if(sSubmenu_parent.legnth != 0)
-		{
-			[].forEach.call(sSubmenu_parent, function(el, i){
-				el.addEventListener('click', function(){
-					if(isOnePageMenu){
-						console.log(sSubmenu_parent[0]);
-						el.classList.toggle('expanded');
-					}
-				});
+	if(sSubmenu_parent.legnth != 0)
+	{
+		[].forEach.call(sSubmenu_parent, function(el, i){
+			el.addEventListener('click', function(){
+				if(isOnePageMenu){
+					console.log(sSubmenu_parent[0]);
+					el.classList.toggle('expanded');
+				}
 			});
-		}
+		});
+	}
 
+	var menu_toggle = document.getElementById('menu-toggle');
+	menu_toggle.addEventListener('click', function(){
+		body.classList.toggle('viewing-menu');
+	});
 </script>

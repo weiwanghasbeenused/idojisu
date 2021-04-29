@@ -23,3 +23,5 @@ media/*.mp4
 backup
 sync
 log
+
+*.sql

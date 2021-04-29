@@ -36,6 +36,7 @@ function checkCookie(name) {
 		return false;
 }
 
+var body = document.body;
 
 var wW = window.innerWidth;
 var wH = window.innerHeight;
