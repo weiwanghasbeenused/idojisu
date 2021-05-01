@@ -27,6 +27,7 @@ if($uu->id) {
 
 $isHome = $uri[1] ? false : true;
 
+require_once('static/php/function.php');
 
 ?><!DOCTYPE html>
 <html>

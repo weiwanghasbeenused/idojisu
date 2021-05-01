@@ -21,6 +21,9 @@
 			$this_class = 'menu-item-container blink-hover-zone';
 			if($isDropdown)
 				$this_class .= ' submenu-parent';
+			$isActive = ($uri[1] == $m_item['url']); 
+			if($isActive)
+				$this_class .= ' active';
 			?><div class="<?= $this_class; ?>"><? 
 			if($isDropdown){
 				$submenu_items = $oo->children($m_item['id']);
