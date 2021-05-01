@@ -1,0 +1,72 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        stroke: #a2a9ad;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-4 {
+        fill: #a2a9ad;
+      }
+
+      .cls-5 {
+        clip-path: url(#clip-path-2);
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect class="cls-1" x="1" y="1" width="38" height="38"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect class="cls-1" x="51" y="1" width="38" height="38"/>
+    </clipPath>
+  </defs>
+  <g class="cls-2">
+    <g>
+      <line class="cls-3" x1="11" y1="20" x2="43" y2="20"/>
+      <rect class="cls-4" x="39" y="11" width="2" height="2"/>
+      <rect class="cls-4" x="37" y="9" width="2" height="2"/>
+      <rect class="cls-4" x="35" y="7" width="2" height="2"/>
+      <rect class="cls-4" x="39" y="13" width="2" height="2"/>
+      <rect class="cls-4" x="37" y="11" width="2" height="2"/>
+      <rect class="cls-4" x="35" y="9" width="2" height="2"/>
+      <rect class="cls-4" x="33" y="7" width="2" height="2"/>
+      <rect class="cls-4" x="39" y="27" width="2" height="2"/>
+      <rect class="cls-4" x="37" y="29" width="2" height="2"/>
+      <rect class="cls-4" x="35" y="31" width="2" height="2"/>
+      <rect class="cls-4" x="39" y="25" width="2" height="2"/>
+      <rect class="cls-4" x="37" y="27" width="2" height="2"/>
+      <rect class="cls-4" x="35" y="29" width="2" height="2"/>
+      <rect class="cls-4" x="33" y="31" width="2" height="2"/>
+      <line class="cls-3" x1="-29" y1="20" x2="3" y2="20"/>
+      <rect class="cls-4" x="5" y="17" width="2" height="2"/>
+      <rect class="cls-4" x="7" y="19" width="2" height="2"/>
+      <rect class="cls-4" x="5" y="19" width="2" height="2"/>
+      <rect class="cls-4" x="3" y="15" width="2" height="2"/>
+      <rect class="cls-4" x="1" y="13" width="2" height="2"/>
+      <rect class="cls-4" x="-1" y="11" width="2" height="2"/>
+      <rect class="cls-4" x="3" y="17" width="2" height="2"/>
+      <rect class="cls-4" x="1" y="15" width="2" height="2"/>
+      <rect class="cls-4" x="-1" y="13" width="2" height="2"/>
+      <rect class="cls-4" x="5" y="21" width="2" height="2"/>
+      <rect class="cls-4" x="3" y="23" width="2" height="2"/>
+      <rect class="cls-4" x="1" y="25" width="2" height="2"/>
+      <rect class="cls-4" x="-1" y="27" width="2" height="2"/>
+      <rect class="cls-4" x="3" y="21" width="2" height="2"/>
+      <rect class="cls-4" x="1" y="23" width="2" height="2"/>
+      <rect class="cls-4" x="-1" y="25" width="2" height="2"/>
+    </g>
+  </g>
+  <g class="cls-5">
+    <line class="cls-3" x1="31" y1="20" x2="63" y2="20"/>
+  </g>
+</svg>
