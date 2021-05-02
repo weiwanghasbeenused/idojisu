@@ -33,7 +33,7 @@
 
 ?>
 <div id="detail-layout-container" class="main-container">
-	<aside>
+	<aside id="left-side-container">
 		<div id="accessory-container">
 			<h2 class="detail-blockname">Items</h2>
 			<? if(!empty($accessory_items)){
@@ -56,10 +56,6 @@
 						</div>
 						<?
 					}
-					if(count($accessory_media) % 2 != 0)
-					{
-						?><div class="accessory-item placeholder"></div><?
-					}
 					?></div><?
 				}
 				?><?
@@ -73,7 +69,7 @@
 			<img id="gallery-image" class="detail-image" src="<?= $default; ?>" alt="<?= $default_alt; ?>" img-url="<?= $default; ?>">
 		</div>
 	</main>
-	<aside>
+	<aside id="right-side-container">
 		<div id="detail-container">
 			<h2 class="detail-blockname">Details</h2>
 			<p id="detail-text"><?= $detail_text; ?></p>
