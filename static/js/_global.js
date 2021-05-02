@@ -42,6 +42,6 @@ var wW = window.innerWidth;
 var wH = window.innerHeight;
 
 var critical_w_menu = 768;
-isOnePageMenu = false;
+isWebLayout = false;
 if(wW < critical_w_menu)
-	isOnePageMenu = true;
+	isWebLayout = true;

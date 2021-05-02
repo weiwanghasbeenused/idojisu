@@ -36,6 +36,7 @@
 	<aside id="left-side-container">
 		<div id="accessory-container">
 			<h2 class="detail-blockname">Items</h2>
+			<h2 id="items-toggle" class="blink-hover-zone detail-blockname"><span class="blink-container"></span>Items<span class="blink-container"></span></h2>
 			<? if(!empty($accessory_items)){
 				$accessory_media = $oo->media($accessory_items['id']);
 				if(count($accessory_media) > 0)
@@ -62,18 +63,7 @@
 			} ?>
 		</div>
 	</aside>
-	<main id="season-detail-container" class="container">
-		<div id="gallery-frame" class="detail-block">
-			<div id="gallery-default-toggle" class="detail-blockname">&otimes;</div>
-			<h1 class="detail-blockname"><?= $item['name1']; ?></h1>
-			<img id="gallery-image" class="detail-image" src="<?= $default; ?>" alt="<?= $default_alt; ?>" img-url="<?= $default; ?>">
-		</div>
-	</main>
 	<aside id="right-side-container">
-		<div id="detail-container">
-			<h2 class="detail-blockname">Details</h2>
-			<p id="detail-text"><?= $detail_text; ?></p>
-		</div>
 		<div id="gallery-container">
 			<h2 class="detail-blockname">Gallery</h2>
 			<? if(count($gallery_media) > 0){
@@ -91,8 +81,50 @@
 			} ?>
 		</div>
 	</aside>
+	<main id="season-detail-container" class="container">
+		<div id="gallery-frame" class="detail-block">
+			<div id="gallery-default-toggle" class="detail-blockname">&otimes;</div>
+			<h1 class="detail-blockname"><?= $item['name1']; ?></h1>
+			<img id="gallery-image" class="detail-image" src="<?= $default; ?>" alt="<?= $default_alt; ?>" img-url="<?= $default; ?>">
+		</div>
+		<div id="detail-container">
+			<h2 class="detail-blockname">Details</h2>
+			<p id="detail-text"><?= $detail_text; ?></p>
+		</div>
+	</main>
+	
 </div>
 <script type="text/javascript" src="/static/js/detail-gallery.js"></script>
 <script>
 	gallery_init();
+	if(!isWebLayout)
+	{
+		var sRight_side_container = document.getElementById('right-side-container');
+		var sSeason_detail_container = document.getElementById('season-detail-container');
+		var sDetail_container = document.getElementById('detail-container');
+
+		sRight_side_container.parentNode.appendChild(sRight_side_container);
+		sRight_side_container.insertBefore(sDetail_container, sRight_side_container.firstChild);
+	}
+	else
+	{
+		var sItems_toggle = document.getElementById('items-toggle');
+		if(sItems_toggle != undefined)
+		{
+			sItems_toggle.addEventListener('click', function(){
+				body.classList.toggle('viewing-items');
+				body.classList.toggle('fadeout');
+				sItems_toggle.classList.toggle('active');
+			});
+			var mask = document.getElementById('mask');
+			if(mask != undefined)
+			{
+				mask.addEventListener('click', function(){
+					body.classList.remove('viewing-items');
+					body.classList.remove('fadeout');
+					sItems_toggle.classList.remove('active');
+				});
+			}
+		}
+	}
 </script>
