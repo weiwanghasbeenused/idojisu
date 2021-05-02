@@ -61,7 +61,7 @@
 	{
 		[].forEach.call(sSubmenu_parent, function(el, i){
 			el.addEventListener('click', function(){
-				if(isOnePageMenu){
+				if(isWebLayout){
 					console.log(sSubmenu_parent[0]);
 					el.classList.toggle('expanded');
 				}
@@ -74,3 +74,4 @@
 		body.classList.toggle('viewing-menu');
 	});
 </script>
+<div id="mask" class="fullpage"></div>

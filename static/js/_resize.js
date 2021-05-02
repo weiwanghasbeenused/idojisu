@@ -8,11 +8,11 @@ window.addEventListener('resize', function(){
 		if(window.innerWidth == wW && window.innerHeight == wH)
 		{
 			if(wW < critical_w_menu){
-				if(!isOnePageMenu)
-					isOnePageMenu = true;
+				if(!isWebLayout)
+					isWebLayout = true;
 			}
 			else{
-				if(isOnePageMenu)
+				if(isWebLayout)
 				{
 					isOnePageMenu = false;
 					var sSubmenu_parent_expanded = document.querySelectorAll('.submenu-parent.expanded');
