@@ -21,6 +21,7 @@ body {
     font-family: ibm_plex_mono, monospace;
     background-color: #000;
     color: var(--light-grey);
+    padding-bottom: 50px;
 }
 body.fadeout
 {
@@ -451,6 +452,8 @@ h1.detail-blockname,
     background-color: #000;
     transform: translate(0, -100%);
     z-index: -1;
+    max-height: 60vh;
+    overflow: scroll;
 }
 .viewing-gallery-list #gallery-item-container
 {
@@ -785,6 +788,8 @@ h1.detail-blockname,
         transform: none;
         position: static;
         width: auto;
+        max-height: none;
+        overflow: visible;
     }
     .gallery-option
     {
