@@ -34,97 +34,149 @@
 ?>
 <div id="detail-layout-container" class="main-container">
 	<aside id="left-side-container">
-		<div id="accessory-container">
-			<h2 class="detail-blockname">Items</h2>
-			<h2 id="items-toggle" class="blink-hover-zone detail-blockname"><span class="blink-container"></span>Items<span class="blink-container"></span></h2>
-			<? if(!empty($accessory_items)){
-				$accessory_media = $oo->media($accessory_items['id']);
-				if(count($accessory_media) > 0)
-				{
-					?><div id="accessory-item-container"><?
-					foreach($accessory_media as $m)
+		
+	</aside><main id="season-detail-container" class="container">
+		<div id="season-detail-sticky-container">
+			<h1 class="detail-blockname"><?= $item['name1']; ?></h1>
+			<div id="gallery-default-toggle" class="detail-blockname">&otimes;</div>
+			<div id="accessory-container">
+				<h2 class="detail-blockname">Items</h2>
+				<h2 id="items-toggle" class="blink-hover-zone detail-blockname"><span class="blink-container"></span>Items<span class="blink-container"></span></h2>
+				<? if(!empty($accessory_items)){
+					$accessory_media = $oo->media($accessory_items['id']);
+					if(count($accessory_media) > 0)
 					{
-						$src = m_src($m);						
-						preg_match_all($bracket_pattern, $m['caption'], $item_info);
-	 					$rank = $item_info[1][0];
-						$name = $item_info[2][0];
-						$alt = $name;
-						?><div class="accessory-item">
-							<div class="accessory-item-img" style="background-image:url(<?= $src; ?>);"></div>
-							<div class="accessory-item-info">
-								<p><?= $name; ?></p>
+						?><div id="accessory-item-container"><?
+						foreach($accessory_media as $m)
+						{
+							$src = m_src($m);						
+							preg_match_all($bracket_pattern, $m['caption'], $item_info);
+		 					$rank = $item_info[1][0];
+							$name = $item_info[2][0];
+							$alt = $name;
+							?><div class="accessory-item">
+								<div class="accessory-item-img" style="background-image:url(<?= $src; ?>);"></div>
+								<div class="accessory-item-info">
+									<p><?= $name; ?></p>
+									<div id="rank-container">
+										<? for($i = 0; $i < $rank; $i++){
+											?><span class="rank active"></span><?
+										} 
+										for($i = 0; $i< 5-$rank; $i++ )
+										{
+											?><span class="rank"></span><?
+										}
+										?>
+
+									</div>
+								</div>
 							</div>
-						</div>
-						<?
+							<?
+						}
+						?></div><?
+					}
+					?><?
+				} ?>
+			</div><div id="gallery-container">
+				<h2 class="detail-blockname">Gallery</h2>
+				<h2 id="gallery-toggle" class="blink-hover-zone detail-blockname"><span class="blink-container"></span>Gallery<span class="blink-container"></span></h2>
+				<? if(count($gallery_media) > 0){
+					?><div id="gallery-item-container"><?
+					foreach($gallery_media as $m)
+					{
+						if(substr($m['caption'], 0, 1) != '.')
+						{
+							$src = m_src($m);
+							$url = m_url($m);
+							?><div class="gallery-option" style="background-image:url(<?= $src; ?>);" img-url="<?= $url; ?>"></div><?
+						}
 					}
 					?></div><?
-				}
-				?><?
-			} ?>
+				} ?>
+			</div>
 		</div>
-	</aside>
-	<aside id="right-side-container">
-		<div id="gallery-container">
-			<h2 class="detail-blockname">Gallery</h2>
-			<? if(count($gallery_media) > 0){
-				?><div id="gallery-item-container"><?
-				foreach($gallery_media as $m)
-				{
-					if(substr($m['caption'], 0, 1) != '.')
-					{
-						$src = m_src($m);
-						$url = m_url($m);
-						?><div class="gallery-option" style="background-image:url(<?= $src; ?>);" img-url="<?= $url; ?>"></div><?
-					}
-				}
-				?></div><?
-			} ?>
-		</div>
-	</aside>
-	<main id="season-detail-container" class="container">
 		<div id="gallery-frame" class="detail-block">
-			<div id="gallery-default-toggle" class="detail-blockname">&otimes;</div>
-			<h1 class="detail-blockname"><?= $item['name1']; ?></h1>
 			<img id="gallery-image" class="detail-image" src="<?= $default; ?>" alt="<?= $default_alt; ?>" img-url="<?= $default; ?>">
 		</div>
 		<div id="detail-container">
 			<h2 class="detail-blockname">Details</h2>
 			<p id="detail-text"><?= $detail_text; ?></p>
 		</div>
-	</main>
-	
+	</main><aside id="right-side-container">
+		
+	</aside>
 </div>
 <script type="text/javascript" src="/static/js/detail-gallery.js"></script>
 <script>
 	gallery_init();
 	if(!isWebLayout)
 	{
-		var sRight_side_container = document.getElementById('right-side-container');
-		var sSeason_detail_container = document.getElementById('season-detail-container');
+		var sAccessory_container = document.getElementById('accessory-container');
+		var sGallery_container = document.getElementById('gallery-container');
 		var sDetail_container = document.getElementById('detail-container');
 
-		sRight_side_container.parentNode.appendChild(sRight_side_container);
-		sRight_side_container.insertBefore(sDetail_container, sRight_side_container.firstChild);
+		var sRight_side_container = document.getElementById('right-side-container');
+		var sLeft_side_container = document.getElementById('left-side-container');
+
+		sRight_side_container.appendChild(sDetail_container);
+		sRight_side_container.appendChild(sGallery_container);
+		sLeft_side_container.appendChild(sAccessory_container);
+
 	}
 	else
 	{
 		var sItems_toggle = document.getElementById('items-toggle');
+		var sGallery_toggle = document.getElementById('gallery-toggle');
+		var mask = document.getElementById('mask');
+
 		if(sItems_toggle != undefined)
 		{
 			sItems_toggle.addEventListener('click', function(){
-				body.classList.toggle('viewing-items');
-				body.classList.toggle('fadeout');
+				if(body.classList.contains('viewing-items-list'))
+				{
+					body.classList.remove('viewing-items-list');
+					body.classList.remove('fadeout');
+				}
+				else
+				{
+					body.classList.add('viewing-items-list');
+					body.classList.remove('viewing-gallery-list');
+					sGallery_toggle.classList.remove('active');
+					body.classList.add('fadeout');
+				}
 				sItems_toggle.classList.toggle('active');
 			});
-			var mask = document.getElementById('mask');
-			if(mask != undefined)
-			{
-				mask.addEventListener('click', function(){
-					body.classList.remove('viewing-items');
+			
+		}
+		
+		if(sGallery_toggle != undefined)
+		{
+			sGallery_toggle.addEventListener('click', function(){
+				if(body.classList.contains('viewing-gallery-list'))
+				{
+					body.classList.remove('viewing-gallery-list');
 					body.classList.remove('fadeout');
+				}
+				else
+				{
+					body.classList.add('viewing-gallery-list');
+					body.classList.remove('viewing-items-list');
 					sItems_toggle.classList.remove('active');
-				});
-			}
+					body.classList.add('fadeout');
+				}
+				sGallery_toggle.classList.toggle('active');
+			});
+		}
+
+		if(mask != undefined)
+		{
+			mask.addEventListener('click', function(){
+				body.classList.remove('viewing-items-list');
+				body.classList.remove('viewing-gallery-list');
+				body.classList.remove('fadeout');
+				sItems_toggle.classList.remove('active');
+				sGallery_toggle.classList.remove('active');
+			});
 		}
 	}
 </script>

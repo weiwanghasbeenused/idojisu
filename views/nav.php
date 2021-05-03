@@ -74,4 +74,4 @@
 		body.classList.toggle('viewing-menu');
 	});
 </script>
-<div id="mask" class="fullpage"></div>
+<div id="mask" class="fullpage"><span id="btn-close-mask">close</span></div>
