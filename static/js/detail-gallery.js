@@ -42,25 +42,12 @@ function gallery_init(elements=false, image=false, toggle=false){
 			
 		});
 	});
-
-	toggle.addEventListener('click', function(){
-		body.classList.remove('viewing-gallery');
-		var activeThumbnail = elements[0].parentNode.querySelector('.active');
-		activeThumbnail.classList.remove('active');
-		if(isWebLayout)
-		{
-			body.classList.remove('viewing-gallery-list');
-			body.classList.remove('fadeout');
-		}
-		// image.src = default_url;
-	});
 }
-function items_init(elements=false, frame=false, toggle=false)
+function items_init(elements=false, frame=false)
 {
 	elements = elements || document.getElementsByClassName('accessory-item');
-	toggle = toggle || document.getElementById('gallery-default-toggle');
 	frame = frame || document.getElementById('gallery-frame');
-	if(!elements || !toggle || !frame)
+	if(!elements || !frame)
 		return false;
 	var sItems_toggle = document.getElementById('items-toggle');
 	[].forEach.call(elements, function(el, i){
@@ -94,17 +81,35 @@ function items_init(elements=false, frame=false, toggle=false)
 			if(sItems_toggle != null)
 				sItems_toggle.classList.remove('active');
 		});
-		toggle.addEventListener('click', function(){
-			body.classList.remove('viewing-items');
-			var activeThumbnail = elements[0].parentNode.querySelector('.accessory-item.active');
-			activeThumbnail.classList.remove('active');
-			frame.style.backgroundImage = 'url(' + default_src + ')';
-			if(isWebLayout)
-			{
-				body.classList.remove('viewing-items-list');
-				body.classList.remove('fadeout');
-			}
-		});
+		
 	});
+}
+function toggle_init(toggle = false, frame = false){
+	toggle = toggle || document.getElementById('gallery-default-toggle');
+	frame = frame || document.getElementById('gallery-frame');
+	var sItems_toggle = document.getElementById('items-toggle');
+	var sGallery_toggle = document.getElementById('gallery-toggle');
+	if(!toggle || !frame)
+		return false;
+	toggle.addEventListener('click', function(){
+		body.classList.remove('viewing-items');
+		body.classList.remove('viewing-gallery');
+		if(isWebLayout)
+		{
+			body.classList.remove('viewing-items-list');
+			body.classList.remove('viewing-gallery-list');
+			body.classList.remove('fadeout');
+			sItems_toggle.classList.remove('active');
+			sGallery_toggle.classList.remove('active');
+		}
+		var activeAccessory_item = document.querySelector('.accessory-item.active');
+		if(activeAccessory_item != null)
+			activeAccessory_item.classList.remove('active');
+		var activeGallery_option = document.querySelector('.gallery-option.active');
+		if(activeGallery_option != null)
+			activeGallery_option.classList.remove('active');
 
+		frame.style.backgroundImage = 'url(' + default_src + ')';
+		
+	});
 }

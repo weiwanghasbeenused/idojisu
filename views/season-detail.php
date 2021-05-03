@@ -124,6 +124,7 @@
 	var default_src = '<?= $default_src; ?>';
 	gallery_init();
 	items_init();
+	toggle_init();
 	if(!isWebLayout)
 	{
 		var sAccessory_container = document.getElementById('accessory-container');
