@@ -116,7 +116,16 @@ body.fadeout #mask
     text-align: center;
     width: 100%;
 }
-
+#chrome-mask
+{
+    position: fixed;
+    top: -70px;
+    height: 70px;
+    width: 100vw;
+    max-width: 100%;
+    background-color: #000;
+    z-index: 1000;
+}
 
 /* blink */
 .blink-container {
