@@ -363,9 +363,10 @@ h1.detail-blockname,
     display: flex;
     position: absolute;
     width: 100vw;
+    height: 0;
+    overflow: hidden;
     background-color: #000;
     max-height: 60vh;
-    overflow: scroll;
     transform: translate(0 ,-100%);
     z-index: -1;
 }
@@ -374,6 +375,8 @@ h1.detail-blockname,
     display: flex;
     transform: translate(0 ,0);
     transition: transform .35s;
+    height: auto;
+    overflow: scroll;
 }
 .accessory-item
 {
@@ -450,14 +453,13 @@ h1.detail-blockname,
     overflow: hidden;
     z-index: -1;
     max-height: 60vh;
-    overflow: scroll;
 }
 .viewing-gallery-list #gallery-item-container
 {
     transform: translate(0, 0);
     transition: transform .35s;
     height: auto;
-    overflow: initial;
+    overflow: scroll;
 }
 .gallery-option
 {
