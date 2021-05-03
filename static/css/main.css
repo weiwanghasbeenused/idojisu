@@ -21,6 +21,7 @@ body {
     font-family: ibm_plex_mono, monospace;
     background-color: #000;
     color: var(--light-grey);
+    padding-bottom: 50px;
 }
 body.fadeout
 {
@@ -322,7 +323,7 @@ body.fadeout #mask
     display: flex;
     flex-wrap: wrap;
     padding-top: 59px;
-    /*overflow: scroll;*/
+    border-bottom: 1px solid var(--light-grey);
 }
 #detail-layout-container aside
 {
@@ -451,6 +452,10 @@ h1.detail-blockname,
     background-color: #000;
     transform: translate(0, -100%);
     z-index: -1;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--light-grey);
+    max-height: 60vh;
+    overflow: scroll;
 }
 .viewing-gallery-list #gallery-item-container
 {
@@ -493,7 +498,7 @@ h1.detail-blockname,
 }
 #detail-text
 {
-    padding: 20px 20px 60px 20px;
+    padding: 20px 20px 40px 20px;
 }
 #accessory-container,
 #gallery-container
@@ -680,17 +685,15 @@ h1.detail-blockname,
     {
         padding-top: 130px;
         flex-wrap: nowrap;
-        height: calc( 100vh - 20px);
-        overflow: hidden;
-        border-bottom: 1px solid var(--light-grey);
+        /*height: calc( 100vh - 20px);*/
+        /*overflow: hidden;*/
+        
     }
     #detail-layout-container aside
     {
         flex: 1;
-        /*border-top: 1px solid var(--light-grey);*/
         -webkit-overflow-scrolling: touch;
         max-height: 100%;
-        overflow-y: scroll;
     }
     #detail-layout-container aside .detail-blockname,
     #detail-layout-container main #season-detail-sticky-container
@@ -701,17 +704,17 @@ h1.detail-blockname,
     }
     #detail-layout-container aside::-webkit-scrollbar,
     #detail-layout-container main::-webkit-scrollbar {
-        width: 5px;
-        border-radius: 2.5px;
+        /*width: 5px;
+        border-radius: 2.5px;*/
     }
     #detail-layout-container aside::-webkit-scrollbar-track,
     #detail-layout-container main::-webkit-scrollbar-track {
-        background-color: transparent;
-        border-top: 1px solid var(--light-grey);
+        /*background-color: transparent;
+        border-top: 1px solid var(--light-grey);*/
     }
     #detail-layout-container aside::-webkit-scrollbar-thumb,
     #detail-layout-container main::-webkit-scrollbar-thumb {
-        background-color: var(--light-grey);
+        /*background-color: var(--light-grey);*/
     }
     #detail-layout-container main
     {
@@ -737,6 +740,8 @@ h1.detail-blockname,
         border-right: none;
         display: block;
         width: initial;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--light-grey);
     }
     #accessory-container > h2:first-child
     {
@@ -779,12 +784,18 @@ h1.detail-blockname,
     {
         width: initial;
         display: block;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--light-grey);
     }
     #gallery-item-container
     {
         transform: none;
         position: static;
         width: auto;
+        padding-bottom: 0;
+        border-bottom: none;
+        max-height: none;
+        overflow: visible;
     }
     .gallery-option
     {
