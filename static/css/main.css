@@ -22,7 +22,7 @@ body {
     background-color: #000;
     color: var(--light-grey);
     padding-bottom: 50px;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 body.fadeout
 {
