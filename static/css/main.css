@@ -21,7 +21,7 @@ body {
     font-family: ibm_plex_mono, monospace;
     background-color: #000;
     color: var(--light-grey);
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     /*overflow: hidden;*/
 }
 body.fadeout
@@ -144,11 +144,14 @@ body.fadeout #mask
     width: 50px;
     height: 50px;
 }
-.noTouchScreen .blink-hover-zone:hover .blink,
-.blink-hover-zone.active .blink
+.noTouchScreen .blink-hover-zone:hover .blink
 {
     display: block;
     animation: blinking_1 .75s infinite linear;
+}
+.blink-hover-zone.active .blink{
+    display: block;
+    background-image: url('../../media/svg/blink_1.svg');
 }
 .blink-hover-zone.active .menu-item  {
     background-color: var(--sky-blue);
@@ -321,8 +324,6 @@ body.fadeout #mask
 /* season detail */
 #detail-layout-container
 {
-    display: flex;
-    flex-wrap: wrap;
     padding-top: 59px;
     /*overflow: scroll;*/
 }
@@ -351,7 +352,16 @@ h1.detail-blockname,
     z-index: 950;
     background-color: #000;
 }
-#gallery-image
+#gallery-frame {
+    height: 70vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#gallery-image {
+    display: none;
+}
+.viewing-gallery #gallery-image
 {
     display: block;
 }
@@ -391,12 +401,14 @@ h1.detail-blockname,
 {
     border-right: none;
 }
-.noTouchScreen .accessory-item:hover
+.noTouchScreen .accessory-item:hover,
+.accessory-item.active
 {
     background-color: var(--sky-blue);
     color: #000;
 }
-.noTouchScreen .accessory-item:hover .accessory-item-info
+.noTouchScreen .accessory-item:hover .accessory-item-info,
+.accessory-item.active .accessory-item-info
 {
     border-top: 1px solid #000;
 }
@@ -416,13 +428,18 @@ h1.detail-blockname,
 {
     background-image: url(../../media/svg/blink_1-light.svg);
 }
-.noTouchScreen .accessory-item:hover .rank
+.noTouchScreen .accessory-item:hover .rank,
+.accessory-item.active .rank
 {
     background-image:url(../../media/svg/blink_1-light.svg);
 }
 .noTouchScreen .accessory-item:hover .rank.active
 {
     animation: blinking_1 .75s infinite linear;
+}
+.accessory-item.active .rank.active
+{
+    background-image:url(../../media/svg/blink_1.svg);
 }
 .accessory-item-img
 {
@@ -487,14 +504,20 @@ h1.detail-blockname,
     background-color: var(--sky-blue);
     color: #000;
 }
-.viewing-gallery #gallery-default-toggle
+.viewing-gallery #gallery-default-toggle,
+.viewing-items #gallery-default-toggle
 {
     display: block;
 }
-.viewing-gallery h1.detail-blockname
+.viewing-gallery h1.detail-blockname,
+.viewing-items h1.detail-blockname
 {
     display: none;
 }
+.viewing-gallery #gallery-frame {
+    height: auto;
+}
+
 #detail-text
 {
     padding: 20px 20px 60px 20px;
@@ -682,8 +705,9 @@ h1.detail-blockname,
     }
     #detail-layout-container
     {
+        display: flex;
+        flex-wrap: wrap;
         padding-top: 130px;
-        flex-wrap: nowrap;
         height: calc( 100vh - 20px);
         overflow: hidden;
         border-bottom: 1px solid var(--light-grey);
@@ -702,6 +726,11 @@ h1.detail-blockname,
         position: -webkit-sticky;
         position: sticky;
         top: 0px;
+    }
+    #detail-layout-container aside,
+    #detail-layout-container main
+    {
+        scrollbar-color: var(--light-grey) transparent;
     }
     #detail-layout-container aside::-webkit-scrollbar,
     #detail-layout-container main::-webkit-scrollbar {
@@ -724,12 +753,16 @@ h1.detail-blockname,
         border-right: 1px solid var(--light-grey);
         -webkit-overflow-scrolling: touch;
         max-height: 100%;
-        overflow: scroll;
+        overflow-y: scroll;
         /*border-top: 1px solid var(--light-grey);*/
     }
     h1.detail-blockname, #gallery-default-toggle
     {
         border-bottom: 1px solid var(--light-grey);
+    }
+    #gallery-frame
+    {
+        height: calc(100% - 34px);
     }
     #gallery-frame .detail-blockname
     {
@@ -741,6 +774,7 @@ h1.detail-blockname,
         border-right: none;
         display: block;
         width: initial;
+        padding-bottom: 20px;
     }
     #accessory-container > h2:first-child
     {
@@ -755,6 +789,7 @@ h1.detail-blockname,
         position: static;
         width: auto;
         max-height: none;
+        height: auto;
         transform: none;
     }
     .accessory-item
@@ -783,6 +818,7 @@ h1.detail-blockname,
     {
         width: initial;
         display: block;
+        padding-bottom: 20px;
     }
     #gallery-item-container
     {
@@ -790,6 +826,7 @@ h1.detail-blockname,
         position: static;
         width: auto;
         max-height: none;
+        height: auto;
         overflow: visible;
     }
     .gallery-option

@@ -86,12 +86,13 @@
 		else
 		{
 			var slideshow_x = idx * interval;
-			// console.log(current_slideshow_x);
-			slideshow_container.scrollTo({
-				top: 0,
-				left: slideshow_x,
-				behavior: 'smooth'
-			});
+			var amount = slideshow_x - slideshow_container.scrollLeft;
+			SmoothHorizontalScrolling(slideshow_container, 250, amount, slideshow_container.scrollLeft);
+			// slideshow_container.scrollTo({
+			// 	top: 0,
+			// 	left: slideshow_x,
+			// 	behavior: 'smooth'
+			// });
 		}
 		return idx;
 	}
@@ -104,12 +105,13 @@
 		else
 		{
 			current_slideshow_x = idx * interval;
-			// console.log(current_slideshow_x);
-			slideshow_container.scrollTo({
-				top: 0,
-				left: current_slideshow_x,
-				behavior: 'smooth'
-			});
+			var amount = current_slideshow_x - slideshow_container.scrollLeft;
+			SmoothHorizontalScrolling(slideshow_container, 250, amount, slideshow_container.scrollLeft);
+			// slideshow_container.scrollTo({
+			// 	top: 0,
+			// 	left: current_slideshow_x,
+			// 	behavior: 'smooth'
+			// });
 		}
 	}
 </script>

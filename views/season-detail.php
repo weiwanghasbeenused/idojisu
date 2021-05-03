@@ -24,18 +24,31 @@
 		foreach( $media as $m ){
 			if(strpos($m['caption'], $tag_thumbnail) !== false ){
 				$default = m_url($m);
+				$default_src = m_src($m);
 				$default_alt = substr($media['caption'], strpos($media['caption'], $tag_thumbnail) + strlen($tag_thumbnail));
 				$default_alt = $default_alt == '' ? 'Thumbnail of '.$child['name1'] : $default_alt;
 			}
 		}
 	}
+	$figure_with_accessory_src = array();
+	$accessory_children = $oo->children($accessory_items['id']);
+	foreach($accessory_children as $a_child)
+	{
+
+		if(strtolower($a_child['name1']) == 'figure with accessory'){
+			$figure_with_accessory_media = $oo->media($a_child['id']);
+			foreach($figure_with_accessory_media as $a_m)
+			{
+				$figure_with_accessory_src[$a_m['caption']] = m_src($a_m);
+			}
+		}
+	}
+
 	$bracket_pattern = '#\[(.*)\](.*)#is';
 
 ?>
 <div id="detail-layout-container" class="main-container">
-	<aside id="left-side-container">
-		
-	</aside><main id="season-detail-container" class="container">
+	<aside id="left-side-container"></aside><main id="season-detail-container" class="container">
 		<div id="season-detail-sticky-container">
 			<h1 class="detail-blockname"><?= $item['name1']; ?></h1>
 			<div id="gallery-default-toggle" class="detail-blockname">&otimes;</div>
@@ -54,7 +67,7 @@
 		 					$rank = $item_info[1][0];
 							$name = $item_info[2][0];
 							$alt = $name;
-							?><div class="accessory-item">
+							?><div class="accessory-item" figure-src="<?= $figure_with_accessory_src[$m['caption']]; ?>">
 								<div class="accessory-item-img" style="background-image:url(<?= $src; ?>);"></div>
 								<div class="accessory-item-info">
 									<p><?= $name; ?></p>
@@ -95,8 +108,8 @@
 				} ?>
 			</div>
 		</div>
-		<div id="gallery-frame" class="detail-block">
-			<img id="gallery-image" class="detail-image" src="<?= $default; ?>" alt="<?= $default_alt; ?>" img-url="<?= $default; ?>">
+		<div id="gallery-frame" class="detail-block" style="background-image:url(<?= $default_src; ?>);">
+			<img id="gallery-image" class="detail-image" alt="<?= $default_alt; ?>" img-url="<?= $default; ?>">
 		</div>
 		<div id="detail-container">
 			<h2 class="detail-blockname">Details</h2>
@@ -108,7 +121,9 @@
 </div>
 <script type="text/javascript" src="/static/js/detail-gallery.js"></script>
 <script>
+	var default_src = '<?= $default_src; ?>';
 	gallery_init();
+	items_init();
 	if(!isWebLayout)
 	{
 		var sAccessory_container = document.getElementById('accessory-container');
