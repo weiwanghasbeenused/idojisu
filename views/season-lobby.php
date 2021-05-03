@@ -7,6 +7,7 @@
 	}
 	unset($child);
 	$tag_thumbnail = '[thumbnail]';
+	$images = [];
 ?>
 <main id="season-lobby-container" class="container main-container">
 	<? if(count($children) > 0){
