@@ -582,6 +582,9 @@ div[viewing-list="gallery"] #gallery-item-container
 .sky-group
 {
     position: absolute;
+    transition-timing-function: linear;
+    width: 120vw;
+    height: 120vh;
 }
 main[viewing="gallery"] #gallery-default-toggle,
 main[viewing="items"] #gallery-default-toggle
@@ -926,6 +929,11 @@ main[viewing="gallery"] #gallery-frame {
     #season-detail-sticky-container
     {
         /*position: static;*/
+    }
+    .sky-group
+    {
+        width: 100vw;
+        height: 100vh;
     }
     
 }
