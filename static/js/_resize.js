@@ -7,13 +7,13 @@ window.addEventListener('resize', function(){
 		if(window.innerWidth == wW && window.innerHeight == wH)
 		{
 			if(wW < critical_w_menu){
-				if(!isWebLayout)
-					isWebLayout = true;
+				if(!isMobileLayout)
+					isMobileLayout = true;
 			}
 			else{
-				if(isWebLayout)
+				if(isMobileLayout)
 				{
-					isWebLayout = false;
+					isMobileLayout = false;
 					var sSubmenu_parent_expanded = document.querySelectorAll('.submenu-parent.expanded');
 					if(sSubmenu_parent_expanded.length != 0)
 					{

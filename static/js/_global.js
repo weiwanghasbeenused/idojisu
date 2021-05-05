@@ -50,12 +50,18 @@ function SHS_B(e, sc, eAmt, start) {
     e.scrollLeft = (eAmt * sc) + start;
 }
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 var body = document.body;
 
 var wW = window.innerWidth;
 var wH = window.innerHeight;
 
 var critical_w_menu = 768;
-isWebLayout = false;
+isMobileLayout = false;
 if(wW < critical_w_menu)
-	isWebLayout = true;
+	isMobileLayout = true;
