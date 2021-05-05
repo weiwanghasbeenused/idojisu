@@ -207,7 +207,7 @@ body.fadeout #mask
     vertical-align: top;
 }
 #logo {
-    width: 130px;
+    width: 110px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -215,7 +215,7 @@ body.fadeout #mask
 }
 #logo-container {
     position: relative;
-    height: 60px;
+    height: 50px;
     border-bottom: 1px solid var(--light-grey); 
 }
 #menu {
@@ -233,10 +233,10 @@ body.fadeout #mask
 }
 #menu-toggle {
     position: fixed;
-    top: 12px;
+    top: 7px;
     right: 10px;
     width: 40px;
-    padding: 10px 5px;
+    padding: 10px 8px;
     cursor: pointer;
     transition: transform .35s;
     z-index: 1000;
@@ -738,6 +738,8 @@ main[viewing="gallery"] #gallery-frame {
     #logo-container
     {
         /*border-bottom: none;*/
+        height: 60px;
+        padding: 0;
     }
     .home.noTouchScreen header
     {
