@@ -61,7 +61,7 @@
 	{
 		[].forEach.call(sSubmenu_parent, function(el, i){
 			el.addEventListener('click', function(){
-				if(isWebLayout){
+				if(isMobileLayout){
 					console.log(sSubmenu_parent[0]);
 					el.classList.toggle('expanded');
 				}

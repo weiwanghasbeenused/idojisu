@@ -200,6 +200,10 @@ body.fadeout #mask
 {
     padding: 0 12%;
 }
+.submenu-item-container:last-child
+{
+    padding: 0;
+}
 .menu-item > .blink-container,
 .submenu-item > .blink-container
 {
