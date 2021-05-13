@@ -13,8 +13,6 @@
 			$detail_items = $child;
 	}
 	$detail_text = wysiwygClean($detail_items['body']);
-	$detail_text = strip_tags($detail_text, '<br><a><div><i><b><strong><emphasis>');
-	$detail_text = replaceDivs($detail_text);
 	$gallery_media = $oo->media($gallery_items['id']);
 
 	$tag_thumbnail = '[thumbnail]';

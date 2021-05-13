@@ -55,6 +55,24 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+function resizeSizeToCover(subject, frame=false) {
+	if(!frame)
+		frame = subject.parentNode;
+	
+	var r_subject = subject.offsetHeight / subject.offsetWidth;
+	var r_frame = frame.offsetHeight / frame.offsetWidth;
+
+	if(r_subject > r_frame && subject.style.width != '100%')
+	{
+		subject.style.width = '100%';
+		subject.style.height = 'auto';
+	}
+	else if(r_subject < r_frame && subject.style.height != '100%')
+	{
+		subject.style.width = 'auto';
+		subject.style.height = '100%';
+	}
+}
 
 var body = document.body;
 
