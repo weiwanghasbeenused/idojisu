@@ -101,13 +101,27 @@ ul {
     opacity: 0;
     z-index: 900;
     color: var(--light-grey);
+    
 }
-body.fadeout #mask,
-body.loading #mask
+#mask-loading
+{
+    background-color: rgba(0,0,0,.75);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 900;
+    transition: opacity .35s;
+}
+body.fadeout #mask
 {
     visibility: initial;
     opacity: 1;
     transition: opacity .35s;
+}
+body.loading #mask-loading
+{
+    visibility: initial;
+    opacity: 1;
+    transition: none;
 }
 #btn-close-mask{
     display: block;
@@ -300,6 +314,14 @@ body.loading #mask
 {
     border-right: none;
 }
+.look img
+{
+    opacity: 1;
+    transition: opacity .35s;
+}
+body.loading .look img{
+    opacity: 0;
+}
 .noTouchScreen .look:hover
 {
     background-color: var(--sky-blue);
@@ -359,6 +381,15 @@ body.loading #mask
 #detail-layout-container aside
 {
     background-color: #000;
+}
+#detail-layout-container img
+{
+    opacity: 1;
+    transition: opacity .35s;
+}
+body.loading #detail-layout-container img
+{
+    opacity: 0;
 }
 .detail-blockname
 {
