@@ -109,7 +109,7 @@ ul {
     visibility: hidden;
     opacity: 0;
     z-index: 900;
-    transition: opacity .35s;
+    transition: opacity .5s;
 }
 body.fadeout #mask
 {
@@ -317,7 +317,7 @@ body.loading #mask-loading
 .look img
 {
     opacity: 1;
-    transition: opacity .35s;
+    transition: opacity .75s;
 }
 body.loading .look img{
     opacity: 0;
@@ -382,12 +382,15 @@ body.loading .look img{
 {
     background-color: #000;
 }
-#detail-layout-container img
+.accessory-item-img,
+.gallery-option,
+#image-frame-default
 {
-    opacity: 1;
-    transition: opacity .35s;
+    transition: opacity .75s;
 }
-body.loading #detail-layout-container img
+body.loading #detail-layout-container .accessory-item-img,
+body.loading #detail-layout-container .gallery-option,
+body.loading #detail-layout-container #image-frame-default
 {
     opacity: 0;
 }

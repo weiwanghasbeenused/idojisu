@@ -76,4 +76,4 @@
 </script>
 <div id="chrome-mask"></div>
 <div id="mask" class="fullpage"><span id="btn-close-mask">close</span></div>
-<div id="mask-loading" class="fullpage"><span id="btn-close-mask">close</span></div>
+<div id="mask-loading" class="fullpage"></div>
