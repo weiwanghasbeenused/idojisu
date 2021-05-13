@@ -1,13 +1,41 @@
 <?
+	$tag_thumbnail = '[thumbnail]';
+	$images_arr = array();
+
 	$children = $oo->children($item['id']);
 	foreach($children as $key => &$child)
 	{
 		if(substr($child['name1'], 0, 1) == '.')
 			unset($children[$key]);
+		else
+		{
+			$media = $oo->media($child['id']);
+			$thumbnail = false;
+			$thumbnail_alt = false;
+			if(count($media) > 0)
+			{
+				foreach( $media as $m ){
+					if(strpos($m['caption'], $tag_thumbnail) !== false ){
+						$thumbnail = m_url($m);
+						$thumbnail_alt = substr($m['caption'], strpos($m['caption'], $tag_thumbnail) + strlen($tag_thumbnail));
+						$thumbnail_alt = empty($thumbnail_alt) ? 'Thumbnail of '.$child['name1'] : $thumbnail_alt;
+					}
+				}
+				if(!$thumbnail){
+					$thumbnail = m_url($media[0]);
+					$thumbnail_alt = substr($m['caption'], strpos($m['caption'], $tag_thumbnail) + strlen($tag_thumbnail));
+						$thumbnail_alt = $media[0]['caption'];
+						$thumbnail_alt = empty($thumbnail_alt) ? 'Thumbnail of '.$child['name1'] : $thumbnail_alt;
+				}
+				$images_arr[] = $thumbnail;
+			}
+			$child['thumbnail'] = $thumbnail;
+			$child['thumbnail_alt'] = $thumbnail_alt;
+		}
 	}
 	unset($child);
-	$tag_thumbnail = '[thumbnail]';
-	$images = [];
+	
+	
 ?>
 <main id="season-lobby-container" class="container main-container">
 	<? if(count($children) > 0){
@@ -18,22 +46,11 @@
 		$children_count = count($children) > 10 ? count($children) : '0' . count($children);
 		foreach($children as $key => $child)
 		{
-			$media = $oo->media($child['id']);
-			$thumbnail = false;
-			if(count($media) > 0)
-			{
-				foreach( $media as $m ){
-					if(strpos($m['caption'], $tag_thumbnail) !== false ){
-						$thumbnail = m_url($m);
-						$thumbnail_alt = substr($media['caption'], strpos($media['caption'], $tag_thumbnail) + strlen($tag_thumbnail));
-						$thumbnail_alt = $thumbnail_alt == '' ? 'Thumbnail of '.$child['name1'] : $thumbnail_alt;
-					}
-				}
-			}
-
 			$url = implode('/', $uri) . '/' . $child['url'];
 			$blink_count = rand(4, 7);
 			$idx = ($key+1) >= 10 ? $key+1 : '0' . ($key+1);
+			$thumbnail = $child['thumbnail'];
+			$thumbnail_alt = $child['thumbnail_alt'];
 
 			?></div><div class="look blink-hover-zone random-blink-hover-zone">
 				<? for($i = 0; $i < $blink_count ; $i++){
@@ -59,6 +76,9 @@
 	} ?>
 </main>
 <script>
+	var images_arr = <?= json_encode($images_arr); ?>;
+	if(images_arr.length != 0)
+		preloadImage(images_arr, removeLoading);
 	var sHorizontal_slideshow_container = document.getElementsByClassName('horizontal-slideshow-container')[0];
 	var next = document.getElementById('next');
 	var prev = document.getElementById('prev');
@@ -89,11 +109,6 @@
 			var slideshow_x = idx * interval;
 			var amount = slideshow_x - slideshow_container.scrollLeft;
 			SmoothHorizontalScrolling(slideshow_container, 250, amount, slideshow_container.scrollLeft);
-			// slideshow_container.scrollTo({
-			// 	top: 0,
-			// 	left: slideshow_x,
-			// 	behavior: 'smooth'
-			// });
 		}
 		return idx;
 	}
@@ -108,11 +123,9 @@
 			current_slideshow_x = idx * interval;
 			var amount = current_slideshow_x - slideshow_container.scrollLeft;
 			SmoothHorizontalScrolling(slideshow_container, 250, amount, slideshow_container.scrollLeft);
-			// slideshow_container.scrollTo({
-			// 	top: 0,
-			// 	left: current_slideshow_x,
-			// 	behavior: 'smooth'
-			// });
 		}
 	}
+	window.addEventListener('load', function(){ 
+		removeLoading(); 
+	});
 </script>

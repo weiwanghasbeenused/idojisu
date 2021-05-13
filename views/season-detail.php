@@ -1,4 +1,5 @@
 <?
+	$images_arr = array();
 	$children = $oo->children($item['id']);
 	$accessory_items = array();
 	$gallery_items = array();
@@ -64,6 +65,7 @@
 		 					$rank = $item_info[1][0];
 							$name = $item_info[2][0];
 							$alt = $name;
+							$images_arr[] = m_url($m);
 							?><div class="accessory-item" figure-src="<?= $figure_with_accessory_src[$m['caption']]; ?>">
 								<div class="accessory-item-img" style="background-image:url(<?= $src; ?>);"></div>
 								<div class="accessory-item-info">
@@ -98,6 +100,7 @@
 						{
 							$src = m_src($m);
 							$url = m_url($m);
+							$images_arr[] = m_url($m);
 							?><div class="gallery-option" style="background-image:url(<?= $src; ?>);" img-url="<?= $url; ?>"></div><?
 						}
 					}
@@ -107,9 +110,11 @@
 		</div>
 		<div id="gallery-frame" class="detail-block image-frame-container">
 			<? foreach($gallery_media as $key => $m){
+				$images_arr[] = m_url($m);
 				?><img id="gallery-image-<?= $key; ?>" class="gallery-image" alt="<?= $m['caption']; ?>" src="<?= m_url($m); ?>" ><?
 			} ?>
 			<? foreach($accessory_media as $key => $m){
+				$images_arr[] = $figure_with_accessory_src[$m['caption']];
 				?><div id="accessory-frame-<?= $key; ?>" class="image-frame contain" style="background-image:url(<?= $figure_with_accessory_src[$m['caption']]; ?>);"></div><?
 			} ?>
 			<div id="image-frame-default" class="image-frame contain" style="background-image:url(<?= $default_src; ?>);"></div>
@@ -124,6 +129,10 @@
 </div>
 <script type="text/javascript" src="/static/js/detail-gallery.js"></script>
 <script>
+	var images_arr = <?= json_encode($images_arr); ?>;
+	var idx_to_callback = parseInt( 3 * images_arr.length / 4);
+	preloadImage(images_arr, removeLoading, idx_to_callback);
+
 	var default_src = '<?= $default_src; ?>';
 	var sSeason_detail_container = document.getElementById('season-detail-container');
 	var sSeason_detail_sticky_container = document.getElementById('season-detail-sticky-container');
@@ -164,4 +173,7 @@
 			});
 		}
 	}
+	window.addEventListener('load', function(){ 
+		removeLoading(); 
+	});
 </script>

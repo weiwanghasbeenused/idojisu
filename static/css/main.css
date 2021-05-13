@@ -29,10 +29,12 @@ body.fadeout
     height: 100vh;
     overflow: hidden;
 }
-body.fadeout #mask
+body.fadeout #mask,
+body.loading #mask
 {
     display: block;
 }
+
 h1, h2, h3
 {
     font-size: 1em;
@@ -278,13 +280,15 @@ body.fadeout #mask
 #slideshow-carrier
 {
     display: flex;
-    flex-wrap: nowrap;   
+    flex-wrap: nowrap;
+    overflow-y: hidden; 
 }
 #looks-container
 {
     border-bottom: 1px solid var(--light-grey);
     border-top: 1px solid var(--light-grey);
     font-family: ibm_plex_mono, sans-serif;
+
 }
 .look
 {
@@ -353,6 +357,7 @@ body.fadeout #mask
 {
     padding-top: 59px;
     border-bottom: 1px solid var(--light-grey);
+    padding-bottom: 0;
 }
 #detail-layout-container aside
 {

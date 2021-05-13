@@ -73,6 +73,23 @@ function resizeSizeToCover(subject, frame=false) {
 		subject.style.height = '100%';
 	}
 }
+function preloadImage(img_arr, callback=false, idx_to_callback=false, idx=0)
+{
+    var img = new Image();
+    if(!idx_to_callback)
+    	idx_to_callback = img_arr.length-1;
+    img.onload = function(){
+    	console.log('loaded');
+    	if(idx < img_arr.length-1)
+    		preloadImage(img_arr, callback, idx_to_callback, idx+1);
+    	if(idx == idx_to_callback)
+    		callback();
+    };
+    img.src = img_arr[idx];
+}
+function removeLoading(){
+	body.classList.remove('loading');
+}
 
 var body = document.body;
 

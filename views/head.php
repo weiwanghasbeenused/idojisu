@@ -30,6 +30,8 @@ $isHome = $uri[1] ? false : true;
 $bodyClass = '';
 if($isHome)
 	$bodyClass .= ' home';
+if($isHome || $uri[1] == 'collection')
+	$bodyClass .= ' loading';
 
 require_once('static/php/function.php');
 
