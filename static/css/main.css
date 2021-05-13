@@ -29,11 +29,7 @@ body.fadeout
     height: 100vh;
     overflow: hidden;
 }
-body.fadeout #mask,
-body.loading #mask
-{
-    display: block;
-}
+
 
 h1, h2, h3
 {
@@ -106,7 +102,8 @@ ul {
     z-index: 900;
     color: var(--light-grey);
 }
-body.fadeout #mask
+body.fadeout #mask,
+body.loading #mask
 {
     visibility: initial;
     opacity: 1;
