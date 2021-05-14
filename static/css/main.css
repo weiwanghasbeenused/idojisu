@@ -99,7 +99,7 @@ ul {
     background-color: rgba(0,0,0,.75);
     visibility: hidden;
     opacity: 0;
-    z-index: 900;
+    z-index: 950;
     color: var(--light-grey);
     
 }
@@ -108,7 +108,7 @@ ul {
     background-color: rgba(0,0,0,.75);
     visibility: hidden;
     opacity: 0;
-    z-index: 900;
+    z-index: 950;
     transition: opacity .5s;
 }
 body.fadeout #mask
@@ -426,7 +426,7 @@ h1.detail-blockname,
     width: 100vw;
     max-width: 100%;
     top: 59px;
-    z-index: 950;
+    z-index: 900;
     background-color: #000;
 }
 #gallery-frame {
@@ -752,6 +752,23 @@ main[viewing="gallery"] #gallery-frame {
     background-color: var(--sky-blue);
     color: #000;
 }
+#loading-icon
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-image: url(../../media/svg/blink_w_1.svg);
+    display: none;
+    transform-origin: center;
+}
+.loading #loading-icon
+{
+    display: block;
+    animation: blinking_w 1s infinite linear;
+}
 @keyframes blinking_1 {
     0%
     {
@@ -784,6 +801,49 @@ main[viewing="gallery"] #gallery-frame {
     100%
     {
         background-image: url('../../media/svg/blink_4.svg');
+    }
+
+}
+@keyframes blinking_w {
+    0%
+    {
+        background-image: url(../../media/svg/blink_w_1.svg);
+        /*transform: translate(-50%, -50%) rotate(0deg);*/
+    }
+    24.5%
+    {
+        background-image: url(../../media/svg/blink_w_1.svg);
+        /*transform: translate(-50%, -50%) rotate(0deg);*/
+    }
+    25%
+    {
+        background-image: url('../../media/svg/blink_w_2.svg');
+        /*transform: translate(-50%, -50%) rotate(22.5deg);*/
+    }
+    49.5%
+    {
+        background-image: url('../../media/svg/blink_w_2.svg');
+        /*transform: translate(-50%, -50%) rotate(22.5deg);*/
+    }
+    50%
+    {
+        background-image: url('../../media/svg/blink_w_3.svg');
+        /*transform: translate(-50%, -50%) rotate(45deg);*/
+    }
+    74.5%
+    {
+        background-image: url('../../media/svg/blink_w_3.svg');
+        /*transform: translate(-50%, -50%) rotate(45deg);*/
+    }
+    75%
+    {
+        background-image: url('../../media/svg/blink_w_4.svg');
+        /*transform: translate(-50%, -50%) rotate(72.5deg);*/
+    }
+    100%
+    {
+        background-image: url('../../media/svg/blink_w_4.svg');
+        /*transform: translate(-50%, -50%) rotate(72.5deg);*/
     }
 
 }

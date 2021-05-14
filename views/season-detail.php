@@ -131,7 +131,7 @@
 <script>
 	var images_arr = <?= json_encode($images_arr); ?>;
 	var idx_to_callback = parseInt( 3 * images_arr.length / 4);
-	preloadImage(images_arr, removeLoading, idx_to_callback);
+	preloadImage(images_arr, false, idx_to_callback);
 
 	var default_src = '<?= $default_src; ?>';
 	var sSeason_detail_container = document.getElementById('season-detail-container');
@@ -174,6 +174,6 @@
 		}
 	}
 	window.addEventListener('load', function(){ 
-		removeLoading(); 
+		// removeLoading(); 
 	});
 </script>
