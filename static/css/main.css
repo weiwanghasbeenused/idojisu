@@ -761,6 +761,9 @@ main[viewing="gallery"] #gallery-frame {
     width: 80px;
     height: 80px;
     background-image: url(../../media/svg/blink_w_1.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
     display: none;
     transform-origin: center;
 }
