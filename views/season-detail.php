@@ -101,7 +101,7 @@
 							$src = m_src($m);
 							$url = m_url($m);
 							$images_arr[] = m_url($m);
-							?><div class="gallery-option" style="background-image:url(<?= $src; ?>);" img-url="<?= $url; ?>"></div><?
+							?><div class="gallery-option fade" style="background-image:url(<?= $src; ?>);" img-url="<?= $url; ?>"></div><?
 						}
 					}
 					?></div><?

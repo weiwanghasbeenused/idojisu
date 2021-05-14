@@ -23,14 +23,13 @@
 				if(substr($child['name1'], 0, 1) != '.')
 				{
 					$name_arr = explode('[]', $child['name1']);
-					// $platform = strtoempty($name_arr[0]) ? false : $name_arr[0];
-					// $title = empty($name_arr[1]) ? false : $name_arr[1];
 					$platform = strtoupper($name_arr[0]);
 					$season = $child['season'];
 					$title = strtoupper($name_arr[1]);
 					$date = date('m/d/Y', strtotime($child['begin']));
 					$url = stripBracket($child['notes']);
-				?><li class="press-item"><a class="press-link" href="<?= $url; ?>" target="_blank"><p class="press-detail date"><?= $date; ?></p><p class="press-detail title"><?= $title; ?></p><p class="press-detail platform"><?= $season . ' ' . $platform; ?></p></a></li><?
+				?><li class="press-item"><a class="press-link blink-hover-zone" href="<?= $url; ?>" target="_blank"><?
+				?><p class="press-detail date"><?= $date; ?></p><p class="press-detail title"><?= $title; ?><span class="blink-container"></span></p><p class="press-detail platform"><?= $season . ' ' . $platform; ?></p></a></li><?
 				}
 			} ?>
 		</ul>

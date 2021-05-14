@@ -123,7 +123,7 @@
 	<? if(isset($landing_video)){
 		?>
 		<div id="landing-video-container">
-			<video muted autoplay>
+			<video muted autoplay loop>
 				<source src="<?= m_url($landing_video); ?>" type="video/mp4">
 				Your browser doesn't support HTML 5 video.
 			</video>
@@ -147,8 +147,6 @@
 	var float_maxmin = float_max - float_min;
 	var speed = <?= $speed; ?>;
 	var sky_timer;
-	// var blue_count = <?= $blue_count; ?>;
-	// var white_count = <?= $white_count; ?>;
 	var group_count = <?= $group_count; ?>;
 	var blue_count = 6;
 	var white_count = 6;
@@ -267,36 +265,6 @@
 		}
 		start();
 		function start(){
-			// var sSky_canvas = document.getElementById('sky-canvas');
-			// var ctx = sSky_canvas.getContext('2d');
-			// for(i = 0; i < group_count; i++)
-			// {
-			// 	console.log(blue_count);
-			// 	ctx.fillStyle = "rgba(170, 220, 255, .85)";
-			// 	for(j = 0; j < blue_count; j++)
-			// 	{
-
-			// 		var this_left = parseInt(wW * getRandomInt(0, 100) / 100);
-			// 		var this_top = parseInt(wH * getRandomInt(0, 100) / 100);
-			// 		var this_w = parseInt(wW * getRandomInt(6, 18) / 100);
-			// 		var this_h = parseInt(wH * getRandomInt(6, 18) / 100);
-			// 		ctx.beginPath();
-			// 		ctx.ellipse(this_left, this_top, this_w, this_h, 0, 0, 2 * Math.PI);
-			// 		ctx.fill();
-			// 	}
-				
-			// 	ctx.fillStyle = "rgba(255, 255, 255, 1)";
-			// 	for(j = 0; j < white_count; j++)
-			// 	{
-			// 		var this_left = parseInt(wW * getRandomInt(0, 100) / 100);
-			// 		var this_top = parseInt(wH * getRandomInt(0, 100) / 100);
-			// 		var this_w = parseInt(wW * getRandomInt(6, 18) / 100);
-			// 		var this_h = parseInt(wH * getRandomInt(6, 18) / 100);
-			// 		ctx.beginPath();
-			// 		ctx.ellipse(this_left, this_top, this_w, this_h, 0, 0, 2 * Math.PI);
-			// 		ctx.fill();
-			// 	}
-			// }
 			ctx.fillStyle = "rgba(170, 220, 255, .85)";
 			for(i = 0; i < blue_count; i++)
 			{
@@ -350,7 +318,6 @@
 				);
 				this_skyElement.print();
 			}
-			// window.requestAnimationFrame(draw);
 		}
 		
 	}
@@ -359,4 +326,7 @@
 		sLanding_video = sLanding_video_container.querySelector('video');
 		resizeSizeToCover(sLanding_video, sLanding_video_container);
 	}
+	window.addEventListener('load', function(){ 
+		removeLoading(); 
+	});
 </script>

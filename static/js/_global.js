@@ -89,6 +89,15 @@ function preloadImage(img_arr, callback=false, idx_to_callback=false, idx=0)
 }
 function removeLoading(){
 	body.classList.remove('loading');
+	setTimeout(function(){
+		var fade = document.getElementsByClassName('fade');
+		if(fade.length > 0)
+		{
+			[].forEach.call(fade, function(el, i){
+				el.classList.remove('fade');
+			});
+		}
+	}, 750);
 }
 
 var body = document.body;
