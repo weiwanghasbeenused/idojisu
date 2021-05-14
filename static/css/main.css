@@ -425,7 +425,7 @@ h1.detail-blockname,
     position: fixed;
     width: 100vw;
     max-width: 100%;
-    top: 59px;
+    top: 49px;
     z-index: 900;
     background-color: #000;
 }
