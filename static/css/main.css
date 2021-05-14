@@ -99,7 +99,7 @@ ul {
     background-color: rgba(0,0,0,.75);
     visibility: hidden;
     opacity: 0;
-    z-index: 950;
+    z-index: 850;
     color: var(--light-grey);
     
 }
@@ -154,6 +154,10 @@ body.loading #mask-loading
 {
     min-width: 30px;
     margin-top: 9px;
+}
+.list-toggle .blink-container
+{
+    margin-top: 7px;
 }
 .blink {
     width: 20px;
@@ -385,7 +389,7 @@ body.loading .look img{
 /* season detail */
 #detail-layout-container
 {
-    padding-top: 59px;
+    padding-top: 49px;
     border-bottom: 1px solid var(--light-grey);
     padding-bottom: 0;
 }
