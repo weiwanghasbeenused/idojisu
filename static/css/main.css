@@ -182,6 +182,11 @@ body.loading #mask-loading
     display: block;
     animation: blinking_1 .75s infinite linear;
 }
+.blink-hover-zone.active
+{
+    background-color: var(--sky-blue);
+    color: #000;
+}
 .blink-hover-zone.active .blink{
     display: block;
     background-image: url('../../media/svg/blink_1.svg');
@@ -775,6 +780,10 @@ main[viewing="gallery"] #gallery-frame {
 {
     display: block;
     animation: blinking_w 1s infinite linear;
+}
+.press-link.active .blink
+{
+    animation: blinking_1 .75s infinite linear;
 }
 @keyframes blinking_1 {
     0%

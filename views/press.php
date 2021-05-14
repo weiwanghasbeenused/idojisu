@@ -36,5 +36,20 @@
 	</section>
 </main>
 <script>
-	
+	var sPress_link = document.getElementsByClassName('press-link');
+	if(sPress_link.length > 0)
+	{
+		[].forEach.call(sPress_link, function(el, i){
+			el.addEventListener('click', function(){
+				if(!el.classList.contains('active'))
+				{
+					var activeSibling = document.querySelector('.press-link.active');
+					if(activeSibling != null)
+						activeSibling.classList.remove('active');
+					el.classList.add('active');
+				}
+				
+			});
+		});
+	}
 </script>
