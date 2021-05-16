@@ -63,8 +63,6 @@ header {
     z-index: 1000;
     width: 100vw;
     max-width: 100%;
-    /*background-color: rgba(0,0,0,.75);*/
-    background-color: #000;
     font-family: ibm_plex_mono, sans-serif;
 }
 
@@ -91,7 +89,7 @@ ul {
 }
 .main-container
 {
-    padding-top: 150px;
+    padding-top: 120px;
     padding-bottom: 60px;
 }
 #mask
@@ -109,26 +107,39 @@ ul {
     visibility: hidden;
     opacity: 0;
     z-index: 950;
-    transition: opacity .5s;
+    -webkit-transition: opacity .5s;
+       -moz-transition: opacity .5s;
+         -o-transition: opacity .5s;
+            transition: opacity .5s;
 }
 body.fadeout #mask
 {
     visibility: initial;
     opacity: 1;
-    transition: opacity .35s;
+    -webkit-transition: opacity .35s;
+       -moz-transition: opacity .35s;
+         -o-transition: opacity .35s;
+            transition: opacity .35s;
 }
 body.loading #mask-loading
 {
     visibility: initial;
     opacity: 1;
-    transition: none;
+    -webkit-transition: none;
+       -moz-transition: none;
+         -o-transition: none;
+            transition: none;
 }
 #btn-close-mask{
     display: block;
     position: absolute;
     bottom: 30px;
-    text-align: center;
-    width: 100%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+       -moz-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+         -o-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
 }
 #chrome-mask
 {
@@ -139,6 +150,17 @@ body.loading #mask-loading
     max-width: 100%;
     background-color: #000;
     z-index: 1000;
+}
+.centered
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 }
 
 /* blink */
@@ -165,7 +187,11 @@ body.loading #mask-loading
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
     background-image: url('../../media/svg/blink_1.svg');
     display: none;
 }
@@ -200,7 +226,8 @@ body.loading #mask-loading
 {
     background-size: 100%;   
     background-repeat: no-repeat;
-    background-position: center;   
+    background-position: center;
+    cursor: pointer;   
 }
 .image-frame.contain
 {
@@ -248,7 +275,11 @@ body.loading #mask-loading
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 }
 #logo-container {
     position: relative;
@@ -261,13 +292,26 @@ body.loading #mask-loading
     /*display: none;*/
     height: 0;
     overflow: hidden;
-    transform: translate(0, -100%);
+    -webkit-transform: translate(0, -100%);
+       -moz-transform: translate(0, -100%);
+        -ms-transform: translate(0, -100%);
+         -o-transform: translate(0, -100%);
+            transform: translate(0, -100%);
+    background-color: #000;
 }
 .viewing-menu #menu
 {
     height: auto;
-    transition: transform .35s;
-    transform: translate(0, 0);
+    -webkit-transition: -webkit-transform .35s;
+       -moz-transition: -moz-transform .35s;
+         -o-transition: -o-transform .35s;
+            transition: -webkit-transform .35s;
+            transition: transform .35s;
+    -webkit-transform: translate(0, 0);
+       -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+         -o-transform: translate(0, 0);
+            transform: translate(0, 0);
 }
 #menu-background{
     background-color: #000;
@@ -278,7 +322,10 @@ body.loading #mask-loading
 .viewing-menu #menu-background
 {
     visibility: initial;
-    transition: opacity .5s;
+    -webkit-transition: opacity .5s;
+       -moz-transition: opacity .5s;
+         -o-transition: opacity .5s;
+            transition: opacity .5s;
     opacity: 1;
 }
 #menu-toggle {
@@ -288,7 +335,11 @@ body.loading #mask-loading
     width: 40px;
     padding: 10px 8px;
     cursor: pointer;
-    transition: transform .35s;
+    -webkit-transition: -webkit-transform .35s;
+       -moz-transition: -moz-transform .35s;
+         -o-transition: -o-transform .35s;
+            transition: -webkit-transform .35s;
+            transition: transform .35s;
     z-index: 1000;
 }
 .menu-icon-bar {
@@ -301,13 +352,21 @@ body.loading #mask-loading
     margin-bottom: 0;
 }
 .viewing-menu .menu-icon-bar:first-child {
-    transform: translate(0, 7px) rotate(45deg);
+    -webkit-transform: translate(0, 7px) rotate(45deg);
+       -moz-transform: translate(0, 7px) rotate(45deg);
+        -ms-transform: translate(0, 7px) rotate(45deg);
+         -o-transform: translate(0, 7px) rotate(45deg);
+            transform: translate(0, 7px) rotate(45deg);
 }
 .viewing-menu .menu-icon-bar:nth-child(2) {
     opacity:0;
 }
 .viewing-menu .menu-icon-bar:last-child {
-    transform: translate(0, -7px) rotate(-45deg);
+    -webkit-transform: translate(0, -7px) rotate(-45deg);
+       -moz-transform: translate(0, -7px) rotate(-45deg);
+        -ms-transform: translate(0, -7px) rotate(-45deg);
+         -o-transform: translate(0, -7px) rotate(-45deg);
+            transform: translate(0, -7px) rotate(-45deg);
 }
 
 /* season lobby */
@@ -354,7 +413,10 @@ body.loading #mask-loading
 .look img
 {
     opacity: 1;
-    transition: opacity .75s;
+    -webkit-transition: opacity .75s;
+       -moz-transition: opacity .75s;
+         -o-transition: opacity .75s;
+            transition: opacity .75s;
 }
 body.loading .look img{
     opacity: 0;
@@ -403,7 +465,11 @@ body.loading .look img{
 #prev
 {
     transform-origin: center;
-    transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+       -moz-transform: scale(-1, 1);
+        -ms-transform: scale(-1, 1);
+         -o-transform: scale(-1, 1);
+            transform: scale(-1, 1);
     /*float: left;*/
 }
 
@@ -414,6 +480,7 @@ body.loading .look img{
     padding-top: 49px;
     border-bottom: 1px solid var(--light-grey);
     padding-bottom: 0;
+    margin-bottom: 30px;
 }
 #detail-layout-container aside
 {
@@ -424,7 +491,10 @@ body.loading .look img{
 .gallery-option.fade,
 #image-frame-default
 {
-    transition: opacity .75s;
+    -webkit-transition: opacity .75s;
+       -moz-transition: opacity .75s;
+         -o-transition: opacity .75s;
+            transition: opacity .75s;
 }
 
 body.loading #detail-layout-container .accessory-item-img,
@@ -494,10 +564,32 @@ main[viewing="items"] #gallery-frame #image-frame-default
 .gallery-image
 {
     display: none;
+    cursor: pointer;
 }
 .gallery-image.viewing
 {
     display: block;
+}
+#gallery-hint
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .8);
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+}
+.viewing-hint #gallery-hint
+{
+    visibility: initial;
+    opacity: 1;
+    -webkit-transition: opacity: .35s;
+       -moz-transition: opacity: .35s;
+         -o-transition: opacity: .35s;
+            transition: opacity: .35s;
 }
 #accessory-item-container
 {
@@ -511,14 +603,22 @@ main[viewing="items"] #gallery-frame #image-frame-default
     overflow: hidden;
     background-color: #000;
     max-height: 60vh;
-    transform: translate(0 ,-100%);
+    -webkit-transform: translate(0 ,-100%);
+       -moz-transform: translate(0 ,-100%);
+        -ms-transform: translate(0 ,-100%);
+         -o-transform: translate(0 ,-100%);
+            transform: translate(0 ,-100%);
     z-index: -1;
 }
 div[viewing-list="items"] #accessory-item-container
 {
     display: flex;
     transform: translate(0 ,0);
-    transition: transform .35s;
+    -webkit-transition: -webkit-transform .35s;
+       -moz-transition: -moz-transform .35s;
+         -o-transition: -o-transform .35s;
+            transition: -webkit-transform .35s;
+            transition: transform .35s;
     height: auto;
     overflow: scroll;
 }
@@ -599,6 +699,10 @@ div[viewing-list="items"] #accessory-item-container
     display: flex;
     flex-wrap: wrap;
     background-color: #000;
+    -webkit-transform: translate(0, -100%);
+       -moz-transform: translate(0, -100%);
+        -ms-transform: translate(0, -100%);
+         -o-transform: translate(0, -100%);
     transform: translate(0, -100%);
     height: 0;
     overflow: hidden;
@@ -607,8 +711,16 @@ div[viewing-list="items"] #accessory-item-container
 }
 div[viewing-list="gallery"] #gallery-item-container
 {
-    transform: translate(0, 0);
-    transition: transform .35s;
+    -webkit-transform: translate(0, 0);
+       -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+         -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+    -webkit-transition: -webkit-transform .35s;
+       -moz-transition: -moz-transform .35s;
+         -o-transition: -o-transform .35s;
+            transition: -webkit-transform .35s;
+            transition: transform .35s;
     height: auto;
     overflow: scroll;
 }
@@ -746,7 +858,11 @@ main[viewing="gallery"] #gallery-frame {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 }
 .large-text
 {
@@ -783,7 +899,11 @@ main[viewing="gallery"] #gallery-frame {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
     width: 80px;
     height: 80px;
     background-image: url(../../media/svg/blink_w_1.svg);
@@ -801,6 +921,29 @@ main[viewing="gallery"] #gallery-frame {
 .press-link.active .blink
 {
     animation: blinking_1 .75s infinite linear;
+}
+#gallery-hint-center-holder
+{
+    width: 75%;
+    height: 200px;
+}
+#btn-close-hint
+{
+}
+.text-btn
+{
+    /*display: inline-block;*/
+    /*text-align: center;*/
+    padding:4px 5px;
+    border-bottom: 1px solid var(--light-grey);
+}
+.text-btn-holder
+{
+    text-align: center;
+}
+#gallery-hint-center-holder .text-btn-holder
+{
+    margin-top: 50px;
 }
 @keyframes blinking_1 {
     0%
@@ -965,7 +1108,11 @@ main[viewing="gallery"] #gallery-frame {
         display: flex;
         overflow: visible;
         height: initial;
-        transform: none;
+        -webkit-transform: none;
+           -moz-transform: none;
+            -ms-transform: none;
+             -o-transform: none;
+                transform: none;
     }
     .menu-item-container
     {
@@ -1040,6 +1187,7 @@ main[viewing="gallery"] #gallery-frame {
         padding-top: 130px;
         height: calc( 100vh - 20px);
         overflow: hidden;
+        margin-bottom: 0;
     }
     #detail-layout-container aside
     {
@@ -1122,7 +1270,11 @@ main[viewing="gallery"] #gallery-frame {
         width: auto;
         max-height: none;
         height: auto;
-        transform: none;
+        -webkit-transform: none;
+           -moz-transform: none;
+            -ms-transform: none;
+             -o-transform: none;
+                transform: none;
     }
     .accessory-item
     {
@@ -1154,7 +1306,11 @@ main[viewing="gallery"] #gallery-frame {
     }
     #gallery-item-container
     {
-        transform: none;
+        -webkit-transform: none;
+           -moz-transform: none;
+            -ms-transform: none;
+             -o-transform: none;
+                transform: none;
         position: static;
         width: auto;
         max-height: none;
@@ -1213,6 +1369,10 @@ main[viewing="gallery"] #gallery-frame {
     .press-detail.title .blink-container
     {
         margin-top: 11px;
+    }
+    #gallery-hint
+    {
+        display: none;
     }
 }
 

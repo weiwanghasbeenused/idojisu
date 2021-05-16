@@ -8,8 +8,6 @@ function gallery_init(elements=false, images=false, list_parent = false, gallery
 	if(!elements || !images || !list_parent || !gallery_container)
 		return false;
 	
-			
-				
 	var sGallery_toggle = document.getElementById('gallery-toggle');
 	[].forEach.call(elements, function(el, i){
 		el.addEventListener('click', function(){
@@ -30,7 +28,6 @@ function gallery_init(elements=false, images=false, list_parent = false, gallery
 				images[i].classList.add('viewing');
 			}
 			this.classList.toggle('active');
-
 			if(sGallery_toggle != undefined)
 				sGallery_toggle.classList.remove('active');
 			
@@ -56,6 +53,23 @@ function gallery_init(elements=false, images=false, list_parent = false, gallery
 			this.classList.toggle('active');
 		});
 	}
+	[].forEach.call(images, function(el, i){
+		el.addEventListener('click', function(){
+			if(el.classList.contains('viewing'))
+			{
+				el.classList.remove('viewing');
+				elements[i].classList.remove('active');
+				var idx = i;
+				if(idx == elements.length - 1)
+					idx = 0;
+				else
+					idx++;
+				images[idx].classList.add('viewing');
+				elements[idx].classList.add('active');
+			}
+		});
+	});
+	
 }
 function items_init(elements=false, frames=false, list_parent = false, gallery_container=false)
 {
@@ -113,6 +127,24 @@ function items_init(elements=false, frames=false, list_parent = false, gallery_c
 			this.classList.toggle('active');
 		});
 	}
+	[].forEach.call(frames, function(el, i){
+		el.addEventListener('click', function(){
+			if(el.classList.contains('viewing'))
+			{
+				el.classList.remove('viewing');
+				elements[i].classList.remove('active');
+				var idx = i;
+				console.log(frames.length);
+				if(idx == elements.length - 1)
+					idx = 0;
+				else
+					idx++;
+				console.log(idx);
+				frames[idx].classList.add('viewing');
+				elements[idx].classList.add('active');
+			}
+		});
+	});
 }
 function close_gallery(side = false, list_parent = false, gallery_container=false)
 {

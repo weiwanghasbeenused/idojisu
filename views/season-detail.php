@@ -43,7 +43,7 @@
 	}
 
 	$bracket_pattern = '#\[(.*)\](.*)#is';
-
+	$showedGalleryHint = isset($_COOKIE['showedGalleryHint']);
 ?>
 <div id="detail-layout-container" class="main-container">
 	<aside id="left-side-container"></aside><main id="season-detail-container" class="container" viewing="default">
@@ -118,6 +118,12 @@
 				?><div id="accessory-frame-<?= $key; ?>" class="image-frame contain" style="background-image:url(<?= $figure_with_accessory_src[$m['caption']]; ?>);"></div><?
 			} ?>
 			<div id="image-frame-default" class="image-frame contain" style="background-image:url(<?= $default_src; ?>);"></div>
+			<div id="gallery-hint">
+				<div id="gallery-hint-center-holder" class="centered">
+					<p class="large-text">Click on image to loop through the gallery/items.</p>
+					<div class="text-btn-holder"><span id="btn-close-hint" class="text-btn">okay</span></div>
+				</div>
+			</div>
 		</div>
 		<div id="detail-container">
 			<h2 class="detail-blockname">Details</h2>
@@ -143,6 +149,7 @@
 	var sItems_toggle = document.getElementById('items-toggle');
 	var sGallery_toggle = document.getElementById('gallery-toggle');
 	var mask = document.getElementById('mask');
+	var sGallery_frame = document.getElementById('gallery-frame');
 
 	gallery_init(sGallery_option, sGallery_image, sSeason_detail_sticky_container, sSeason_detail_container);
 	items_init(sAccessory_item, sImage_frame, sSeason_detail_sticky_container, sSeason_detail_container);
@@ -173,6 +180,33 @@
 			});
 		}
 	}
+	var showedGalleryHint = <?= json_encode($showedGalleryHint); ?>;
+	function displayHint(){
+		if(!showedGalleryHint)
+		{
+			setCookie('showedGalleryHint', true, 7);
+			sGallery_frame.classList.add('viewing-hint');
+			showedGalleryHint = getCookie('showedGalleryHint');
+		}
+	}
+	var sBtn_close_hint = document.getElementById('btn-close-hint');
+	var sGallery_hint = document.getElementById('gallery-hint');
+	if(sBtn_close_hint != undefined)
+	{
+		sBtn_close_hint.addEventListener('click', function(){
+			sGallery_frame.classList.remove('viewing-hint');
+		});
+	}
+	var gallery_triggers = document.querySelectorAll('.gallery-option, .accessory-item');
+	if(!showedGalleryHint && gallery_triggers.length != 0 && isMobileLayout)
+	{
+		[].forEach.call(gallery_triggers, function(el, i){
+			el.addEventListener('click', function(){
+				displayHint();
+			});
+		});
+	}
+	console.log(showedGalleryHint);
 	window.addEventListener('load', function(){ 
 		removeLoading(); 
 	});
