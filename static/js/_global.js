@@ -58,10 +58,8 @@ function getRandomInt(min, max) {
 function resizeSizeToCover(subject, frame=false) {
 	if(!frame)
 		frame = subject.parentNode;
-	
 	var r_subject = subject.offsetHeight / subject.offsetWidth;
 	var r_frame = frame.offsetHeight / frame.offsetWidth;
-
 	if(r_subject > r_frame && subject.style.width != '100%')
 	{
 		subject.style.width = '100%';
@@ -79,7 +77,6 @@ function preloadImage(img_arr, callback=false, idx_to_callback=false, idx=0)
     if(!idx_to_callback)
     	idx_to_callback = img_arr.length-1;
     img.onload = function(){
-    	console.log('loaded');
     	if(idx < img_arr.length-1)
     		preloadImage(img_arr, callback, idx_to_callback, idx+1);
     	if(idx == idx_to_callback)

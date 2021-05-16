@@ -33,8 +33,12 @@
 						if(substr($m_item['name1'], 0, 1) != '.')
 						{
 							$sub_url = $url . '/' . $sm_item['url'];
+							$isSubActive = $isActive && ($uri[2] === $sm_item['url']);
+							$this_subclass = 'submenu-item-container blink-hover-zone';
+							if($isSubActive)
+								$this_subclass .= ' active';
 							?>
-							<div class="submenu-item-container blink-hover-zone"><a class="submenu-item" href="<?= $sub_url; ?>" ><span class="blink-container"></span><?= $sm_item['name1']; ?><span class="blink-container"></span></a></div>
+							<div class="<?= $this_subclass; ?>"><a class="submenu-item" href="<?= $sub_url; ?>" ><span class="blink-container"></span><?= $sm_item['name1']; ?><span class="blink-container"></span></a></div>
 							<?
 						}
 					} ?>

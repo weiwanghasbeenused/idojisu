@@ -190,9 +190,10 @@ body.loading #mask-loading
 .blink-hover-zone.active .blink{
     display: block;
     background-image: url('../../media/svg/blink_1.svg');
+    animation: blinking_1 .75s infinite linear;
 }
-.blink-hover-zone.active .menu-item  {
-    background-color: var(--sky-blue);
+.blink-hover-zone.active > .menu-item,
+.blink-hover-zone.active > .submenu-item  {
     color: #000;
 }
 .image-frame
@@ -224,10 +225,13 @@ body.loading #mask-loading
     border-bottom: 1px solid var(--light-grey);
 }
 .submenu-container { display: none; }
-.submenu-parent.expanded .submenu-container { display: block; }
+.submenu-parent.expanded .submenu-container,
+.submenu-parent.active .submenu-container
+{ display: block; }
 .submenu-item-container
 {
     padding: 0 12%;
+    background-color: #000;
 }
 .submenu-item-container:last-child
 {
@@ -250,19 +254,32 @@ body.loading #mask-loading
     position: relative;
     height: 50px;
     border-bottom: 1px solid var(--light-grey); 
+    background-color: #000;
+    z-index: 10;
 }
 #menu {
-    display: none;
+    /*display: none;*/
+    height: 0;
+    overflow: hidden;
+    transform: translate(0, -100%);
+}
+.viewing-menu #menu
+{
+    height: auto;
+    transition: transform .35s;
+    transform: translate(0, 0);
 }
 #menu-background{
     background-color: #000;
     z-index: 999;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
 }
-.viewing-menu #menu,
 .viewing-menu #menu-background
 {
-    display: block;
+    visibility: initial;
+    transition: opacity .5s;
+    opacity: 1;
 }
 #menu-toggle {
     position: fixed;
@@ -946,10 +963,17 @@ main[viewing="gallery"] #gallery-frame {
     #menu
     {
         display: flex;
+        overflow: visible;
+        height: initial;
+        transform: none;
     }
     .menu-item-container
     {
         flex: 1;
+    }
+    .submenu-parent.active .submenu-container
+    {
+        display: none;
     }
     #logo
     {
@@ -1002,7 +1026,6 @@ main[viewing="gallery"] #gallery-frame {
     }
     .submenu-item-container
     {
-        background-color: #000;
         padding: 0;
     }
     .look

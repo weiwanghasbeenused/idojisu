@@ -123,7 +123,7 @@
 	<? if(isset($landing_video)){
 		?>
 		<div id="landing-video-container">
-			<video muted autoplay loop>
+			<video muted loop buffered playsinline>
 				<source src="<?= m_url($landing_video); ?>" type="video/mp4">
 				Your browser doesn't support HTML 5 video.
 			</video>
@@ -321,12 +321,18 @@
 		}
 		
 	}
-	var sLanding_video_container = document.getElementById('landing-video-container');
-	if(sLanding_video_container != undefined){
-		sLanding_video = sLanding_video_container.querySelector('video');
-		resizeSizeToCover(sLanding_video, sLanding_video_container);
-	}
+
 	window.addEventListener('load', function(){ 
+		var sLanding_video_container = document.getElementById('landing-video-container');
+		if(sLanding_video_container != undefined){
+			console.log('sLanding_video_container != undefined');
+			
+			setTimeout(function(){
+				sLanding_video = sLanding_video_container.querySelector('video');
+				resizeSizeToCover(sLanding_video, sLanding_video_container);
+				sLanding_video.play();
+			}, 250);
+		}
 		removeLoading(); 
 	});
 </script>
