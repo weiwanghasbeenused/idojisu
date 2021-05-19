@@ -79,21 +79,10 @@ function preloadImage(img_arr, callback=false, idx_to_callback=false, idx=0)
     img.onload = function(){
     	if(idx < img_arr.length-1)
     		preloadImage(img_arr, callback, idx_to_callback, idx+1);
-    	if(idx == idx_to_callback)
+    	if(callback && idx == idx_to_callback)
     		callback();
     };
     img.src = img_arr[idx];
-}
-function removeLoading(){
-	if(body.classList.contains('loading'))
-	{
-		body.classList.remove('loading');
-		setTimeout(function(){
-			var fade = document.getElementsByClassName('fade');
-			while(fade.length > 0)
-				fade[0].classList.remove('fade');
-		}, 750);
-	}
 }
 
 var body = document.body;

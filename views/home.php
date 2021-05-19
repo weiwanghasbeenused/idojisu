@@ -9,10 +9,9 @@
 				$landing_video = $m;
 		}
 	}
-	
 	$blue_count = 7;
 	$white_count = 2;
-	$group_count = 4;
+	$group_count = 0;
 	$size = array();
 	$useSvg = isset($_GET['useSvg']);
 	$useCanvas = isset($_GET['useCanvas']);
@@ -20,111 +19,50 @@
 	$duration_init = 5;
 	$distance = $speed * $duration_init;
 	$attributeName = 'transform';
+
 ?>
 
 <main>
 	<div id="sky-container">
 		<?
-			if($useSvg)
+			for($i = 0; $i < $group_count; $i++)
 			{
-				?>
-				<svg width="100vw" height="100vh">
-					<!-- <defs>
-						<filter id="filterblur" x="-150%" y="-150%" width="400%" height="400%">
-							<feGaussianBlur in="SourceGraphic" stdDeviation="50" />
-						</filter>
-					</defs> -->
-				<?
-				for($i = 0; $i < $group_count; $i++)
+				?><div class="sky-group"><?
+			
+				for($j = 0; $j < $blue_count; $j++)
 				{
-
-					$direction = rand(0, 3);
-					if($direction == 0){
-						$this_translate = 'translate(' . $distance . ', 0)';
-					}
-					else if($direction == 1){
-						$this_translate = 'translate(0, ' . $distance . ')';
-					}
-					else if($direction == 2){
-						$this_translate = 'translate(' . -$distance . ', 0)';
-					}
-					else if($direction == 3){
-						$this_translate = 'translate(0, ' . -$distance . ')';
-					}
-					?><g id="sky-group-<?= $i; ?>" transform="translate(0, 0)" class="sky-group">
-						<?
-						$color = 'rgba(170, 220, 255, .85)';
-						for($j = 0; $j < $blue_count; $j++)
-						{
-							$w = rand(6, 18)/2;
-							$h = rand(6, 18)/2;
-							$left = rand(0, 100) - $w;
-							$top = rand(0, 100) - $h;
-							$style='rx="'.$w.'%" ry="'.$h.'%" cy="'.$top.'vh" cx="'.$left.'vw" fill="'.$color.'"';
-							?><ellipse class="sky-element sky-blue" filter="" <?= $style; ?>/><?
-
-						}
-						$color = 'white';
-						for($j = 0; $j < $white_count; $j++)
-						{
-							$w = rand(5, 18)/2;
-							$h = rand(5, 18)/2;
-							$left = rand(0, 100) - $w;
-							$top = rand(0, 100) - $h;
-							$style='rx="'.$w.'%" ry="'.$h.'%" cy="'.$top.'vh" cx="'.$left.'vw" fill="'.$color.'"'; 
-
-							?><ellipse class="sky-element sky-white" filter="" <?= $style; ?> /><?
-						}
-					?></g>
-					<?
+					
+					$left = rand(0, 100);
+					$top = rand(0, 100);
+					$w = rand(10, 24);
+					$h = rand(10, 24);
+					// $w = rand(35, 60);
+					// $h = rand(35, 60);
+					$style="width:".$w."%;height:".$h."%;top:".$top."vh;left:".$left."vw;"; 
+					?><div class="sky-element sky-blue blur" style="<?= $style; ?>"></div><div class="sky-element sky-blue" style="<?= $style; ?>"></div><?
+					
 				}
-				?></svg><?
-			}
-			else if($useCanvas)
-			{
-				?><canvas id="sky-canvas"></canvas><?
-			}
-			else
-			{
-				for($i = 0; $i < $group_count; $i++)
+				for($j = 0; $j < $white_count; $j++)
 				{
-					?><div class="sky-group"><?
-				
-					for($j = 0; $j < $blue_count; $j++)
-					{
-						
-						$left = rand(0, 100);
-						$top = rand(0, 100);
-						$w = rand(10, 24);
-						$h = rand(10, 24);
-						// $w = rand(35, 60);
-						// $h = rand(35, 60);
-						$style="width:".$w."%;height:".$h."%;top:".$top."vh;left:".$left."vw;"; 
-						?><div class="sky-element sky-blue blur" style="<?= $style; ?>"></div><div class="sky-element sky-blue" style="<?= $style; ?>"></div><?
-						
-					}
-					for($j = 0; $j < $white_count; $j++)
-					{
-						$w = rand(10, 24);
-						$h = rand(10, 24);
-						$left = rand(0, 100);
-						$top = rand(0, 100);
-						// $w = rand(35, 60);
-						// $h = rand(35, 60);
-						$style="width:".$w."%;height:".$h."%;top:".$top."vh;left:".$left."vw;"; 
-						?><div class="sky-element sky-white blur" style="<?= $style; ?>"></div><div class="sky-element sky-white" style="<?= $style; ?>"></div><?
-					}
-
-				?></div><?
+					$w = rand(10, 24);
+					$h = rand(10, 24);
+					$left = rand(0, 100);
+					$top = rand(0, 100);
+					// $w = rand(35, 60);
+					// $h = rand(35, 60);
+					$style="width:".$w."%;height:".$h."%;top:".$top."vh;left:".$left."vw;"; 
+					?><div class="sky-element sky-white blur" style="<?= $style; ?>"></div><div class="sky-element sky-white" style="<?= $style; ?>"></div><?
 				}
-			}			
+
+			?></div><?
+			}
 		?>
 	</div>
 	<? if(isset($landing_video)){
 		?>
 		<div id="landing-video-container">
-			<video muted loop buffered playsinline>
-				<source src="<?= m_url($landing_video); ?>" type="video/mp4">
+			<video id="landing-video" muted loop buffered playsinline>
+				<source src="<?= m_url($landing_video); ?>" type="video/<?= $landing_video['type']; ?>">
 				Your browser doesn't support HTML 5 video.
 			</video>
 			<div id="video-control"></div>
@@ -133,6 +71,92 @@
 	} ?>
 	
 </main>
+<style>
+#sky-container
+{
+    position: absolute;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10;
+    display: flex;
+    /*animation: sky 20s alternate linear infinite;*/
+    /*filter: blur(60px);*/
+}
+#sky-canvas
+{
+    filter: blur(60px);
+}
+
+div.sky-element{
+    filter: blur(40px);
+    position: absolute;
+    border-radius: 50%;
+    /*background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;*/
+}
+div.sky-element.blur
+{
+    filter: blur(60px);
+}
+div.sky-element.sky-blue
+{
+    background-color: rgba(170, 220, 255, 1);
+    /*background-image: url(../../media/png/blur-blue-2.png);*/
+    z-index: 10;
+}
+div.sky-element.sky-white
+{
+    background-color: rgba(255, 255, 255, 1);
+    /*background-image: url(../../media/png/blur-white.png);*/
+    z-index: 500;
+}
+#sSky_canvas
+{
+    width: 100%;
+    height: 100%;
+}
+
+.sky-group
+{
+    /*position: absolute;*/
+    transition-timing-function: linear;
+    /*width: 120vw;*/
+    /*height: 120vh;*/
+    flex: 1;
+}
+
+#landing-video-container
+{
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+
+}
+#landing-video
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    margin-top: 45px;
+}
+@media screen and (min-width: 768px) {
+
+    .sky-group
+    {
+        width: 100vw;
+        height: 100vh;
+    }
+}
+
+</style>
 <script>
 	var useSvg = <?= json_encode($useSvg); ?>;
 	var useCanvas = <?= json_encode($useCanvas); ?>;
@@ -150,16 +174,13 @@
 	var group_count = <?= $group_count; ?>;
 	var blue_count = 6;
 	var white_count = 6;
-	
+
 	if(!useCanvas){
 		[].forEach.call(sSky_group, function(el, i){
 			el.style.transform = 'translate3d(0, 0, 0)';
 		});
 	}
-	
-
-	// wind(sSky_group, 5000);
-	
+		
 	function wind(groups, duration){
 		[].forEach.call(groups, function(el, i){
 			var direction = getRandomInt(0, 3);
@@ -205,6 +226,22 @@
 		setTimeout(function(){
 			wind(groups, next_duration);
 		}, duration);
+	}
+	function blow(groups, duration){
+		[].forEach.call(groups, function(el, i){
+			if(i%2 == 0)
+			{
+				var this_transform = 'translate3d(-80%, 0, 0)';
+
+			}
+			else
+			{
+				var this_transform = 'translate3d(80%, 0, 0)';
+			}
+			var this_transition = (duration + 250 * i) / 1000;
+			el.style.transition = 'transform ' + this_transition+'s';
+			el.style.transform = this_transform;
+		});
 	}
 
 	var sSky_canvas = document.getElementById('sky-canvas');
@@ -319,20 +356,8 @@
 				this_skyElement.print();
 			}
 		}
-		
 	}
-
-	window.addEventListener('load', function(){ 
-		var sLanding_video_container = document.getElementById('landing-video-container');
-		if(sLanding_video_container != undefined){
-			console.log('sLanding_video_container != undefined');
-			
-			setTimeout(function(){
-				sLanding_video = sLanding_video_container.querySelector('video');
-				resizeSizeToCover(sLanding_video, sLanding_video_container);
-				sLanding_video.play();
-			}, 250);
-		}
-		removeLoading(); 
+	sSky_container.addEventListener('click', function(){
+		blow(sSky_group, 5000);
 	});
 </script>

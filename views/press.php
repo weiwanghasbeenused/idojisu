@@ -35,6 +35,61 @@
 		</ul>
 	</section>
 </main>
+<style>
+.press-link
+{
+    display: block;
+    padding: 20px 20px;
+    border-bottom: 1px solid var(--light-grey);
+}
+.press-detail.date
+{
+    margin-bottom: 20px;
+}
+
+.press-detail.platform
+{
+    margin-top: 20px;
+}
+.noTouchScreen .press-link:hover
+{
+    background-color: var(--sky-blue);
+    color: #000;
+}
+.press-link.active .blink
+{
+    animation: blinking_1 .75s infinite linear;
+}
+@media screen and (min-width: 768px) {
+	.press-link
+    {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .press-detail.date
+    {
+        width: 170px;
+        margin-bottom: 0;
+    }
+    .press-detail.title
+    {
+        padding-right: 30px;
+        flex: 1;
+    }
+    .press-detail.platform
+    {
+        margin-top: 0;
+        width: 320px;
+        text-align: right;
+    }
+    .press-detail.title .blink-container
+    {
+        margin-top: 11px;
+    }
+}
+</style>
 <script>
 	var sPress_link = document.getElementsByClassName('press-link');
 	if(sPress_link.length > 0)

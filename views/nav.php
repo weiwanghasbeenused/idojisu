@@ -66,13 +66,11 @@
 		[].forEach.call(sSubmenu_parent, function(el, i){
 			el.addEventListener('click', function(){
 				if(isMobileLayout){
-					console.log(sSubmenu_parent[0]);
 					el.classList.toggle('expanded');
 				}
 			});
 		});
 	}
-
 	var menu_toggle = document.getElementById('menu-toggle');
 	menu_toggle.addEventListener('click', function(){
 		body.classList.toggle('viewing-menu');
@@ -80,4 +78,3 @@
 </script>
 <div id="chrome-mask"></div>
 <div id="mask" class="fullpage"><span id="btn-close-mask" class="text-btn">close</span></div>
-<div id="mask-loading" class="fullpage"><div id="loading-icon"></div></div>
