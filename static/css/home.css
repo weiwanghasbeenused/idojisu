@@ -1,0 +1,83 @@
+#sky-container
+{
+    position: absolute;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10;
+    display: flex;
+    /*animation: sky 20s alternate linear infinite;*/
+    /*filter: blur(60px);*/
+}
+#sky-canvas
+{
+    filter: blur(60px);
+}
+
+div.sky-element{
+    filter: blur(40px);
+    position: absolute;
+    border-radius: 50%;
+    /*background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;*/
+}
+div.sky-element.blur
+{
+    filter: blur(60px);
+}
+div.sky-element.sky-blue
+{
+    background-color: rgba(170, 220, 255, 1);
+    /*background-image: url(../../media/png/blur-blue-2.png);*/
+    z-index: 10;
+}
+div.sky-element.sky-white
+{
+    background-color: rgba(255, 255, 255, 1);
+    /*background-image: url(../../media/png/blur-white.png);*/
+    z-index: 500;
+}
+#sSky_canvas
+{
+    width: 100%;
+    height: 100%;
+}
+
+.sky-group
+{
+    /*position: absolute;*/
+    transition-timing-function: linear;
+    /*width: 120vw;*/
+    /*height: 120vh;*/
+    flex: 1;
+}
+
+#landing-video-container
+{
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+
+}
+#landing-video
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    margin-top: 45px;
+}
+@media screen and (min-width: 768px) {
+
+    .sky-group
+    {
+        width: 100vw;
+        height: 100vh;
+    }
+}
