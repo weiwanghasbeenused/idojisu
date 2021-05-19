@@ -86,10 +86,42 @@
 	} ?>
 	<? if($feature){
 		?><div id="feature-video-container">
-			<video id="feature-video" muted loop buffered playsinline>
+			<video id="feature-video" muted loop buffered playsinline controls>
 				<source src="<?= m_url($feature); ?>" type="video/<?= $feature['type']; ?>">
 				Your browser doesn't support HTML 5 video.
 			</video>
+			<div id="video-controls" class="controls" data-state="hidden">
+				<button id="playpause" type="button" data-state="play">
+					<svg version="1.1" id="play-graphic" class="playpause-graphic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+						<style type="text/css">
+							.st0{fill:#A0A7AB;}
+						</style>
+						<polygon class="st0" points="17,9 17,8 15,8 15,7 13,7 13,6 11,6 11,5 9,5 9,4 7,4 7,3 5,3 5,2 3,2 3,1 1,1 1,19 3,19 3,18 5,18 
+							5,17 7,17 7,16 9,16 9,15 11,15 11,14 13,14 13,13 15,13 15,12 17,12 17,11 19,11 19,9 "/>
+					</svg>
+					<svg version="1.1" id="pause-graphic" class="playpause-graphic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+						<style type="text/css">
+							.st0{fill:#A0A7AB;}
+						</style>
+						<g>
+							<rect x="4" y="2" class="st0" width="4" height="16"/>
+							<rect x="12" y="2" class="st0" width="4" height="16"/>
+						</g>
+					</svg>
+			   </button>
+			   <button id="stop" type="button" data-state="stop">Stop</button>
+			   <div class="progress">
+			      <progress id="progress" value="0" min="0">
+			         <span id="progress-bar"></span>
+			      </progress>
+			   </div>
+			   <button id="mute" type="button" data-state="mute">Mute/Unmute</button>
+			   <button id="volinc" type="button" data-state="volup">Vol+</button>
+			   <button id="voldec" type="button" data-state="voldown">Vol-</button>
+			   <button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button>
+			</div>
 		</div><?
 	} ?>
 </main>
@@ -195,6 +227,57 @@ body.loading .look img{
             transform: scale(-1, 1);
     /*float: left;*/
 }
+#video-controls button {
+   border:none;
+   cursor:pointer;
+   background:transparent;
+   background-size:contain;
+   background-repeat:no-repeat;
+}
+#playpause
+{
+	width: 40px;
+	height: 40px;
+}
+.playpause-graphic
+{
+	display: none;
+}
+#playpause[data-state="play"] #play-graphic{
+	display: block;
+}
+
+#playpause[data-state="pause"] #pause-graphic{
+	display: block;
+}
+.controls progress {
+   display:block;
+   width:100%;
+   height:81%;
+   margin-top:0.125rem;
+   border:none;
+   color:#000
+   -moz-border-radius:2px;
+   -webkit-border-radius:2px;
+   border-radius:2px;
+}
+.controls progress[data-state="fake"] {
+   background:var(--light-grey);
+   height:65%;
+}
+.controls progress span {
+   width:0%;
+   height:100%;
+   display:inline-block;
+   background-color:#000;
+}
+.controls progress::-moz-progress-bar {
+   background-color:var(--light-grey);
+}
+
+.controls progress::-webkit-progress-value {
+   background-color:var(--light-grey);
+}
 @media screen and (min-width: 768px) {
 
     .look
@@ -271,4 +354,51 @@ body.loading .look img{
 	        scrollCounter++;
 	    }
 	}
+
+	var video = document.getElementById('feature-video');
+	var videoControls = document.getElementById('video-controls');
+	var playpause = document.getElementById('playpause');
+	var mute = document.getElementById('mute');
+	var stop = document.getElementById('stop');
+	
+	videoControls.setAttribute('data-state', 'visible');
+	video.removeAttribute('controls');
+	var supportsProgress = (document.createElement('progress').max !== undefined);
+	if (!supportsProgress) progress.setAttribute('data-state', 'fake');
+	var changeButtonState = function(type) {
+	   // Play/Pause button
+	   if (type == 'playpause') {
+	      if (video.paused || video.ended) {
+	         playpause.setAttribute('data-state', 'play');
+	      }
+	      else {
+	         playpause.setAttribute('data-state', 'pause');
+	      }
+	   }
+	   // Mute button
+	   else if (type == 'mute') {
+	      mute.setAttribute('data-state', video.muted ? 'unmute' : 'mute');
+	   }
+	}
+	video.addEventListener('play', function() {
+	   changeButtonState('playpause');
+	}, false);
+	video.addEventListener('pause', function() {
+	   changeButtonState('playpause');
+	}, false);
+	stop.addEventListener('click', function(e) {
+	   video.pause();
+	   video.currentTime = 0;
+	   progress.value = 0;
+	   // Update the play/pause button's 'data-state' which allows the correct button image to be set via CSS
+	   changeButtonState('playpause');
+	});
+	mute.addEventListener('click', function(e) {
+	   video.muted = !video.muted;
+	   changeButtonState('mute');
+	});
+	playpause.addEventListener('click', function(e) {
+	   if (video.paused || video.ended) video.play();
+	   else video.pause();
+	});
 </script>

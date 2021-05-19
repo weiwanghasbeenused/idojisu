@@ -379,49 +379,6 @@ ul {
     }
 
 }
-@keyframes blinking_w {
-    0%
-    {
-        background-image: url(../../media/svg/blink_w_1.svg);
-        /*transform: translate(-50%, -50%) rotate(0deg);*/
-    }
-    24.5%
-    {
-        background-image: url(../../media/svg/blink_w_1.svg);
-        /*transform: translate(-50%, -50%) rotate(0deg);*/
-    }
-    25%
-    {
-        background-image: url('../../media/svg/blink_w_2.svg');
-        /*transform: translate(-50%, -50%) rotate(22.5deg);*/
-    }
-    49.5%
-    {
-        background-image: url('../../media/svg/blink_w_2.svg');
-        /*transform: translate(-50%, -50%) rotate(22.5deg);*/
-    }
-    50%
-    {
-        background-image: url('../../media/svg/blink_w_3.svg');
-        /*transform: translate(-50%, -50%) rotate(45deg);*/
-    }
-    74.5%
-    {
-        background-image: url('../../media/svg/blink_w_3.svg');
-        /*transform: translate(-50%, -50%) rotate(45deg);*/
-    }
-    75%
-    {
-        background-image: url('../../media/svg/blink_w_4.svg');
-        /*transform: translate(-50%, -50%) rotate(72.5deg);*/
-    }
-    100%
-    {
-        background-image: url('../../media/svg/blink_w_4.svg');
-        /*transform: translate(-50%, -50%) rotate(72.5deg);*/
-    }
-
-}
 @keyframes arrow_next {
     0%
     {

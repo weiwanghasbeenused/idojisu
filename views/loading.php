@@ -114,7 +114,6 @@
 	.loading #loading-icon-holder
 	{
 	    display: block;
-	    animation: blinking_w 1s infinite linear;
 	}
 </style>
 <script>
