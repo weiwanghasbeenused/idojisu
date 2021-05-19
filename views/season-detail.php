@@ -618,7 +618,7 @@ main[viewing="gallery"] #gallery-frame {
 
     .gallery-option
     {
-        width: 33%;
+        width: 33.3%;
     }
     .accessory-item
     {

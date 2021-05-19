@@ -44,7 +44,7 @@ require_once('static/php/function.php');
 		<link rel="stylesheet" href="/static/css/ibm-plex-mono.css">
 		<link rel="stylesheet" href="/static/css/main.css">
 		<link rel="apple-touch-icon" href="/media/png/touchicon.png" />
-		<link rel="stylesheet" href="https://use.typekit.net/hpl4nwi.css">
+		<!-- <link rel="stylesheet" href="https://use.typekit.net/hpl4nwi.css"> -->
 	</head>
 	<body <?= empty($bodyClass) ? '' : 'class="'.$bodyClass.'"'; ?>>
 		<script src="/static/js/_touchScreen.js"></script>
