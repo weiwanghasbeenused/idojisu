@@ -58,6 +58,35 @@
 </div>
 
 <style>
+	#mask-loading
+	{
+	    background-color: rgba(0,0,0,.75);
+	    visibility: hidden;
+	    opacity: 0;
+	    z-index: 950;
+	    -webkit-transition: opacity .5s;
+	       -moz-transition: opacity .5s;
+	         -o-transition: opacity .5s;
+	            transition: opacity .5s;
+	}
+	body.fadeout #mask
+	{
+	    visibility: initial;
+	    opacity: 1;
+	    -webkit-transition: opacity .35s;
+	       -moz-transition: opacity .35s;
+	         -o-transition: opacity .35s;
+	            transition: opacity .35s;
+	}
+	body.loading #mask-loading
+	{
+	    visibility: initial;
+	    opacity: 1;
+	    -webkit-transition: none;
+	       -moz-transition: none;
+	         -o-transition: none;
+	            transition: none;
+	}
 	.loading-icon
 	{
 		width: 100%;
@@ -66,6 +95,26 @@
 	#loading-icon-1
 	{
 		display: block;
+	}
+	#loading-icon-holder
+	{
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    -webkit-transform: translate(-50%, -50%);
+	       -moz-transform: translate(-50%, -50%);
+	        -ms-transform: translate(-50%, -50%);
+	         -o-transform: translate(-50%, -50%);
+	            transform: translate(-50%, -50%);
+	    width: 80px;
+	    height: 80px;
+	    display: none;
+	    transform-origin: center;
+	}
+	.loading #loading-icon-holder
+	{
+	    display: block;
+	    animation: blinking_w 1s infinite linear;
 	}
 </style>
 <script>
@@ -100,6 +149,7 @@
 				}, 250);
 			}
 		<? } ?>
+		clearInterval(loading_timer);
 		removeLoading(); 
 	});
 </script>

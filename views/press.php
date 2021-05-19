@@ -61,6 +61,11 @@
     animation: blinking_1 .75s infinite linear;
 }
 @media screen and (min-width: 768px) {
+	.press-detail.title .blink-container
+	{
+	    min-width: 30px;
+	    margin-top: 9px;
+	}
 	.press-link
     {
         display: flex;

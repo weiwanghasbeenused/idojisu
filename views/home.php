@@ -244,120 +244,24 @@ div.sky-element.sky-white
 		});
 	}
 
-	var sSky_canvas = document.getElementById('sky-canvas');
-	if(sSky_canvas != undefined)
-	{
-		sSky_canvas.width = wW;
-		sSky_canvas.height = wH;
-		var ctx = sSky_canvas.getContext('2d');
-		var skyElement_arr = {};
-		skyElement_arr['blue'] = [];
-		skyElement_arr['white'] = [];
-		for(j = 0; j < blue_count; j++)
-		{
-
-			var this_left = parseInt(wW * getRandomInt(0, 100) / 100);
-			var this_top = parseInt(wH * getRandomInt(0, 100) / 100);
-			var this_w = parseInt(wW * getRandomInt(6, 18) / 100);
-			var this_h = parseInt(wH * getRandomInt(6, 18) / 100);
-			var this_skyBlue = {
-				x: this_left,
-				y: this_top,
-				width: this_w,
-				height: this_h
-			};
-			skyElement_arr['blue'].push(this_skyBlue);
-		}
-		
-		for(j = 0; j < white_count; j++)
-		{
-			var this_left = parseInt(wW * getRandomInt(0, 100) / 100);
-			var this_top = parseInt(wH * getRandomInt(0, 100) / 100);
-			var this_w = parseInt(wW * getRandomInt(3, 15) / 100);
-			var this_h = parseInt(wH * getRandomInt(3, 15) / 100);
-			var this_skyWhite = {
-				x: this_left,
-				y: this_top,
-				width: this_w,
-				height: this_h
-			};
-			skyElement_arr['white'].push(this_skyWhite);
-		}
-
-		class skyElement{
-			constructor( x, y, width, height){
-				this.x = x
-    			this.y = y
-    			this.width = width
-    			this.height = height
-			}
-			print(){
-				const {
-					x, y, width, height
-			    } = this
-			    ctx.beginPath();
-				ctx.ellipse(x, y, width, height, 0, 0, 2 * Math.PI);
-				ctx.fill();
-			}
-		}
-		start();
-		function start(){
-			ctx.fillStyle = "rgba(170, 220, 255, .85)";
-			for(i = 0; i < blue_count; i++)
-			{
-				var this_skyElement = new skyElement(
-					skyElement_arr['blue'][i]['x'], 
-					skyElement_arr['blue'][i]['y'], 
-					skyElement_arr['blue'][i]['width'],
-					skyElement_arr['blue'][i]['height']
-				);
-				this_skyElement.print();
-			}
-
-			ctx.fillStyle = "rgba(255, 255, 255)";
-			for(i = 0; i < white_count; i++)
-			{
-				var this_skyElement = new skyElement(
-					skyElement_arr['white'][i]['x'], 
-					skyElement_arr['white'][i]['y'], 
-					skyElement_arr['white'][i]['width'],
-					skyElement_arr['white'][i]['height']
-				);
-				this_skyElement.print();
-			}
-			setInterval(draw, 100);
-		}
-		
-		function draw(){
-			var ctx = document.getElementById('sky-canvas').getContext('2d');
-			ctx.clearRect(0, 0, sSky_canvas.width, sSky_canvas.height);
-			ctx.fillStyle = "rgba(170, 220, 255, .85)";
-			for(i = 0; i < blue_count; i++)
-			{
-				skyElement_arr['blue'][i]['x'] = skyElement_arr['blue'][i]['x']-1;
-				var this_skyElement = new skyElement(
-					skyElement_arr['blue'][i]['x'], 
-					skyElement_arr['blue'][i]['y'], 
-					skyElement_arr['blue'][i]['width'],
-					skyElement_arr['blue'][i]['height']
-				);
-				this_skyElement.print();
-			}
-			ctx.fillStyle = "rgba(255, 255, 255)";
-			for(i = 0; i < white_count; i++)
-			{
-				skyElement_arr['white'][i]['x'] = skyElement_arr['white'][i]['x'] - 1;
-				var this_skyElement = new skyElement(
-					skyElement_arr['white'][i]['x'], 
-					skyElement_arr['white'][i]['y'], 
-					skyElement_arr['white'][i]['width'],
-					skyElement_arr['white'][i]['height']
-				);
-				this_skyElement.print();
-			}
-		}
-	}
+	
 	sSky_container.addEventListener('click', function(){
 		blow(sSky_group, 5000);
 	});
+	function resizeSizeToCover(subject, frame=false) {
+		if(!frame)
+			frame = subject.parentNode;
+		var r_subject = subject.offsetHeight / subject.offsetWidth;
+		var r_frame = frame.offsetHeight / frame.offsetWidth;
+		if(r_subject > r_frame && subject.style.width != '100%')
+		{
+			subject.style.width = '100%';
+			subject.style.height = 'auto';
+		}
+		else if(r_subject < r_frame && subject.style.height != '100%')
+		{
+			subject.style.width = 'auto';
+			subject.style.height = '100%';
+		}
+	}
 </script>

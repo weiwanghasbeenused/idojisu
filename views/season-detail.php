@@ -135,6 +135,10 @@
 	</aside>
 </div>
 <style>
+.list-toggle .blink-container
+{
+    margin-top: 7px;
+}
 #detail-layout-container
 {
     padding-top: 49px;
@@ -663,6 +667,7 @@ main[viewing="gallery"] #gallery-frame {
 
 </style>
 <script type="text/javascript" src="/static/js/detail-gallery.js"></script>
+<script type="text/javascript" src="/static/js/cookie.js"></script>
 <script>
 	var images_arr = <?= json_encode($images_arr); ?>;
 	var idx_to_callback = parseInt( 3 * images_arr.length / 4);

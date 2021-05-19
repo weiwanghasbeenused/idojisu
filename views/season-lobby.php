@@ -86,7 +86,7 @@
 	} ?>
 	<? if($feature){
 		?><div id="feature-video-container">
-			<video id="feature-video" autoplay muted loop buffered playsinline>
+			<video id="feature-video" muted loop buffered playsinline>
 				<source src="<?= m_url($feature); ?>" type="video/<?= $feature['type']; ?>">
 				Your browser doesn't support HTML 5 video.
 			</video>
@@ -260,5 +260,15 @@ body.loading .look img{
 			var amount = current_slideshow_x - slideshow_container.scrollLeft;
 			SmoothHorizontalScrolling(slideshow_container, 250, amount, slideshow_container.scrollLeft);
 		}
+	}
+	function SmoothHorizontalScrolling(e, time, amount, start) {
+	    var eAmt = amount / 100;
+	    var curTime = 0;
+	    var scrollCounter = 0;
+	    while (curTime <= time) {
+	        window.setTimeout(SHS_B, curTime, e, scrollCounter, eAmt, start);
+	        curTime += time / 100;
+	        scrollCounter++;
+	    }
 	}
 </script>

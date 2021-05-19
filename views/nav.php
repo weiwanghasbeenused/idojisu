@@ -52,9 +52,9 @@
 		} ?>
 	</nav>
 	<div id="menu-toggle">
-		<div class="menu-icon-bar"></div>
-		<div class="menu-icon-bar"></div>
-		<div class="menu-icon-bar"></div>
+		<div id="first-menu-icon-bar" class="menu-icon-bar"></div>
+		<div id="second-menu-icon-bar" class="menu-icon-bar"></div>
+		<div id="last-menu-icon-bar" class="menu-icon-bar"></div>
 	</div>
 </header>
 <div id="menu-background" class="fullpage"></div>
