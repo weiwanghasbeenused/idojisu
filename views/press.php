@@ -68,7 +68,10 @@
 	}
 	.press-link
     {
-        display: flex;
+        display: -webkit-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+	    display: flex;
         flex-wrap: nowrap;
         padding-top: 15px;
         padding-bottom: 15px;
@@ -81,6 +84,9 @@
     .press-detail.title
     {
         padding-right: 30px;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
         flex: 1;
     }
     .press-detail.platform

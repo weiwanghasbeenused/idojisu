@@ -260,6 +260,9 @@ main[viewing="items"] #gallery-frame #image-frame-default
     flex-wrap: wrap;
     /*border-bottom: 1px solid var(--light-grey);*/
     /*display: none;*/
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     position: absolute;
     width: 100vw;
@@ -276,6 +279,9 @@ main[viewing="items"] #gallery-frame #image-frame-default
 }
 div[viewing-list="items"] #accessory-item-container
 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     transform: translate(0 ,0);
     -webkit-transition: -webkit-transform .35s;
@@ -360,6 +366,9 @@ div[viewing-list="items"] #accessory-item-container
     position: absolute;
     right: 0;
     width: 100vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     flex-wrap: wrap;
     background-color: #000;
@@ -471,6 +480,9 @@ main[viewing="gallery"] #gallery-frame {
 @media screen and (min-width: 768px) {
     #detail-layout-container
     {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
         display: flex;
         flex-wrap: wrap;
         padding-top: 130px;
@@ -480,6 +492,10 @@ main[viewing="gallery"] #gallery-frame {
     }
     #detail-layout-container aside
     {
+        -webkit-box-flex: 1;
+        width: 24.5%;
+        -webkit-flex: 1;
+        -ms-flex: 1;
         flex: 1;
         /*border-top: 1px solid var(--light-grey);*/
         -webkit-overflow-scrolling: touch;
@@ -513,6 +529,10 @@ main[viewing="gallery"] #gallery-frame {
     }
     #detail-layout-container main
     {
+        -webkit-box-flex: 2;
+        width: 50%;
+        -webkit-flex: 2;
+        -ms-flex: 2;
         flex: 2;
         border-left: 1px solid var(--light-grey);
         border-right: 1px solid var(--light-grey);
@@ -667,7 +687,7 @@ main[viewing="gallery"] #gallery-frame {
 
 </style>
 <script type="text/javascript" src="/static/js/detail-gallery.js"></script>
-<script type="text/javascript" src="/static/js/cookie.js"></script>
+<script type="text/javascript" src="/static/js/_cookie.js"></script>
 <script>
 	var images_arr = <?= json_encode($images_arr); ?>;
 	var idx_to_callback = parseInt( 3 * images_arr.length / 4);

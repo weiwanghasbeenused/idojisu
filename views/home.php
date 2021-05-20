@@ -72,6 +72,7 @@
 	
 </main>
 <style>
+
 #sky-container
 {
     position: absolute;
@@ -80,6 +81,9 @@
     height: 100vh;
     overflow: hidden;
     z-index: 10;
+    display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
     display: flex;
     /*animation: sky 20s alternate linear infinite;*/
     /*filter: blur(60px);*/
@@ -125,6 +129,10 @@ div.sky-element.sky-white
     transition-timing-function: linear;
     /*width: 120vw;*/
     /*height: 120vh;*/
+    -webkit-box-flex: 1;
+    /*width: 24.5%;*/
+    -webkit-flex: 1;
+    -ms-flex: 1;
     flex: 1;
 }
 
@@ -145,7 +153,7 @@ div.sky-element.sky-white
         -ms-transform: translate(-50%, -50%);
          -o-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-    margin-top: 45px;
+    /*margin-top: 50px;*/
 }
 @media screen and (min-width: 768px) {
 
@@ -153,6 +161,21 @@ div.sky-element.sky-white
     {
         width: 100vw;
         height: 100vh;
+    }
+    #menu,
+	#logo-container
+	{
+		background-color: transparent;
+	}
+	.noTouchScreen header
+    {
+        background-color: transparent;
+    }
+    .noTouchScreen header:hover
+    {
+        /*background-color: rgba(0,0,0,.75);*/
+        transition: background-color .5s;
+        background-color: #000;
     }
 }
 

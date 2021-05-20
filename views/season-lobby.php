@@ -1,13 +1,18 @@
 <?
-	$tag_feature = '[feature]';
+	$tag_hidden = '[hidden]';
 	$media = $oo->media($item['id']);
 	$feature = false;
+	$poster = false;
 	foreach($media as $m)
 	{
-		if(strpos($m['caption'], $tag_feature) !== false ){
-			$feature = $m;
+		if(strpos($m['caption'], $tag_hidden) === false){
+			if($m['type'] == 'mp4' || $m['type'] == 'wav' || $m['type'] == 'mov')
+				$feature = $m;
+			else if( strtolower($m['type']) == 'jpg' || strtolower($m['type']) == 'png' || strtolower($m['type']) == 'git')
+				$poster = '/media/' . m_pad($m['id']) . '.' . $m['type'];
 		}
 	}
+
 	$tag_thumbnail = '[thumbnail]';
 	$images_arr = array();
 
@@ -24,17 +29,11 @@
 			if(count($media) > 0)
 			{
 				foreach( $media as $m ){
-					if(strpos($m['caption'], $tag_thumbnail) !== false ){
+					if(strpos($m['caption'], $tag_hidden) === false ){
 						$thumbnail = m_url($m);
 						$thumbnail_alt = substr($m['caption'], strpos($m['caption'], $tag_thumbnail) + strlen($tag_thumbnail));
 						$thumbnail_alt = empty($thumbnail_alt) ? 'Thumbnail of '.$child['name1'] : $thumbnail_alt;
 					}
-				}
-				if(!$thumbnail){
-					$thumbnail = m_url($media[0]);
-					$thumbnail_alt = substr($m['caption'], strpos($m['caption'], $tag_thumbnail) + strlen($tag_thumbnail));
-						$thumbnail_alt = $media[0]['caption'];
-						$thumbnail_alt = empty($thumbnail_alt) ? 'Thumbnail of '.$child['name1'] : $thumbnail_alt;
 				}
 				$images_arr[] = $thumbnail;
 			}
@@ -85,23 +84,25 @@
 		</div><?
 	} ?>
 	<? if($feature){
-		?><div id="feature-video-container">
-			<video id="feature-video" muted loop buffered playsinline controls>
+		?><figure id="feature-video-container" data-fullscreen="false">
+			<video id="feature-video" muted loop buffered playsinline controls <?= $poster ? 'poster="' .  $poster . '"' : ''; ?> >
 				<source src="<?= m_url($feature); ?>" type="video/<?= $feature['type']; ?>">
 				Your browser doesn't support HTML 5 video.
 			</video>
-			<div id="video-controls" class="controls" data-state="hidden">
-				<button id="playpause" type="button" data-state="play">
-					<svg version="1.1" id="play-graphic" class="playpause-graphic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			<div id="video-controls" data-state="hidden">
+				<button id="playpause" class="video-controls-btn" type="button" data-state="play">
+					<svg version="1.1" id="play-graphic" class="video-controls-graphic playpause-graphic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+	 					<title>Play the video</title>
 						<style type="text/css">
 							.st0{fill:#A0A7AB;}
 						</style>
 						<polygon class="st0" points="17,9 17,8 15,8 15,7 13,7 13,6 11,6 11,5 9,5 9,4 7,4 7,3 5,3 5,2 3,2 3,1 1,1 1,19 3,19 3,18 5,18 
 							5,17 7,17 7,16 9,16 9,15 11,15 11,14 13,14 13,13 15,13 15,12 17,12 17,11 19,11 19,9 "/>
 					</svg>
-					<svg version="1.1" id="pause-graphic" class="playpause-graphic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+					<svg version="1.1" id="pause-graphic" class="video-controls-graphic playpause-graphic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+	 					<title>Pause the video</title>
 						<style type="text/css">
 							.st0{fill:#A0A7AB;}
 						</style>
@@ -111,18 +112,29 @@
 						</g>
 					</svg>
 			   </button>
-			   <button id="stop" type="button" data-state="stop">Stop</button>
-			   <div class="progress">
+			   <!-- <button id="stop" type="button" data-state="stop">Stop</button> -->
+			   <div id="progress-container">
 			      <progress id="progress" value="0" min="0">
 			         <span id="progress-bar"></span>
 			      </progress>
 			   </div>
-			   <button id="mute" type="button" data-state="mute">Mute/Unmute</button>
-			   <button id="volinc" type="button" data-state="volup">Vol+</button>
-			   <button id="voldec" type="button" data-state="voldown">Vol-</button>
-			   <button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button>
+			   <!-- <button id="mute" type="button" data-state="mute">Mute/Unmute</button> -->
+			   <!-- <button id="volinc" type="button" data-state="volup">Vol+</button> -->
+			   <!-- <button id="voldec" type="button" data-state="voldown">Vol-</button> -->
+			   <button id="fs" class="video-controls-btn" type="button" data-state="go-fullscreen">
+			   	<svg version="1.1" id="fullscreen-graphic" class="video-controls-graphic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+		   		<title>Toggle fullscreen</title>
+				<style type="text/css">
+					.st0{fill:#A0A7AB;}
+				</style>
+				<path class="st0" d="M7,13H5v2h2V13z M9,11H7v2h2V11z M11,9H9v2h2V9z M13,7h-2v2h2V7z M15,5h-2v2h2V5z M7,7V5H5v2H7z M9,9V7H7v2H9z
+					 M11,11V9H9v2H11z M13,13v-2h-2v2H13z M15,15v-2h-2v2H15z M8,17v2H3H1v-2v-5h2v5H8z M19,12v5v2h-2h-5v-2h5v-5H19z M8,3H3v5H1V3V1h2
+					h5V3z M19,1v2v5h-2V3h-5V1h5H19z"/>
+				</svg>
+			   </button>
 			</div>
-		</div><?
+			<div id="video-controls-mask" data-state=""></div>
+		</figure><?
 	} ?>
 </main>
 <style>
@@ -136,6 +148,9 @@
 }
 #slideshow-carrier
 {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
     display: flex;
     flex-wrap: nowrap;
     /*overflow-y: hidden; */
@@ -152,6 +167,9 @@
     vertical-align: middle;
     /*display: inline-block;*/
     width: 57vw;
+    -webkit-box-flex: 0 0 auto;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
     flex: 0 0 auto;
     border-right: 1px solid var(--light-grey);
     padding: 20px 0;
@@ -167,6 +185,7 @@
 }
 .look-image
 {
+	display: block;
     opacity: 1;
     -webkit-transition: opacity .75s;
        -moz-transition: opacity .75s;
@@ -183,10 +202,6 @@ body.loading .look img{
 .noTouchScreen .look:hover a
 {
     color: #000;
-}
-.thumbnail
-{
-    display: block;
 }
 .look-idx
 {
@@ -227,7 +242,32 @@ body.loading .look img{
             transform: scale(-1, 1);
     /*float: left;*/
 }
-#video-controls button {
+#video-controls
+{
+	/*position: absolute;*/
+	/*bottom: 0;*/
+	/*left: 0;*/
+	/*width: 100%;*/
+	padding: 10px;
+	/*visibility: initial;*/
+	display: flex;
+	margin-top: -44px;
+	
+}
+#video-controls[data-state=hidden] {
+	/*visibility: hidden;*/
+	pointer-events: none;
+	transition: opacity .35s;
+	opacity: 0;
+}
+#video-controls:after
+{
+	content: ' ';
+	display: block;
+	clear: both;
+	height: 0;
+}
+.video-controls-btn {
    border:none;
    cursor:pointer;
    background:transparent;
@@ -236,50 +276,120 @@ body.loading .look img{
 }
 #playpause
 {
-	width: 40px;
-	height: 40px;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
 }
+
 .playpause-graphic
 {
 	display: none;
 }
-#playpause[data-state="play"] #play-graphic{
+#playpause[data-state="play"] #play-graphic
+{
 	display: block;
 }
 
-#playpause[data-state="pause"] #pause-graphic{
+#playpause[data-state="pause"] #pause-graphic
+{
 	display: block;
 }
-.controls progress {
+#progress-container
+{
+	position: relative;
+	padding: 8px 15px 0 15px;
+	flex: 1;
+	z-index: 10;
+}
+#progress {
    display:block;
    width:100%;
-   height:81%;
+   height:4px;
    margin-top:0.125rem;
-   border:none;
-   color:#000
-   -moz-border-radius:2px;
+   /*-moz-border-radius:2px;
    -webkit-border-radius:2px;
-   border-radius:2px;
+   border-radius:2px;*/
+   color:#000;
+   background-color: #000;
 }
-.controls progress[data-state="fake"] {
+#progress[data-state="fake"] {
    background:var(--light-grey);
-   height:65%;
+   height:20px;
 }
-.controls progress span {
+#progress-bar {
    width:0%;
    height:100%;
    display:inline-block;
    background-color:#000;
 }
-.controls progress::-moz-progress-bar {
+#progress::-moz-progress-bar {
    background-color:var(--light-grey);
+   /*background-color: #000;*/
 }
-
-.controls progress::-webkit-progress-value {
+#progress::-webkit-progress-bar { 
+	background: #000; 
+}
+#progress::-webkit-progress-value {
    background-color:var(--light-grey);
+   /*background-color: #000;*/
+}
+#feature-video-container
+{
+	position: relative;
+}
+#fs
+{
+	position: relative;
+	z-index: 10;
+	width: 24px;
+	height: 24px;
+}
+.video-controls-graphic:hover .st0
+{
+	fill: var(--sky-blue);
+}
+#video-controls-mask
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .65);
+	z-index: 5;
+	transition: opacity .35s;
+	pointer-events: none;
+}
+#video-controls-mask[data-state="hidden"]
+{
+
+	/*visibility: hidden;*/
+	opacity: 0;
 }
 @media screen and (min-width: 768px) {
+	#playpause,
+	#fs
+	{
+		width: 40px;
+		height: 40px;
+	}
+	#fs
+	{
+		margin-right: 10px;
+	}
+	#video-controls
+	{
+		margin-top: -60px;
 
+	}
+	#progress-container
+	{
+		padding-top: 16px;
+	}
     .look
     {
         width: 30vw;
@@ -355,16 +465,25 @@ body.loading .look img{
 	    }
 	}
 
+	var videoContainer = document.getElementById('feature-video-container');
 	var video = document.getElementById('feature-video');
 	var videoControls = document.getElementById('video-controls');
 	var playpause = document.getElementById('playpause');
 	var mute = document.getElementById('mute');
 	var stop = document.getElementById('stop');
+	var progress = document.getElementById('progress');
+	var progressBar = document.getElementById('progress-bar');
+	var fullscreen = document.getElementById('fs');
+	var videoControlsMask = document.getElementById('video-controls-mask');
+	var videoControls_timer = null;
 	
 	videoControls.setAttribute('data-state', 'visible');
 	video.removeAttribute('controls');
 	var supportsProgress = (document.createElement('progress').max !== undefined);
 	if (!supportsProgress) progress.setAttribute('data-state', 'fake');
+	var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen);
+	if (!fullScreenEnabled)
+		fullscreen.style.display = 'none';
 	var changeButtonState = function(type) {
 	   // Play/Pause button
 	   if (type == 'playpause') {
@@ -375,30 +494,106 @@ body.loading .look img{
 	         playpause.setAttribute('data-state', 'pause');
 	      }
 	   }
-	   // Mute button
-	   else if (type == 'mute') {
-	      mute.setAttribute('data-state', video.muted ? 'unmute' : 'mute');
-	   }
 	}
 	video.addEventListener('play', function() {
-	   changeButtonState('playpause');
+		changeButtonState('playpause');
 	}, false);
 	video.addEventListener('pause', function() {
 	   changeButtonState('playpause');
 	}, false);
-	stop.addEventListener('click', function(e) {
-	   video.pause();
-	   video.currentTime = 0;
-	   progress.value = 0;
-	   // Update the play/pause button's 'data-state' which allows the correct button image to be set via CSS
-	   changeButtonState('playpause');
-	});
-	mute.addEventListener('click', function(e) {
-	   video.muted = !video.muted;
-	   changeButtonState('mute');
-	});
 	playpause.addEventListener('click', function(e) {
-	   if (video.paused || video.ended) video.play();
-	   else video.pause();
+		if (video.paused || video.ended){
+			video.play();
+			toggleVideoControls(videoControls, videoControlsMask);
+		} 
+		else{
+			video.pause();
+			toggleVideoControls(videoControls, videoControlsMask, 1000);
+		} 
+		
 	});
+	progress.addEventListener('click', function(e) {
+		var pos = (e.pageX  - (this.offsetLeft + this.offsetParent.offsetLeft)) / this.offsetWidth;
+		video.currentTime = pos * video.duration;
+	});
+	fullscreen.addEventListener('click', function(e) {
+		handleFullscreen();
+	});
+	var handleFullscreen = function() {
+		if (isFullScreen()) {
+			if (document.exitFullscreen) document.exitFullscreen();
+			else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+			else if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
+			else if (document.msExitFullscreen) document.msExitFullscreen();
+			setFullscreenData(false);
+		}
+		else {
+			if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
+			else if (videoContainer.mozRequestFullScreen) videoContainer.mozRequestFullScreen();
+			else if (videoContainer.webkitRequestFullScreen) videoContainer.webkitRequestFullScreen();
+			else if (videoContainer.msRequestFullscreen) videoContainer.msRequestFullscreen();
+			setFullscreenData(true);
+		}
+	}
+	var isFullScreen = function() {
+		return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement);
+	}
+	var setFullscreenData = function(state) {
+		videoContainer.setAttribute('data-fullscreen', !!state);
+	}
+	document.addEventListener('fullscreenchange', function(e) {
+		setFullscreenData(!!(document.fullscreen || document.fullscreenElement));
+	});
+	document.addEventListener('webkitfullscreenchange', function() {
+		setFullscreenData(!!document.webkitIsFullScreen);
+	});
+	document.addEventListener('mozfullscreenchange', function() {
+		setFullscreenData(!!document.mozFullScreen);
+	});
+	document.addEventListener('msfullscreenchange', function() {
+		setFullscreenData(!!document.msFullscreenElement);
+	});
+	video.addEventListener('timeupdate', function() {
+		if (!progress.getAttribute('max')) progress.setAttribute('max', video.duration);
+		progress.value = video.currentTime;
+		progressBar.style.width = Math.floor((video.currentTime / video.duration) * 100) + '%';
+	});
+
+	video.addEventListener('click', function(){
+		if(video.played.length != 0)
+		{
+			toggleVideoControls(videoControls, videoControlsMask);
+		}
+		
+	}, false);
+
+	function toggleVideoControls(controls, mask, delay=false)
+	{
+		clearTimeout(videoControls_timer);
+		if(!delay)
+		{
+			if(controls.getAttribute('data-state') == 'hidden'){
+				controls.setAttribute('data-state', 'visible');
+				mask.setAttribute('data-state', 'visible');
+			}
+			else if(controls.getAttribute('data-state') == 'visible'){
+				controls.setAttribute('data-state', 'hidden');
+				mask.setAttribute('data-state', 'hidden');
+			}
+		}
+		else
+		{
+			videoControls_timer = setTimeout(function(){
+				if(controls.getAttribute('data-state') == 'hidden'){
+					controls.setAttribute('data-state', 'visible');
+					mask.setAttribute('data-state', 'visible');
+				}
+				else if(controls.getAttribute('data-state') == 'visible'){
+					controls.setAttribute('data-state', 'hidden');
+					mask.setAttribute('data-state', 'hidden');
+				}
+			}, delay);
+		}
+		
+	}
 </script>
