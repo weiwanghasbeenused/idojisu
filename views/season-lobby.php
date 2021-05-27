@@ -308,13 +308,14 @@ body.loading .look img{
 #progress {
    display:block;
    width:100%;
-   height:4px;
+   height:6px;
    margin-top:0.125rem;
    /*-moz-border-radius:2px;
    -webkit-border-radius:2px;
    border-radius:2px;*/
    color:#000;
    background-color: #000;
+   cursor: pointer;
 }
 #progress[data-state="fake"] {
    background:var(--light-grey);
@@ -325,6 +326,15 @@ body.loading .look img{
    height:100%;
    display:inline-block;
    background-color:#000;
+}
+#progress-bar:after
+{
+	display: block;
+	content: " ";
+	position: absolute;
+	width: 12px;
+	height: 10px;
+	background-color: #fff;
 }
 #progress::-moz-progress-bar {
    background-color:var(--light-grey);
@@ -371,8 +381,11 @@ body.loading .look img{
 	opacity: 0;
 }
 @media screen and (min-width: 768px) {
-	#playpause,
-	#fs
+	#progress
+	{
+		height: 4px;
+	}
+	#playpause
 	{
 		width: 40px;
 		height: 40px;
@@ -383,12 +396,12 @@ body.loading .look img{
 	}
 	#video-controls
 	{
-		margin-top: -60px;
+		margin-top: -48px;
 
 	}
 	#progress-container
 	{
-		padding-top: 16px;
+		padding-top: 9px;
 	}
     .look
     {
@@ -540,6 +553,7 @@ body.loading .look img{
 	}
 	var setFullscreenData = function(state) {
 		videoContainer.setAttribute('data-fullscreen', !!state);
+		toggleVideoControls(videoControls, videoControlsMask, 1000);
 	}
 	document.addEventListener('fullscreenchange', function(e) {
 		setFullscreenData(!!(document.fullscreen || document.fullscreenElement));

@@ -9,9 +9,9 @@
 				$landing_video = $m;
 		}
 	}
-	$blue_count = 7;
-	$white_count = 2;
-	$group_count = 0;
+	$blue_count = 1;
+	$white_count = 0;
+	$group_count = 1;
 	$size = array();
 	$useSvg = isset($_GET['useSvg']);
 	$useCanvas = isset($_GET['useCanvas']);
@@ -25,6 +25,24 @@
 <main>
 	<div id="sky-container">
 		<?
+		if($useSvg)
+		{
+			?>
+			<svg id="cloud-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #c6dff1;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M0,1080H427.51a71.43,71.43,0,0,0-26.05-32.09q-5.26-3.62-10.69-6.62c41.14-20,141.08-71.83,205.73-33.83,39,22.93,94.11,16.44,132-5.31L761.11,1080H1920V0H0ZM99.65,73.9c38.67-71,118.1-35.46,246.66,6.07a192,192,0,0,0-29,18.38c-91.49,70.19-116.45,242.91-38.39,304.43,58.33,46,106.85-2.37,145.23,57.57s99.81,93.85,226.49,82,148.68-37,151.64-76.5c3.84-51.26-86.22-66.9-85.1-176.66.9-87.35-55.64-158.3-130.49-198.1C614.49,80.58,644.26,69,688,64.44c119.88-12.62,974.8-6.31,1085.21-6.31s37.07,302.06,74.14,437.71,74.13,327.3-142,314.68c-45.28-2.64-82,2.06-112.06,11.93,10.13-28.86,11.14-64.14.46-102.23-36.28-129.34,78.87-97.8,82.81-242.12s-86-160.89-145.12-132.5-143.7,3.72-139.59-49.69c5.52-71.77-83.63-121.65-170.35-82-119.09,54.42-145.91,129.34-64.68,198.75,35.35,30.19,93.86,54.42,168.78,65.46-76.5,15.77-126.19,126.19-122.24,175.87-37.86,11.83-201.12,91.49-184.55,183s263.41,71.77,380.14,32.34c35.1,20.48,67.82,28.72,96.28,27.37-31.28,46.15-43.62,101.51-58,141.8-30.76,86-320.2,6.31-382.51-74.14-52.85-68.24-175.51-89.36-290.47-48.95-34.61-64.7-128.8-29.42-165.83-75.88C560.6,792,511.49,721.81,428.53,734.34c-68,10.25-168.62,57.7-188.5,182.72-7.06,44.42-2.72,76.26,8.55,98.31-49.92-5.66-97.79-21.16-134-87.33C40.5,792.38,56.27,153.56,99.65,73.9Z"/>
+</svg>
+
+			<?
+		}
+		else
+		{
 			for($i = 0; $i < $group_count; $i++)
 			{
 				?><div class="sky-group"><?
@@ -36,8 +54,8 @@
 					$top = rand(0, 100);
 					$w = rand(10, 24);
 					$h = rand(10, 24);
-					// $w = rand(35, 60);
-					// $h = rand(35, 60);
+					$w = 50;
+					$h = 50;
 					$style="width:".$w."%;height:".$h."%;top:".$top."vh;left:".$left."vw;"; 
 					?><div class="sky-element sky-blue blur" style="<?= $style; ?>"></div><div class="sky-element sky-blue" style="<?= $style; ?>"></div><?
 					
@@ -56,6 +74,8 @@
 
 			?></div><?
 			}
+		}
+			
 		?>
 	</div>
 	<? if(isset($landing_video)){
@@ -91,8 +111,17 @@
 #sky-canvas
 {
     filter: blur(60px);
-}
 
+}
+#cloud-1
+{
+	filter: blur(40px);
+	animation: float 30s linear forwards;
+
+    width: 150%;
+    height: 150%;
+    top: -200px;
+}
 div.sky-element{
     filter: blur(40px);
     position: absolute;
@@ -134,6 +163,7 @@ div.sky-element.sky-white
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
+    animation: float 30s linear forwards;
 }
 
 #landing-video-container
@@ -154,6 +184,16 @@ div.sky-element.sky-white
          -o-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
     /*margin-top: 50px;*/
+}
+@keyframes float
+{
+	0%{
+		transform: translate(0, 0);
+	}
+	100%
+	{
+		transform: translate(-500px, 0);
+	}
 }
 @media screen and (min-width: 768px) {
 
