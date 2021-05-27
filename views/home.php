@@ -9,9 +9,9 @@
 				$landing_video = $m;
 		}
 	}
-	$blue_count = 1;
-	$white_count = 0;
-	$group_count = 1;
+	$blue_count = 14;
+	$white_count = 6;
+	$group_count = 4;
 	$size = array();
 	$useSvg = isset($_GET['useSvg']);
 	$useCanvas = isset($_GET['useCanvas']);
@@ -43,36 +43,41 @@
 		}
 		else
 		{
-			for($i = 0; $i < $group_count; $i++)
+			for($j = 0; $j < $blue_count; $j++)
 			{
-				?><div class="sky-group"><?
-			
-				for($j = 0; $j < $blue_count; $j++)
+				$w = rand(25, 50);
+				$h = rand(25, 50);
+				if($j < $blue_count/2)
 				{
-					
-					$left = rand(0, 100);
-					$top = rand(0, 100);
-					$w = rand(10, 24);
-					$h = rand(10, 24);
-					$w = 50;
-					$h = 50;
-					$style="width:".$w."%;height:".$h."%;top:".$top."vh;left:".$left."vw;"; 
-					?><div class="sky-element sky-blue blur" style="<?= $style; ?>"></div><div class="sky-element sky-blue" style="<?= $style; ?>"></div><?
-					
+					$left = rand(-($w-10), (45 - $w));
+					$top = rand(-($h-10), 90);
 				}
-				for($j = 0; $j < $white_count; $j++)
+				else
 				{
-					$w = rand(10, 24);
-					$h = rand(10, 24);
-					$left = rand(0, 100);
-					$top = rand(0, 100);
-					// $w = rand(35, 60);
-					// $h = rand(35, 60);
-					$style="width:".$w."%;height:".$h."%;top:".$top."vh;left:".$left."vw;"; 
-					?><div class="sky-element sky-white blur" style="<?= $style; ?>"></div><div class="sky-element sky-white" style="<?= $style; ?>"></div><?
+					$left = rand(55, 90);
+					$top = rand(-($h-10), 80);
+				}
+				$style="width:".$w."vw;height:".$h."vh;top:".$top."vh;left:".$left."vw;"; 
+				?><div class="sky-element sky-blue blur" style="<?= $style; ?>"></div><?
+				
+			}
+			for($j = 0; $j < $white_count; $j++)
+			{
+				$w = rand(20, 35);
+				$h = rand(20, 30);
+				if($j < $white_count/2)
+				{
+					$left = rand(-($w-10), (50 - $w));
+					$top = rand(-($h-10), 90);
+				}
+				else
+				{
+					$left = rand(50, 90);
+					$top = rand(-($h-10), 90);
 				}
 
-			?></div><?
+				$style="width:".$w."vw;height:".$h."vh;top:".$top."vh;left:".$left."vw;"; 
+				?><div class="sky-element sky-white blur" style="<?= $style; ?>"></div><?
 			}
 		}
 			
@@ -107,6 +112,11 @@
     display: flex;
     /*animation: sky 20s alternate linear infinite;*/
     /*filter: blur(60px);*/
+    transition: opacity 1s;
+}
+#sky-container.hidden
+{
+	opacity: 0;
 }
 #sky-canvas
 {
@@ -116,7 +126,7 @@
 #cloud-1
 {
 	filter: blur(40px);
-	animation: float 30s linear forwards;
+	/*animation: float 30s linear forwards;*/
 
     width: 150%;
     height: 150%;
@@ -154,16 +164,16 @@ div.sky-element.sky-white
 
 .sky-group
 {
-    /*position: absolute;*/
-    transition-timing-function: linear;
+    /*position: relative;
+    transition-timing-function: linear;*/
     /*width: 120vw;*/
     /*height: 120vh;*/
-    -webkit-box-flex: 1;
-    /*width: 24.5%;*/
+    /*-webkit-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
-    flex: 1;
-    animation: float 30s linear forwards;
+    width: 33.3%;
+    flex: 1;*/
+    /*animation: float 30s linear forwards;*/
 }
 
 #landing-video-container
@@ -199,8 +209,8 @@ div.sky-element.sky-white
 
     .sky-group
     {
-        width: 100vw;
-        height: 100vh;
+        /*width: 100vw;*/
+        /*height: 100vh;*/
     }
     #menu,
 	#logo-container
@@ -309,7 +319,7 @@ div.sky-element.sky-white
 
 	
 	sSky_container.addEventListener('click', function(){
-		blow(sSky_group, 5000);
+		sSky_container.classList.toggle('hidden');
 	});
 	function resizeSizeToCover(subject, frame=false) {
 		if(!frame)
