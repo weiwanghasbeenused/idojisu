@@ -113,6 +113,7 @@
     /*animation: sky 20s alternate linear infinite;*/
     /*filter: blur(60px);*/
     transition: opacity 1s;
+    cursor: pointer;
 }
 #sky-container.hidden
 {

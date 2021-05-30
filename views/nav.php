@@ -55,6 +55,16 @@
 		<div id="first-menu-icon-bar" class="menu-icon-bar"></div>
 		<div id="second-menu-icon-bar" class="menu-icon-bar"></div>
 		<div id="last-menu-icon-bar" class="menu-icon-bar"></div>
+		<div id="cross">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 40 40" style="enable-background:new 0 0 40 40;" xml:space="preserve">
+				<polygon fill="#A2A9AD" points="25,19 25,17 27,17 27,15 29,15 29,13 31,13 31,11 33,11 33,9 29,9 29,11 27,11 27,13 25,13 25,15 
+	23,15 23,17 21,17 21,19 19,19 19,17 17,17 17,15 15,15 15,13 13,13 13,11 11,11 11,9 7,9 7,11 9,11 9,13 11,13 11,15 13,15 13,17 
+	15,17 15,19 17,19 17,21 15,21 15,23 13,23 13,25 11,25 11,27 9,27 9,29 7,29 7,31 11,31 11,29 13,29 13,27 15,27 15,25 17,25 
+	17,23 19,23 19,21 21,21 21,23 23,23 23,25 25,25 25,27 27,27 27,29 29,29 29,31 33,31 33,29 31,29 31,27 29,27 29,25 27,25 27,23 
+	25,23 25,21 23,21 23,19 "/>
+			</svg>
+		</div>
 	</div>
 </header>
 <div id="menu-background" class="fullpage"></div>

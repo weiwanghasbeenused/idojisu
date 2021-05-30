@@ -40,6 +40,13 @@
 
 	$bracket_pattern = '#\[(.*)\](.*)#is';
 	$showedGalleryHint = isset($_COOKIE['showedGalleryHint']);
+
+    $uri_temp = $uri;
+    array_pop($uri_temp);
+    $this_season_url = implode('/', $uri_temp);
+    array_shift($uri_temp);
+    $this_season_name = $oo->get(end($oo->urls_to_ids($uri_temp)))['name1'];
+    
 ?>
 <div id="detail-layout-container" class="main-container">
 	<aside id="left-side-container"></aside><main id="season-detail-container" class="container" viewing="default">
@@ -134,6 +141,16 @@
 		
 	</aside>
 </div>
+<div id="season-nav">
+    <a href="<?= $this_season_url; ?>" class="blink-hover-zone">
+        <svg id="season-nav-arrow" class="arrow-small"version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+            <polygon fill="#A0A7AB" class="st0" points="7,9 7,7 9,7 9,5 11,5 11,3 7,3 7,5 5,5 5,7 3,7 3,9 1,9 1,11 3,11 3,13 5,13 5,15 7,15 7,17 11,17 
+            11,15 9,15 9,13 7,13 7,11 5,11 5,9 "/>
+        </svg>
+        <span id="season-nav-text" >back to <?= $this_season_name; ?><span class="blink-container"></span></span>
+    </a>
+</div>
 <style>
 .list-toggle .blink-container
 {
@@ -144,7 +161,7 @@
     padding-top: 49px;
     border-bottom: 1px solid var(--light-grey);
     padding-bottom: 0;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 #detail-layout-container aside
 {
@@ -477,6 +494,38 @@ main[viewing="gallery"] #gallery-frame {
 {
     margin-top: 50px;
 }
+#season-nav
+{
+    
+}
+#season-nav a
+{
+    display: block;
+    text-align: center;
+    padding: 5px 10px;
+}
+#season-nav-arrow, 
+#season-nav-text
+{
+    vertical-align: top;
+}
+#season-nav-text
+{
+    margin-top: 2px;
+}
+.arrow-small
+{
+    width: 24px;
+}
+#season-nav-text .blink-container
+{
+    margin-top: 8px;
+    min-width: 40px;
+}
+.noTouchScreen #season-nav a:hover polygon
+{
+    fill: #000;
+}
 @media screen and (min-width: 768px) {
     #detail-layout-container
     {
@@ -486,9 +535,9 @@ main[viewing="gallery"] #gallery-frame {
         display: flex;
         flex-wrap: wrap;
         padding-top: 130px;
-        height: calc( 100vh - 20px);
+        height: calc( 100vh - 34px);
         overflow: hidden;
-        margin-bottom: 0;
+        /*margin-bottom: 0;*/
     }
     #detail-layout-container aside
     {
