@@ -163,8 +163,7 @@ ul {
     display: block;
     animation: blinking_1 .75s infinite linear;
 }
-.blink-hover-zone.active,
-.noTouchScreen .blink-hover-zone:hover
+.blink-hover-zone.active
 {
     background-color: var(--sky-blue);
     color: #000;

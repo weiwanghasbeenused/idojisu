@@ -522,9 +522,14 @@ main[viewing="gallery"] #gallery-frame {
     margin-top: 8px;
     min-width: 40px;
 }
-.noTouchScreen #season-nav a:hover polygon
+.noTouchScreen #season-nav .blink-hover-zone:hover polygon
 {
     fill: #000;
+}
+.noTouchScreen #season-nav .blink-hover-zone:hover
+{
+    color: #000;
+    background-color: var(--sky-blue);
 }
 @media screen and (min-width: 768px) {
     #detail-layout-container
