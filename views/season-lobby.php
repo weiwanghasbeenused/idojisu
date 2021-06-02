@@ -436,7 +436,8 @@ body.loading .look img{
 	var current_slideshow_x = sHorizontal_slideshow_container.scrollLeft;
 	var current_slideshow_idx = parseInt(current_slideshow_x / horizontal_slideshow_interval);
 	var slides_count = <?= $children_count; ?>;
-	
+	var isIos = iOS();
+
 	next.addEventListener('click', function(){
 		current_slideshow_idx = next_slide(sHorizontal_slideshow_container, horizontal_slideshow_interval, slides_count);
 	});
@@ -496,12 +497,16 @@ body.loading .look img{
 	var fullscreen = document.getElementById('fs');
 	var videoControlsMask = document.getElementById('video-controls-mask');
 	var videoControls_timer = null;
+	console.log(video.webkitSupportsFullscreen());
+
 	
 	videoControls.setAttribute('data-state', 'visible');
 	video.removeAttribute('controls');
 	var supportsProgress = (document.createElement('progress').max !== undefined);
 	if (!supportsProgress) progress.setAttribute('data-state', 'fake');
-	var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen);
+	var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen || video.webkitSupportsFullscreen);
+
+	console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
 	if (!fullScreenEnabled)
 		fullscreen.style.display = 'none';
 	var changeButtonState = function(type) {
@@ -541,14 +546,16 @@ body.loading .look img{
 	});
 	var handleFullscreen = function() {
 		if (isFullScreen()) {
-			if (document.exitFullscreen) document.exitFullscreen();
+			if (video.webkitSupportsFullscreen) video.webkitExitFullscreen();
+			else if (document.exitFullscreen) document.exitFullscreen();
 			else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
 			else if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
 			else if (document.msExitFullscreen) document.msExitFullscreen();
 			setFullscreenData(false);
 		}
 		else {
-			if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
+			if (video.webkitSupportsFullscreen) video.webkitEnterFullscreen();
+			else if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
 			else if (videoContainer.mozRequestFullScreen) videoContainer.mozRequestFullScreen();
 			else if (videoContainer.webkitRequestFullScreen) videoContainer.webkitRequestFullScreen();
 			else if (videoContainer.msRequestFullscreen) videoContainer.msRequestFullscreen();
@@ -565,7 +572,7 @@ body.loading .look img{
 		}
 	}
 	var isFullScreen = function() {
-		return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement);
+		return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement || video.webkitDisplayingFullscreen);
 	}
 	var setFullscreenData = function(state) {
 		videoContainer.setAttribute('data-fullscreen', !!state);
@@ -594,7 +601,6 @@ body.loading .look img{
 		{
 			toggleVideoControls(videoControls, videoControlsMask);
 		}
-		
 	}, false);
 
 	function toggleVideoControls(controls, mask, delay=false)
@@ -638,5 +644,4 @@ body.loading .look img{
 	  // iPad on iOS 13 detection
 	  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 	}
-	console.log(iOS());
 </script>
