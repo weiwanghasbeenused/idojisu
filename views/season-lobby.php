@@ -128,8 +128,8 @@
 			   </button>
 			</div>
 			<div id="video-controls-mask" data-state=""></div>
-			<div id="loading-icon-holder">
-				<svg id="loading-icon-1" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			<div id="video-loading-icon-holder">
+				<svg id="" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 					<style type="text/css">
 						.st0{fill:#A0A7AB;}
@@ -137,7 +137,7 @@
 					<polygon class="st0" points="17,9 15,9 15,7 13,7 13,5 11,5 11,3 11,1 9,1 9,3 9,5 9,5 7,5 7,7 5,7 5,9 3,9 1,9 1,11 3,11 5,11 
 						5,13 7,13 7,15 9,15 9,17 9,19 11,19 11,17 11,15 13,15 13,13 15,13 15,11 17,11 19,11 19,9 "/>
 				</svg>
-				<svg id="loading-icon-2" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				<svg id="" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 					<style type="text/css">
 						.st0{fill:#A0A7AB;}
@@ -151,7 +151,7 @@
 							3,11 5,11 7,11 7,13 9,13 9,14.9 9,15 9,16.9 9,18.9 11,18.9 11,16.9 11,15 11,14.9 11,13 13,13 13,11 15,11 17,11 19,11 19,9 	"/>
 					</g>
 				</svg>
-				<svg id="loading-icon-3" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				<svg id="" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 					<style type="text/css">
 						.st0{fill:#A0A7AB;}
@@ -168,7 +168,7 @@
 						<polygon class="st0" points="17,9 15,9 13,9 13,11 15,11 17,11 19,11 19,9 	"/>
 					</g>
 				</svg>
-				<svg id="loading-icon-4" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				<svg id="" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 					<style type="text/css">
 						.st0{fill:#A0A7AB;}
@@ -435,7 +435,7 @@ body.loading .look img{
 	/*visibility: hidden;*/
 	opacity: 0;
 }
-#loading-icon-holder
+#video-loading-icon-holder
 {
 	display: none;
 	position: absolute;
@@ -446,11 +446,12 @@ body.loading .look img{
         -ms-transform: translate(-50%, -50%);
          -o-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
+    width: 32px;
+    height: 32px;
     transform-origin: center;
+    z-index: 10;
 }
-.preplay #loading-icon-holder
+.preplay #video-loading-icon-holder
 {
 	display: block;
 }
@@ -566,6 +567,9 @@ body.loading .look img{
 	var videoControls_timer = null;
 	var hasPlayed = false;
 
+	var sVideo_loading_icon = document.querySelectorAll('#video-loading-icon-holder .loading-icon');
+	var video_loading_timer = false;
+	video_loading_timer = animateLoadingIcons(sVideo_loading_icon);
 	
 	videoControls.setAttribute('data-state', 'visible');
 	video.removeAttribute('controls');
@@ -594,6 +598,8 @@ body.loading .look img{
 	video.addEventListener('play', function() {
 		if(!hasPlayed) {
 			hasPlayed = true;
+			clearInterval(video_loading_timer);
+			videoControlsMask.setAttribute('data-state', 'hidden');
 			videoContainer.classList.remove('preplay');
 		}
 		changeButtonState('playpause');
@@ -691,7 +697,8 @@ body.loading .look img{
 			}
 			else if(controls.getAttribute('data-state') == 'visible'){
 				controls.setAttribute('data-state', 'hidden');
-				mask.setAttribute('data-state', 'hidden');
+				if(hasPlayed)
+					mask.setAttribute('data-state', 'hidden');
 			}
 		}
 		else
@@ -703,7 +710,8 @@ body.loading .look img{
 				}
 				else if(controls.getAttribute('data-state') == 'visible'){
 					controls.setAttribute('data-state', 'hidden');
-					mask.setAttribute('data-state', 'hidden');
+					if(hasPlayed)
+						mask.setAttribute('data-state', 'hidden');
 				}
 			}, delay);
 		}

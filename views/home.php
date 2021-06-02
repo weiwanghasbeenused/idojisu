@@ -43,6 +43,13 @@
             transform: translate(-50%, -50%);
     /*margin-top: 50px;*/
 }
+@media (orientation: portrait) {
+  #landing-video
+  {
+  	height: 100%;
+  	width: auto;
+  }
+}
 @media screen and (min-width: 768px) {
     #menu,
 	#logo-container

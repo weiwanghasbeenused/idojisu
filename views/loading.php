@@ -58,74 +58,84 @@
 </div>
 
 <style>
-	#mask-loading
-	{
-	    background-color: rgba(0,0,0,.75);
-	    visibility: hidden;
-	    opacity: 0;
-	    z-index: 950;
-	    -webkit-transition: opacity .5s;
-	       -moz-transition: opacity .5s;
-	         -o-transition: opacity .5s;
-	            transition: opacity .5s;
-	}
-	body.fadeout #mask
-	{
-	    visibility: initial;
-	    opacity: 1;
-	    -webkit-transition: opacity .35s;
-	       -moz-transition: opacity .35s;
-	         -o-transition: opacity .35s;
-	            transition: opacity .35s;
-	}
-	body.loading #mask-loading
-	{
-	    visibility: initial;
-	    opacity: 1;
-	    -webkit-transition: none;
-	       -moz-transition: none;
-	         -o-transition: none;
-	            transition: none;
-	}
-	.loading-icon
-	{
-		width: 100%;
-		display: none;
-	}
-	#loading-icon-1
-	{
-		display: block;
-	}
-	#loading-icon-holder
-	{
-	    position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    -webkit-transform: translate(-50%, -50%);
-	       -moz-transform: translate(-50%, -50%);
-	        -ms-transform: translate(-50%, -50%);
-	         -o-transform: translate(-50%, -50%);
-	            transform: translate(-50%, -50%);
-	    width: 80px;
-	    height: 80px;
-	    display: none;
-	    transform-origin: center;
-	}
-	.loading #loading-icon-holder
-	{
-	    display: block;
-	}
+#mask-loading
+{
+    background-color: rgba(0,0,0,.75);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 950;
+    -webkit-transition: opacity .5s;
+       -moz-transition: opacity .5s;
+         -o-transition: opacity .5s;
+            transition: opacity .5s;
+}
+body.fadeout #mask
+{
+    visibility: initial;
+    opacity: 1;
+    -webkit-transition: opacity .35s;
+       -moz-transition: opacity .35s;
+         -o-transition: opacity .35s;
+            transition: opacity .35s;
+}
+body.loading #mask-loading
+{
+    visibility: initial;
+    opacity: 1;
+    -webkit-transition: none;
+       -moz-transition: none;
+         -o-transition: none;
+            transition: none;
+}
+.loading-icon
+{
+	width: 100%;
+	display: none;
+}
+#loading-icon-1
+{
+	display: block;
+}
+#loading-icon-holder
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+       -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+         -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    display: none;
+    transform-origin: center;
+}
+.loading #loading-icon-holder
+{
+    display: block;
+}
 </style>
 <script>
-	var sLoading_icon = document.getElementsByClassName('loading-icon');
+	var sLoading_icon = document.querySelectorAll('#loading-icon-holder .loading-icon');
 	var loading_icon_count = sLoading_icon.length;
 	var loading_timer = false;
 	var loading_counter = 0;
-	loading_timer = setInterval(function(){
-		sLoading_icon[loading_counter].style.display = 'none';
-		loading_counter = (loading_counter+1)%loading_icon_count;
-		sLoading_icon[loading_counter].style.display = 'block';
-	}, 250);
+	// loading_timer = setInterval(function(){
+	// 	sLoading_icon[loading_counter].style.display = 'none';
+	// 	loading_counter = (loading_counter+1)%loading_icon_count;
+	// 	sLoading_icon[loading_counter].style.display = 'block';
+	// }, 250);
+	loading_timer = animateLoadingIcons(sLoading_icon);
+	function animateLoadingIcons(icons){
+		var count = icons.length;
+		var counter = 0;
+		return setInterval(function(){
+			icons[counter].style.display = 'none';
+			counter = (counter+1)%count;
+			icons[counter].style.display = 'block';
+		}, 250);
+	}
 	function removeLoading(){
 		if(body.classList.contains('loading'))
 		{
@@ -139,14 +149,16 @@
 	}
 	window.addEventListener('load', function(){ 
 		<? if($isHome) { ?>
-			var sLanding_video_container = document.getElementById('landing-video-container');
-			if(sLanding_video_container != undefined){			
-				setTimeout(function(){
-					sLanding_video = sLanding_video_container.querySelector('video');
-					resizeSizeToCover(sLanding_video, sLanding_video_container);
-					sLanding_video.play();
-				}, 250);
-			}
+			
+				var sLanding_video_container = document.getElementById('landing-video-container');
+				if(sLanding_video_container != undefined){			
+					setTimeout(function(){
+						sLanding_video = sLanding_video_container.querySelector('video');
+						if(wW >= wH)
+							resizeSizeToCover(sLanding_video, sLanding_video_container);
+						sLanding_video.play();
+					}, 250);
+				}
 		<? } ?>
 		clearInterval(loading_timer);
 		removeLoading(); 
