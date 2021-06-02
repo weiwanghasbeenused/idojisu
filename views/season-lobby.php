@@ -497,7 +497,6 @@ body.loading .look img{
 	var fullscreen = document.getElementById('fs');
 	var videoControlsMask = document.getElementById('video-controls-mask');
 	var videoControls_timer = null;
-	console.log(video.webkitSupportsFullscreen());
 
 	
 	videoControls.setAttribute('data-state', 'visible');
