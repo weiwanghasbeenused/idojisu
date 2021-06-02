@@ -508,8 +508,10 @@ body.loading .look img{
 	console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
 	function debug(){
 		console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
-		if(!video.webkitSupportsFullscreen)
+		if(!video.webkitSupportsFullscreen){
+			console.log('eoo');
 			setTimeout(function(){debug();}, 1000);
+		}
 	}
 	if (!fullScreenEnabled)
 		fullscreen.style.display = 'none';
