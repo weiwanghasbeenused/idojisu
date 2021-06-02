@@ -390,7 +390,11 @@ div[viewing-list="items"] #accessory-item-container
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+       -moz-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+         -o-flex-wrap: wrap;
+            flex-wrap: wrap;
     background-color: #000;
     -webkit-transform: translate(0, -100%);
        -moz-transform: translate(0, -100%);
@@ -537,11 +541,14 @@ main[viewing="gallery"] #gallery-frame {
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
-        flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
+           -moz-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+             -o-flex-wrap: wrap;
+                flex-wrap: wrap;
         padding-top: 130px;
         height: calc( 100vh - 34px);
         overflow: hidden;
-        /*margin-bottom: 0;*/
     }
     #detail-layout-container aside
     {

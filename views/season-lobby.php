@@ -247,7 +247,10 @@ body.loading .look img{
 #video-controls
 {
 	padding: 10px;
-	display: flex;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+    display: flex;
 	margin-top: -44px;
 	
 }
@@ -305,6 +308,9 @@ body.loading .look img{
 {
 	position: relative;
 	padding: 8px 15px 0 15px;
+	-webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
 	flex: 1;
 	z-index: 10;
 }
