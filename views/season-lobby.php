@@ -351,10 +351,6 @@ body.loading .look img{
 {
 	position: relative;
 }
-#feature-video
-{
-	display: block;
-}
 #fs
 {
 	position: relative;
