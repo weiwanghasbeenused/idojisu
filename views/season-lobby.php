@@ -509,7 +509,7 @@ body.loading .look img{
 	function debug(){
 		console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
 		if(!video.webkitSupportsFullscreen)
-			setTimeout(debug, 1000);
+			setTimeout(function(){debug();}, 1000);
 	}
 	if (!fullScreenEnabled)
 		fullscreen.style.display = 'none';
