@@ -110,15 +110,11 @@
 						</g>
 					</svg>
 			   </button>
-			   <!-- <button id="stop" type="button" data-state="stop">Stop</button> -->
 			   <div id="progress-container">
 			      <progress id="progress" value="0" min="0">
 			         <span id="progress-bar"></span>
 			      </progress>
 			   </div>
-			   <!-- <button id="mute" type="button" data-state="mute">Mute/Unmute</button> -->
-			   <!-- <button id="volinc" type="button" data-state="volup">Vol+</button> -->
-			   <!-- <button id="voldec" type="button" data-state="voldown">Vol-</button> -->
 			   <button id="fs" class="video-controls-btn" type="button" data-state="go-fullscreen">
 			   	<svg version="1.1" id="fullscreen-graphic" class="video-controls-graphic" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
 		   		<title>Toggle fullscreen</title>
@@ -559,6 +555,15 @@ body.loading .look img{
 			setFullscreenData(true);
 		}
 	}
+	function toggleFullscreen() {
+		if(video.requestFullScreen){
+			video.requestFullScreen();
+		} else if(video.webkitRequestFullScreen){
+			video.webkitRequestFullScreen();
+		} else if(video.mozRequestFullScreen){
+			video.mozRequestFullScreen();
+		}
+	}
 	var isFullScreen = function() {
 		return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement);
 	}
@@ -621,4 +626,17 @@ body.loading .look img{
 		}
 		
 	}
+	function iOS() {
+	  return [
+	    'iPad Simulator',
+	    'iPhone Simulator',
+	    'iPod Simulator',
+	    'iPad',
+	    'iPhone',
+	    'iPod'
+	  ].includes(navigator.platform)
+	  // iPad on iOS 13 detection
+	  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+	}
+	console.log(iOS());
 </script>
