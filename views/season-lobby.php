@@ -503,19 +503,15 @@ body.loading .look img{
 	video.removeAttribute('controls');
 	var supportsProgress = (document.createElement('progress').max !== undefined);
 	if (!supportsProgress) progress.setAttribute('data-state', 'fake');
-	var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen || video.webkitSupportsFullscreen);
+	
 
-	// console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
-	function debug(){
-		console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
-		if(!video.webkitSupportsFullscreen){
-			console.log('eoo');
-			setTimeout(function(){debug();}, 1000);
-		}
-	}
-	debug();
-	if (!fullScreenEnabled)
-		fullscreen.style.display = 'none';
+	window.addEventListener('load', function(){
+		var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen || video.webkitSupportsFullscreen);
+		if (!fullScreenEnabled)
+			fullscreen.style.display = 'none';
+	});
+
+	
 	var changeButtonState = function(type) {
 	   // Play/Pause button
 	   if (type == 'playpause') {
