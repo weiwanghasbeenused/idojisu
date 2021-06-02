@@ -505,7 +505,7 @@ body.loading .look img{
 	if (!supportsProgress) progress.setAttribute('data-state', 'fake');
 	var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen || video.webkitSupportsFullscreen);
 
-	console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
+	// console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
 	function debug(){
 		console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
 		if(!video.webkitSupportsFullscreen){
@@ -513,6 +513,7 @@ body.loading .look img{
 			setTimeout(function(){debug();}, 1000);
 		}
 	}
+	debug();
 	if (!fullScreenEnabled)
 		fullscreen.style.display = 'none';
 	var changeButtonState = function(type) {
