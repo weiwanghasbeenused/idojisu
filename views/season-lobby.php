@@ -506,6 +506,11 @@ body.loading .look img{
 	var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen || video.webkitSupportsFullscreen);
 
 	console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
+	function debug(){
+		console.log('video.webkitSupportsFullscreen = '+video.webkitSupportsFullscreen);
+		if(!video.webkitSupportsFullscreen)
+			setTimeout(debug, 1000);
+	}
 	if (!fullScreenEnabled)
 		fullscreen.style.display = 'none';
 	var changeButtonState = function(type) {
