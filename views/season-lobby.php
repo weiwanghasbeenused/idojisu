@@ -596,6 +596,7 @@ body.loading .look img{
 	   }
 	}
 	video.addEventListener('play', function() {
+		console.log('on play');
 		if(!hasPlayed) {
 			hasPlayed = true;
 			clearInterval(video_loading_timer);
@@ -608,6 +609,7 @@ body.loading .look img{
 	   changeButtonState('playpause');
 	}, false);
 	playpause.addEventListener('click', function(e) {
+		console.log('click play');
 		if(!hasPlayed)
 			videoContainer.classList.add('preplay');
 		if (video.paused || video.ended){
