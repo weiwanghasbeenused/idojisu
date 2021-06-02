@@ -58,6 +58,7 @@
 }
 .press-link.active .blink
 {
+	-webkit-animation: blinking_1 .75s infinite linear;
     animation: blinking_1 .75s infinite linear;
 }
 @media screen and (min-width: 768px) {
@@ -72,7 +73,11 @@
 		display: -ms-flexbox;
 		display: -webkit-flex;
 	    display: flex;
-        flex-wrap: nowrap;
+	    -webkit-flex-wrap: nowrap;
+		   -moz-flex-wrap: nowrap;
+		    -ms-flex-wrap: nowrap;
+		     -o-flex-wrap: nowrap;
+		        flex-wrap: nowrap;
         padding-top: 15px;
         padding-bottom: 15px;
     }

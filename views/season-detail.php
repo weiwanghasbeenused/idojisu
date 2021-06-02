@@ -274,9 +274,11 @@ main[viewing="items"] #gallery-frame #image-frame-default
 }
 #accessory-item-container
 {
-    flex-wrap: wrap;
-    /*border-bottom: 1px solid var(--light-grey);*/
-    /*display: none;*/
+    -webkit-flex-wrap: wrap;
+       -moz-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+         -o-flex-wrap: wrap;
+            flex-wrap: wrap;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -356,6 +358,7 @@ div[viewing-list="items"] #accessory-item-container
 }
 .noTouchScreen .accessory-item:hover .rank.active
 {
+    -webkit-animation: blinking_1 .75s infinite linear;
     animation: blinking_1 .75s infinite linear;
 }
 .accessory-item.active .rank.active
@@ -494,10 +497,6 @@ main[viewing="gallery"] #gallery-frame {
 {
     margin-top: 50px;
 }
-#season-nav
-{
-    
-}
 #season-nav a
 {
     display: block;
@@ -551,7 +550,6 @@ main[viewing="gallery"] #gallery-frame {
         -webkit-flex: 1;
         -ms-flex: 1;
         flex: 1;
-        /*border-top: 1px solid var(--light-grey);*/
         -webkit-overflow-scrolling: touch;
         max-height: 100%;
         overflow-y: scroll;

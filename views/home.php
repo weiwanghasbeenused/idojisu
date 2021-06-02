@@ -55,7 +55,10 @@
     }
     .noTouchScreen header:hover
     {
-        transition: background-color .5s;
+    	-webkit-transition: background-color .5s;
+	       -moz-transition: background-color .5s;
+	         -o-transition: background-color .5s;
+	            transition: background-color .5s;
         background-color: #000;
     }
 }
