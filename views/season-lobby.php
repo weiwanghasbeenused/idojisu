@@ -128,58 +128,6 @@
 			   </button>
 			</div>
 			<div id="video-controls-mask" data-state=""></div>
-			<div id="video-loading-icon-holder">
-				<svg id="" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-			 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-					<style type="text/css">
-						.st0{fill:#A0A7AB;}
-					</style>
-					<polygon class="st0" points="17,9 15,9 15,7 13,7 13,5 11,5 11,3 11,1 9,1 9,3 9,5 9,5 7,5 7,7 5,7 5,9 3,9 1,9 1,11 3,11 5,11 
-						5,13 7,13 7,15 9,15 9,17 9,19 11,19 11,17 11,15 13,15 13,13 15,13 15,11 17,11 19,11 19,9 "/>
-				</svg>
-				<svg id="" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-			 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-					<style type="text/css">
-						.st0{fill:#A0A7AB;}
-					</style>
-					<g>
-						<rect x="15" y="3" class="st0" width="2" height="2"/>
-						<rect x="3" y="3" class="st0" width="2" height="2"/>
-						<rect x="15" y="14.9" class="st0" width="2" height="2"/>
-						<rect x="3" y="14.9" class="st0" width="2" height="2"/>
-						<polygon class="st0" points="17,9 15,9 13,9 13,7 11,7 11,5 11,3.1 11,3 11,1.1 9,1.1 9,3 9,3.1 9,5 9,7 7,7 7,9 5,9 3,9 1,9 1,11 
-							3,11 5,11 7,11 7,13 9,13 9,14.9 9,15 9,16.9 9,18.9 11,18.9 11,16.9 11,15 11,14.9 11,13 13,13 13,11 15,11 17,11 19,11 19,9 	"/>
-					</g>
-				</svg>
-				<svg id="" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-			 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-					<style type="text/css">
-						.st0{fill:#A0A7AB;}
-					</style>
-					<rect x="17" y="1" class="st0" width="2" height="2"/>
-					<rect x="1" y="1" class="st0" width="2" height="2"/>
-					<rect x="17" y="16.9" class="st0" width="2" height="2"/>
-					<rect x="1" y="16.9" class="st0" width="2" height="2"/>
-					<rect x="9" y="9" class="st0" width="2" height="2"/>
-					<g>
-						<rect x="9" y="1.1" class="st0" width="2" height="5.9"/>
-						<polygon class="st0" points="7,9 5,9 3,9 1,9 1,11 3,11 5,11 7,11 	"/>
-						<polygon class="st0" points="9,13 9,14.9 9,15 9,16.9 9,18.9 11,18.9 11,16.9 11,15 11,14.9 11,13 	"/>
-						<polygon class="st0" points="17,9 15,9 13,9 13,11 15,11 17,11 19,11 19,9 	"/>
-					</g>
-				</svg>
-				<svg id="" class="loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-			 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-					<style type="text/css">
-						.st0{fill:#A0A7AB;}
-					</style>
-					<rect x="17" y="1" class="st0" width="2" height="2"/>
-					<rect x="1" y="1" class="st0" width="2" height="2"/>
-					<rect x="17" y="16.9" class="st0" width="2" height="2"/>
-					<rect x="1" y="16.9" class="st0" width="2" height="2"/>
-					<rect x="9" y="9" class="st0" width="2" height="2"/>
-				</svg>
-			</div>
 		</figure><?
 	} ?>
 </main>
@@ -435,26 +383,6 @@ body.loading .look img{
 	/*visibility: hidden;*/
 	opacity: 0;
 }
-#video-loading-icon-holder
-{
-	display: none;
-	position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-       -moz-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-         -o-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-    width: 32px;
-    height: 32px;
-    transform-origin: center;
-    z-index: 10;
-}
-.preplay #video-loading-icon-holder
-{
-	display: block;
-}
 @media screen and (min-width: 768px) {
 	#progress
 	{
@@ -565,11 +493,7 @@ body.loading .look img{
 	var fullscreen = document.getElementById('fs');
 	var videoControlsMask = document.getElementById('video-controls-mask');
 	var videoControls_timer = null;
-	var hasPlayed = false;
 
-	var sVideo_loading_icon = document.querySelectorAll('#video-loading-icon-holder .loading-icon');
-	var video_loading_timer = false;
-	video_loading_timer = animateLoadingIcons(sVideo_loading_icon);
 	
 	videoControls.setAttribute('data-state', 'visible');
 	video.removeAttribute('controls');
@@ -596,22 +520,12 @@ body.loading .look img{
 	   }
 	}
 	video.addEventListener('play', function() {
-		console.log('on play');
-		if(!hasPlayed) {
-			hasPlayed = true;
-			clearInterval(video_loading_timer);
-			videoControlsMask.setAttribute('data-state', 'hidden');
-			videoContainer.classList.remove('preplay');
-		}
 		changeButtonState('playpause');
 	}, false);
 	video.addEventListener('pause', function() {
 	   changeButtonState('playpause');
 	}, false);
 	playpause.addEventListener('click', function(e) {
-		console.log('click play');
-		if(!hasPlayed)
-			videoContainer.classList.add('preplay');
 		if (video.paused || video.ended){
 			video.play();
 			toggleVideoControls(videoControls, videoControlsMask);
@@ -699,8 +613,7 @@ body.loading .look img{
 			}
 			else if(controls.getAttribute('data-state') == 'visible'){
 				controls.setAttribute('data-state', 'hidden');
-				if(hasPlayed)
-					mask.setAttribute('data-state', 'hidden');
+				mask.setAttribute('data-state', 'hidden');
 			}
 		}
 		else
@@ -712,8 +625,7 @@ body.loading .look img{
 				}
 				else if(controls.getAttribute('data-state') == 'visible'){
 					controls.setAttribute('data-state', 'hidden');
-					if(hasPlayed)
-						mask.setAttribute('data-state', 'hidden');
+					mask.setAttribute('data-state', 'hidden');
 				}
 			}, delay);
 		}
