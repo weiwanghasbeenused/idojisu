@@ -42,7 +42,7 @@ require_once('static/php/function.php');
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="/static/css/ibm-plex-mono.css">
-		<link rel="stylesheet" href="/static/css/main.css">
+		<link rel="stylesheet" href="/static/css/main.human.css">
 		<link rel="stylesheet" href="/static/css/main-laptop.css" media="(min-width: 768px)">
 		<link rel="apple-touch-icon" href="/media/png/touchicon.png" />
 		<!-- <link rel="stylesheet" href="https://use.typekit.net/hpl4nwi.css"> -->

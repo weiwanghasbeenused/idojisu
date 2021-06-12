@@ -120,4 +120,16 @@ function stripBracket($str){
   preg_match_all($bracket_pattern, $str, $output);
   return $output[1][0];
 }
+function childrenByBegin($oo, $o){
+  $fields = array("objects.*");
+  $tables = array("objects", "wires");
+  $where  = array("wires.fromid = '".$o."'",
+          "wires.active = 1",
+          "wires.toid = objects.id",
+          "objects.active = '1'");
+  $order  = array("objects.rank", "objects.begin");
+  $limit = '';
+  $descending = true;
+  return $oo->get_all($fields, $tables, $where, $order, $limit, $descending);
+}
 ?>

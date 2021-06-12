@@ -97,9 +97,7 @@ ul {
     opacity: 0;
     z-index: 850;
     color: var(--light-grey);
-    
 }
-
 #btn-close-mask{
     display: block;
     position: absolute;
@@ -140,7 +138,7 @@ ul {
     display: inline-block;
     height: 5px;
     vertical-align: top;
-
+    pointer-events: none;
 }
 
 .blink {
@@ -156,6 +154,17 @@ ul {
             transform: translate(-50%, -50%);
     background-image: url('../../media/svg/blink_1.svg');
     display: none;
+}
+.reverse-blink-container .blink
+{
+    background-image: url('../../media/svg/blink_1-light.svg');
+    animation: blinking_1 .75s infinite linear;
+}
+.noTouchScreen .blink-hover-zone:hover .reverse-blink-container .blink
+{
+    display: block;
+    -webkit-animation: blinking_reverse .75s infinite linear;
+    animation: blinking_reverse .75s infinite linear;
 }
 .random-blink-hover-zone {
     position: relative;
@@ -180,6 +189,7 @@ ul {
     display: block;
     background-image: url('../../media/svg/blink_1.svg');
 }
+
 .blink-hover-zone.active > .menu-item,
 .blink-hover-zone.active > .submenu-item
 {
@@ -233,7 +243,9 @@ ul {
     vertical-align: top;
 }
 #logo {
-    width: 110px;
+    text-align:  center;
+    width: 150px;
+    height: 31px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -242,6 +254,10 @@ ul {
         -ms-transform: translate(-50%, -50%);
          -o-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
+}
+#logo-img
+{
+    width: 110px;
 }
 #logo-container {
     position: relative;
@@ -383,6 +399,41 @@ ul {
     100%
     {
         background-image: url('../../media/svg/blink_4.svg');
+    }
+
+}
+@keyframes blinking_reverse {
+    0%
+    {
+        background-image: url(../../media/svg/blink_w_1.svg);
+    }
+    24.5%
+    {
+        background-image: url(../../media/svg/blink_w_1.svg);
+    }
+    25%
+    {
+        background-image: url('../../media/svg/blink_w_2.svg');
+    }
+    49.5%
+    {
+        background-image: url('../../media/svg/blink_w_2.svg');
+    }
+    50%
+    {
+        background-image: url('../../media/svg/blink_w_3.svg');
+    }
+    74.5%
+    {
+        background-image: url('../../media/svg/blink_w_3.svg');
+    }
+    75%
+    {
+        background-image: url('../../media/svg/blink_w_4.svg');
+    }
+    100%
+    {
+        background-image: url('../../media/svg/blink_w_4.svg');
     }
 
 }

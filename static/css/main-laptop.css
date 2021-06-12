@@ -59,6 +59,11 @@
     }
     #logo
     {
+        width: 200px;
+        height: 40px;
+    }
+    #logo-img
+    {
         width: 140px;
     }
     #logo-container

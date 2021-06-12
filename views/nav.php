@@ -1,7 +1,4 @@
 <? 
-	$menu_version = isset($_GET['menu']) ? $_GET['menu'] : 1;
-	$header_class .= 'menu-version-' . $menu_version;
-
 	$menu_items_raw = $oo->children(0);
 	$menu_items = array();
 	foreach($menu_items_raw as $m_item)
@@ -10,10 +7,16 @@
 			$menu_items[] = $m_item;
 	}
 ?>
-<header class="<?= $header_class; ?>">
-	<? if($menu_version == 1){
-		?><div id="logo-container"><a href = '/'><img id="logo" src = "/media/svg/logo-light-grey.svg"></a></div><?
-	} ?>
+<header>
+	<div id="logo-container">
+		<a id="logo" class="blink-hover-zone random-blink-hover-zone" href = '/'>
+			<span class="blink-container random-blink-container reverse-blink-container"></span>
+			<span class="blink-container random-blink-container reverse-blink-container"></span>
+			<img id="logo-img" src = "/media/svg/logo-light-grey.svg">
+			<span class="blink-container random-blink-container reverse-blink-container"></span>
+			<span class="blink-container random-blink-container reverse-blink-container"></span>
+		</a>
+	</div>
 	<nav id="menu">
 		<? foreach($menu_items as $m_item){
 			$url = '/' . $m_item['url'];
@@ -26,7 +29,7 @@
 				$this_class .= ' active';
 			?><div class="<?= $this_class; ?>"><? 
 			if($isDropdown){
-				$submenu_items = $oo->children($m_item['id']);
+				$submenu_items = childrenByBegin($oo, $m_item['id']);
 				?><span class="menu-item " ><span class="blink-container"></span><?= $m_item['name1']; ?><span class="blink-container"></span></span>
 				<div class="submenu-container">
 					<? foreach($submenu_items as $sm_item){
@@ -46,9 +49,6 @@
 			}else{
 				?><a class="menu-item" href="<?= $url; ?>"><span class="blink-container"></span><?= $m_item['name1']; ?><span class="blink-container"></span></a><?
 			} ?></div><?
-		} ?>
-		<? if($menu_version == 2){
-			?><div id="logo-container"><a href = '/'><img id="logo" src = "/media/svg/logo-light-grey.svg"></a></div><?
 		} ?>
 	</nav>
 	<div id="menu-toggle">
