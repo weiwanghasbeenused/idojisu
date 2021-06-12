@@ -29,7 +29,7 @@
 					$date = date('m/d/Y', strtotime($child['begin']));
 					$url = stripBracket($child['notes']);
 				?><li class="press-item"><a class="press-link blink-hover-zone" href="<?= $url; ?>" target="_blank"><?
-				?><p class="press-detail date"><?= $date; ?></p><p class="press-detail title"><?= $title; ?><span class="blink-container"></span></p><p class="press-detail platform"><?= $season . ' ' . $platform; ?></p></a></li><?
+				?><p class="press-detail date"><?= $date; ?></p><p class="press-detail title"><?= $title; ?><span class="blink-container"></span></p><p class="press-detail platform"><?= $season . ', ' . '<i>' . $platform . '</i>'; ?></p></a></li><?
 				}
 			} ?>
 		</ul>

@@ -5,8 +5,10 @@
 	{
 		foreach($media as $m)
 		{
-			if(strpos($m['caption'], '[landing]') !== false)
+			if($m['type'] == 'mp4' || $m['type'] == 'wav' || $m['type'] == 'mov')
 				$landing_video = $m;
+			else if( strtolower($m['type']) == 'jpg' || strtolower($m['type']) == 'png' || strtolower($m['type']) == 'git')
+				$landing_video_poster = '/media/' . m_pad($m['id']) . '.' . $m['type'];
 		}
 	}
 ?>
@@ -14,7 +16,7 @@
 <main>
 <? if(isset($landing_video)){ ?>
 <div id="landing-video-container">
-	<video id="landing-video" muted loop buffered playsinline>
+	<video id="landing-video" muted loop buffered playsinline <?= isset($landing_video_poster) ? 'poster="' .  $landing_video_poster . '"' : ''; ?> >
 		<source src="<?= m_url($landing_video); ?>" type="video/<?= $landing_video['type']; ?>">
 		Your browser doesn't support HTML 5 video.
 	</video>
