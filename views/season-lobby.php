@@ -400,7 +400,7 @@ body.loading .look img{
 	}
 	#video-controls
 	{
-		margin-top: -48px;
+		margin-top: -44px;
 
 	}
 	#progress-container

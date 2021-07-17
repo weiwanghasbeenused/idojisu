@@ -14,7 +14,7 @@ if(sBlinking_container.length != 0 )
 var sRandom_blink_hover_zone = document.getElementsByClassName('random-blink-hover-zone');
 if(sRandom_blink_hover_zone.length != 0)
 {
-	if(sRandom_blink_hover_zone[0].querySelectorAll('.blink-container')[0].classList.contains('look'))
+	if( document.querySelector('.random-blink-hover-zone.look') != null )
 	{
 		var padding = 20;
 		var blink_container_w = 50;
@@ -22,7 +22,7 @@ if(sRandom_blink_hover_zone.length != 0)
 		var rect_dev_x = 0.3;
 		var rect_dev_y = 0.4;
 	}
-	else if(sRandom_blink_hover_zone[0].id == 'logo'){
+	if( document.querySelector('.random-blink-hover-zone#logo') != null ){
 		var positions = [
 			[[-10, -20], [-5, -17], [7, -22], [15, -24]],
 			[[-15, -15], [-2, -14], [-5, -22], [10, -30]],
@@ -44,10 +44,9 @@ if(sRandom_blink_hover_zone.length != 0)
 			el.addEventListener('mouseenter', function(){
 				if(el.classList.contains('look'))
 				{
-
 					[].forEach.call(this_blink_container, function(e, j){
-						var this_left = padding + rect_w * Math.random();
-						var this_top = padding + rect_h * Math.random();
+						var this_left = parseInt(padding + rect_w * Math.random());
+						var this_top = parseInt(padding + rect_h * Math.random());
 						if(j == 0)
 						{
 							this_left = this_left * rect_dev_x;
@@ -68,7 +67,6 @@ if(sRandom_blink_hover_zone.length != 0)
 							this_left = padding + rect_w - (this_left  * rect_dev_x);
 							this_top = padding + rect_h - (this_top * rect_dev_y);
 						}
-
 						e.style.left = this_left + 'px';
 						e.style.top = this_top + 'px';
 					});
