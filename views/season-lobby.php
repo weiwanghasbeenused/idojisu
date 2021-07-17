@@ -42,6 +42,7 @@
 		}
 	}
 	unset($child);
+	$children_count = 0;
 ?>
 <main id="season-lobby-container" class="container main-container">
 	<? if(count($children) > 0){

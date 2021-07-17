@@ -117,14 +117,21 @@
 			</div>
 		</div>
 		<div id="gallery-frame" class="detail-block image-frame-container">
-			<? foreach($gallery_media as $key => $m){
-				$images_arr[] = m_url($m);
-				?><img id="gallery-image-<?= $key; ?>" class="gallery-image" alt="<?= $m['caption']; ?>" src="<?= m_url($m); ?>" ><?
-			} ?>
-			<? foreach($accessory_media as $key => $m){
+			<? 
+            if(!empty($gallery_items))
+            {
+                foreach($gallery_media as $key => $m){
+    				$images_arr[] = m_url($m);
+    				?><img id="gallery-image-<?= $key; ?>" class="gallery-image" alt="<?= $m['caption']; ?>" src="<?= m_url($m); ?>" ><?
+    			}
+            }
+            if(!empty($accessory_items))
+            {
+                foreach($accessory_media as $key => $m){
 				$images_arr[] = $figure_with_accessory_src[$m['caption']];
 				?><div id="accessory-frame-<?= $key; ?>" class="image-frame contain" style="background-image:url(<?= $figure_with_accessory_src[$m['caption']]; ?>);"></div><?
-			} ?>
+    			} 
+            }?>
 			<div id="image-frame-default" class="image-frame contain" style="background-image:url(<?= $default_src; ?>);"></div>
 			<div id="gallery-hint">
 				<div id="gallery-hint-center-holder" class="centered">
