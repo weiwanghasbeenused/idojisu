@@ -434,17 +434,17 @@ body.loading .look img{
 	var current_slideshow_idx = parseInt(current_slideshow_x / horizontal_slideshow_interval);
 	var slides_count = <?= $children_count; ?>;
 	var isIos = iOS();
+	var slideTimer = null;
 
 	next.addEventListener('click', function(){
+		horizontal_slideshow_interval = document.getElementsByClassName('look')[0].offsetWidth;
 		current_slideshow_idx = next_slide(sHorizontal_slideshow_container, horizontal_slideshow_interval, slides_count);
 	});
 	prev.addEventListener('click', function(){
+		horizontal_slideshow_interval = document.getElementsByClassName('look')[0].offsetWidth;
 		current_slideshow_idx = prev_slide(sHorizontal_slideshow_container, horizontal_slideshow_interval);
 	});
 
-	function init_horizontal_slideshow(){
-		horizontal_slideshow_interval = document.getElementsByClassName('look')[0].innerWidth;
-	}
 	function next_slide(slideshow_container, interval, max_count){
 		var idx = (parseInt(slideshow_container.scrollLeft / interval) + 1);
 		if(idx > max_count - 1)
@@ -455,7 +455,7 @@ body.loading .look img{
 		{
 			var slideshow_x = idx * interval;
 			var amount = slideshow_x - slideshow_container.scrollLeft;
-			SmoothHorizontalScrolling(slideshow_container, 250, amount, slideshow_container.scrollLeft);
+			sideScroll(slideshow_container, 'right', 100, amount, 70);
 		}
 		return idx;
 	}
@@ -468,20 +468,34 @@ body.loading .look img{
 		else
 		{
 			current_slideshow_x = idx * interval;
-			var amount = current_slideshow_x - slideshow_container.scrollLeft;
-			SmoothHorizontalScrolling(slideshow_container, 250, amount, slideshow_container.scrollLeft);
+			var amount = slideshow_container.scrollLeft - current_slideshow_x;
+			sideScroll(slideshow_container, 'left', 100, amount, 70);
 		}
 	}
-	function SmoothHorizontalScrolling(e, time, amount, start) {
-	    var eAmt = amount / 100;
-	    var curTime = 0;
-	    var scrollCounter = 0;
-	    while (curTime <= time) {
-	        window.setTimeout(SHS_B, curTime, e, scrollCounter, eAmt, start);
-	        curTime += time / 100;
-	        scrollCounter++;
+	function sideScroll(element,direction,duration,distance,step = 100){
+	    var scrollAmount = 0;
+	    var d_interval = parseInt(distance/ step);
+	    var t_interval = parseInt(1/6)/10;
+	    if(slideTimer != null)
+	    {
+	    	window.clearInterval(slideTimer);
+            slideTimer = null;
 	    }
+	    slideTimer = setInterval(function(){
+	    	
+	        if(direction == 'left'){
+	            element.scrollLeft -= d_interval;
+	        } else {
+	            element.scrollLeft += d_interval;
+	        }
+	        scrollAmount += d_interval;
+	        if(scrollAmount >= distance){
+	            window.clearInterval(slideTimer);
+	            slideTimer = null;
+	        }
+	    }, t_interval);
 	}
+
 
 	var videoContainer = document.getElementById('feature-video-container');
 	var video = document.getElementById('feature-video');
