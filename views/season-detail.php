@@ -33,7 +33,6 @@
 	$accessory_children = $oo->children($accessory_items['id']);
 	foreach($accessory_children as $a_child)
 	{
-
 		if(strtolower($a_child['name1']) == 'figure with accessory'){
 			$figure_with_accessory_media = $oo->media($a_child['id']);
 			foreach($figure_with_accessory_media as $a_m)

@@ -433,7 +433,6 @@ body.loading .look img{
 	var current_slideshow_x = sHorizontal_slideshow_container.scrollLeft;
 	var current_slideshow_idx = parseInt(current_slideshow_x / horizontal_slideshow_interval);
 	var slides_count = <?= $children_count; ?>;
-	var isIos = iOS();
 	var slideTimer = null;
 
 	next.addEventListener('click', function(){
@@ -446,29 +445,26 @@ body.loading .look img{
 	});
 
 	function next_slide(slideshow_container, interval, max_count){
-		var idx = (parseInt(slideshow_container.scrollLeft / interval) + 1);
-		if(idx > max_count - 1)
-		{
-			idx = max_count - 1;
-		}
-		else
+		var idx = parseInt(slideshow_container.scrollLeft / interval) + 1;
+		if(idx < max_count - 1)
 		{
 			var slideshow_x = idx * interval;
 			var amount = slideshow_x - slideshow_container.scrollLeft;
+			if(amount > interval)
+				amount -= interval;
 			sideScroll(slideshow_container, 'right', 100, amount, 70);
 		}
 		return idx;
 	}
 	function prev_slide(slideshow_container, interval, max_count=false){
-		var idx = (parseInt((slideshow_container.scrollLeft-5) / interval));
-		if(idx < 0)
+		var idx = parseInt( slideshow_container.scrollLeft  / interval) - 1;
+		if(idx >= 0)
 		{
-			idx = 0;
-		}
-		else
-		{
-			current_slideshow_x = idx * interval;
+
+			var current_slideshow_x = idx * interval;
 			var amount = slideshow_container.scrollLeft - current_slideshow_x;
+			if(amount > interval)
+				amount -= interval;
 			sideScroll(slideshow_container, 'left', 100, amount, 70);
 		}
 	}
@@ -482,7 +478,8 @@ body.loading .look img{
             slideTimer = null;
 	    }
 	    slideTimer = setInterval(function(){
-	    	
+	    	if(scrollAmount > distance - d_interval)
+	    		d_interval = distance - scrollAmount;
 	        if(direction == 'left'){
 	            element.scrollLeft -= d_interval;
 	        } else {
@@ -546,7 +543,6 @@ body.loading .look img{
 				video.pause();
 				toggleVideoControls(videoControls, videoControlsMask, 1000);
 			} 
-			
 		});
 		progress.addEventListener('click', function(e) {
 			var pos = (e.pageX  - (this.offsetLeft + this.offsetParent.offsetLeft)) / this.offsetWidth;
@@ -641,23 +637,6 @@ body.loading .look img{
 					}
 				}, delay);
 			}
-			
 		}
-	}
-	
-
-	
-	
-	function iOS() {
-	  return [
-	    'iPad Simulator',
-	    'iPhone Simulator',
-	    'iPod Simulator',
-	    'iPad',
-	    'iPhone',
-	    'iPod'
-	  ].includes(navigator.platform)
-	  // iPad on iOS 13 detection
-	  || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 	}
 </script>
