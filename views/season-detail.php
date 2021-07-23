@@ -1,14 +1,19 @@
 <?
 	$images_arr = array();
 	$children = $oo->children($item['id']);
-	$accessory_items = array();
-	$gallery_items = array();
+    $accessory_media = array();
+    $gallery_media = array();
 	foreach($children as $child)
 	{
-		if($child['url'] == 'accessory' && substr($child['name1'], 0, 1) != '.')
+		if($child['url'] == 'accessory' && substr($child['name1'], 0, 1) != '.'){
 			$accessory_items = $child;
+            $accessory_media = $oo->media($child['id']);
+        }
 		elseif($child['url'] == 'gallery' && substr($child['name1'], 0, 1) != '.')
+        {
 			$gallery_items = $child;
+            $gallery_media = $oo->media($child['id']);
+        }
 	}
 	$detail_text = wysiwygClean($item['body']);
 	$gallery_media = $oo->media($gallery_items['id']);
@@ -53,79 +58,78 @@
 		<div id="season-detail-sticky-container">
 			<h1 class="detail-blockname"><?= $item['name1']; ?></h1>
 			<div id="gallery-default-toggle" class="detail-blockname">&otimes;</div>
-			<div id="accessory-container">
-				<h2 class="detail-blockname">Items</h2>
-				<h2 id="items-toggle" class="blink-hover-zone detail-blockname list-toggle"><span class="blink-container"></span>Items<span class="blink-container"></span></h2>
-				<? if(!empty($accessory_items)){
-					$accessory_media = $oo->media($accessory_items['id']);
-					if(count($accessory_media) > 0)
-					{
-						?><div id="accessory-item-container"><?
-						foreach($accessory_media as $key => $m)
-						{
-							$src = m_src($m);						
-							preg_match_all($bracket_pattern, $m['caption'], $item_info);
-		 					$rank = $item_info[1][0];
-							$name = $item_info[2][0];
-							$alt = $name;
-							$images_arr[] = m_url($m);
-							$class = 'accessory-item';
-							if( ($key+1) % 2 == 0)
-								$class .= ' 2n-th-accessory-item';
-							if( ($key+1) % 3 == 0)
-								$class .= ' 3n-th-accessory-item';
-							?><div class="<?= $class; ?>" figure-src="<?= $figure_with_accessory_src[$m['caption']]; ?>">
-								<div class="accessory-item-img" style="background-image:url(<?= $src; ?>);"></div>
-								<div class="accessory-item-info">
-									<p><?= $name; ?></p>
-									<div id="rank-container">
-										<? for($i = 0; $i < $rank; $i++){
-											?><span class="rank active"></span><?
-										} 
-										for($i = 0; $i< 5-$rank; $i++ )
-										{
-											?><span class="rank"></span><?
-										}
-										?>
+			<div id="accessory-container" class="<?= empty($accessory_media) ? 'empty' : ''; ?>">
+                <? if(!empty($accessory_media)){
+                    ?><h2 class="detail-blockname">Items</h2><h2 id="items-toggle" class="blink-hover-zone detail-blockname list-toggle"><span class="blink-container"></span>Items<span class="blink-container"></span></h2>
+                    <div id="accessory-item-container"><?
+                        foreach($accessory_media as $key => $m)
+                        {
+                            $src = m_src($m);                       
+                            preg_match_all($bracket_pattern, $m['caption'], $item_info);
+                            $rank = $item_info[1][0];
+                            $name = $item_info[2][0];
+                            $alt = $name;
+                            $images_arr[] = m_url($m);
+                            $class = 'accessory-item';
+                            if( ($key+1) % 2 == 0)
+                                $class .= ' 2n-th-accessory-item';
+                            if( ($key+1) % 3 == 0)
+                                $class .= ' 3n-th-accessory-item';
+                            ?><div class="<?= $class; ?>" figure-src="<?= $figure_with_accessory_src[$m['caption']]; ?>">
+                                <div class="accessory-item-img" style="background-image:url(<?= $src; ?>);"></div>
+                                <div class="accessory-item-info">
+                                    <p><?= $name; ?></p>
+                                    <div id="rank-container">
+                                        <? for($i = 0; $i < $rank; $i++){
+                                            ?><span class="rank active"></span><?
+                                        } 
+                                        for($i = 0; $i< 5-$rank; $i++ )
+                                        {
+                                            ?><span class="rank"></span><?
+                                        }
+                                        ?>
 
-									</div>
-								</div>
-							</div>
-							<?
-						}
-						?></div><?
-					}
-					?><?
-				} ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <? }
+                    ?></div><?
+                }
+                else
+                {
+                    ?><div class="empty-placeholder detail-blockname"><div class="empty-cross-1 empty-cross"></div><div class="empty-cross-2 empty-cross"></div>Items</div><?
+                } ?>
 			</div><div id="gallery-container">
-				<h2 class="detail-blockname">Gallery</h2>
-				<h2 id="gallery-toggle" class="blink-hover-zone detail-blockname list-toggle"><span class="blink-container"></span>Gallery<span class="blink-container"></span></h2>
-				<? if(count($gallery_media) > 0){
-					?><div id="gallery-item-container"><?
-					foreach($gallery_media as $m)
-					{
-						if(substr($m['caption'], 0, 1) != '.')
-						{
-							$src = m_src($m);
-							$url = m_url($m);
-							$images_arr[] = m_url($m);
-							?><div class="gallery-option fade" style="background-image:url(<?= $src; ?>);" img-url="<?= $url; ?>"></div><?
-						}
-					}
-					?></div><?
-				} ?>
+                <? if(count($gallery_media) > 0){ ?>
+				    <h2 class="detail-blockname">Gallery</h2>
+                    <h2 id="gallery-toggle" class="blink-hover-zone detail-blockname list-toggle"><span class="blink-container"></span>Gallery<span class="blink-container"></span></h2>
+                    <div id="gallery-item-container"><?
+                    foreach($gallery_media as $m)
+                    {
+                        if(substr($m['caption'], 0, 1) != '.')
+                        {
+                            $src = m_src($m);
+                            $url = m_url($m);
+                            $images_arr[] = m_url($m);
+                            ?><div class="gallery-option fade" style="background-image:url(<?= $src; ?>);" img-url="<?= $url; ?>"></div><?
+                        }
+                    }
+                    ?></div>
+                <? } else{ ?>
+                    <div class="empty-placeholder detail-blockname"><div class="empty-cross-1 empty-cross"></div><div class="empty-cross-2 empty-cross"></div>Gallery</div>
+                <? } ?>
 			</div>
 		</div>
 		<div id="gallery-frame" class="detail-block image-frame-container">
 			<? 
-            if(!empty($gallery_items))
+            if(!empty($gallery_media))
             {
                 foreach($gallery_media as $key => $m){
     				$images_arr[] = m_url($m);
     				?><img id="gallery-image-<?= $key; ?>" class="gallery-image" alt="<?= $m['caption']; ?>" src="<?= m_url($m); ?>" ><?
     			}
             }
-            if(!empty($accessory_items))
+            if(!empty($accessory_media))
             {
                 foreach($accessory_media as $key => $m){
 				$images_arr[] = $figure_with_accessory_src[$m['caption']];
@@ -141,8 +145,13 @@
 			</div>
 		</div>
 		<div id="detail-container">
-			<h2 class="detail-blockname">Details</h2>
-			<p id="detail-text"><?= $detail_text; ?></p>
+            <? if(!empty($detail_text)){
+                ?><h2 class="detail-blockname">Details</h2><p id="detail-text"><?= $detail_text; ?></p><?
+            } else {
+                ?><div class="empty-placeholder detail-blockname"><div class="empty-cross-1 empty-cross"></div><div class="empty-cross-2 empty-cross"></div>Gallery</div><?
+            } ?>
+			
+			
 		</div>
 	</main><aside id="right-side-container">
 		
@@ -541,6 +550,42 @@ main[viewing="gallery"] #gallery-frame {
     color: #000;
     background-color: var(--sky-blue);
 }
+.empty-placeholder
+{
+    position: relative;
+    color: transparent;
+}
+.empty-placeholder:before
+{
+
+}
+.empty .detail-blockname
+{
+    color: transparent;
+}
+.empty-cross
+{
+    position: absolute;
+    background-color: #666;
+    
+    /*top: -1px;*/
+    top: 0;
+    transform: translate(-50%, -50%);
+}
+.empty-cross-1
+{
+    left: 0;
+    transform-origin: top left;
+}
+.empty-cross-2
+{
+    right: 0;
+    transform-origin: top right;
+}
+#detail-container .empty-placeholder
+{
+    border-bottom:none;
+}
 @media screen and (min-width: 768px) {
     #detail-layout-container
     {
@@ -702,6 +747,7 @@ main[viewing="gallery"] #gallery-frame {
     {
         padding: 10px 10px 20px 10px;
     }
+    
 }
 
 @media screen and (min-width: 1100px) {
@@ -787,6 +833,13 @@ main[viewing="gallery"] #gallery-frame {
 		sRight_side_container.appendChild(sGallery_container);
 		sLeft_side_container.appendChild(sAccessory_container);
 
+        var sAccessory_container_parent = sAccessory_container.parentNode;
+        if(sAccessory_container_parent.offsetHeight > sAccessory_container.offsetHeight)
+            sAccessory_container_parent.style.overflow = 'visible';
+
+        var sGallery_container_parent = sGallery_container.parentNode;
+        if(sGallery_container_parent.offsetHeight > sGallery_container.offsetHeight)
+            sGallery_container_parent.style.overflow = 'visible';
 	}
 	else
 	{
@@ -826,5 +879,31 @@ main[viewing="gallery"] #gallery-frame {
 			});
 		});
 	}
+
+    var sEmpty_placeholder = document.getElementsByClassName('empty-placeholder');
+    [].forEach.call(sEmpty_placeholder, function(el, i){
+        let placeholder_w = el.clientWidth + 1; // +1 = border width 
+        let placeholder_h = el.clientHeight + 1;
+        let cross_length = Math.sqrt(placeholder_w * placeholder_w + placeholder_h * placeholder_h);
+        let sEmpty_cross = el.querySelectorAll('.empty-cross');
+        [].forEach.call(sEmpty_cross, function(el, i){
+            el.style.width = cross_length + 'px';
+            el.style.height = '1px';
+            if(el.classList.contains('empty-cross-1'))
+            {
+                var deg = Math.atan(placeholder_h / placeholder_w);
+                deg = deg * 180 / Math.PI;
+                deg = parseInt(deg * 100) / 100;
+            }
+            else if(el.classList.contains('empty-cross-2'))
+            {
+                var deg = Math.atan(placeholder_h / placeholder_w);
+                deg = deg * 180 / Math.PI;
+                deg = -parseInt(deg * 100) / 100;
+            }
+            el.style.transform = 'translate(0, -100%) rotate('+deg+'deg)';
+
+        });
+    });
 	
 </script>

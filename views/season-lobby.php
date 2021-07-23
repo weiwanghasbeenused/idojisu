@@ -509,131 +509,116 @@ body.loading .look img{
 	var videoControlsMask = document.getElementById('video-controls-mask');
 	var videoControls_timer = null;
 
-	
-	videoControls.setAttribute('data-state', 'visible');
-	video.removeAttribute('controls');
-	var supportsProgress = (document.createElement('progress').max !== undefined);
-	if (!supportsProgress) progress.setAttribute('data-state', 'fake');
-	
-
-	window.addEventListener('load', function(){
-		var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen || video.webkitSupportsFullscreen);
-		if (!fullScreenEnabled)
-			fullscreen.style.display = 'none';
-	});
-
-	
-	var changeButtonState = function(type) {
-	   // Play/Pause button
-	   if (type == 'playpause') {
-	      if (video.paused || video.ended) {
-	         playpause.setAttribute('data-state', 'play');
-	      }
-	      else {
-	         playpause.setAttribute('data-state', 'pause');
-	      }
-	   }
-	}
-	video.addEventListener('play', function() {
-		changeButtonState('playpause');
-	}, false);
-	video.addEventListener('pause', function() {
-	   changeButtonState('playpause');
-	}, false);
-	playpause.addEventListener('click', function(e) {
-		if (video.paused || video.ended){
-			video.play();
-			toggleVideoControls(videoControls, videoControlsMask);
-		} 
-		else{
-			video.pause();
-			toggleVideoControls(videoControls, videoControlsMask, 1000);
-		} 
-		
-	});
-	progress.addEventListener('click', function(e) {
-		var pos = (e.pageX  - (this.offsetLeft + this.offsetParent.offsetLeft)) / this.offsetWidth;
-		video.currentTime = pos * video.duration;
-	});
-	fullscreen.addEventListener('click', function(e) {
-		handleFullscreen();
-	});
-	var handleFullscreen = function() {
-		if (isFullScreen()) {
-			if (video.webkitSupportsFullscreen) video.webkitExitFullscreen();
-			else if (document.exitFullscreen) document.exitFullscreen();
-			else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-			else if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
-			else if (document.msExitFullscreen) document.msExitFullscreen();
-			setFullscreenData(false);
-		}
-		else {
-			if (video.webkitSupportsFullscreen) video.webkitEnterFullscreen();
-			else if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
-			else if (videoContainer.mozRequestFullScreen) videoContainer.mozRequestFullScreen();
-			else if (videoContainer.webkitRequestFullScreen) videoContainer.webkitRequestFullScreen();
-			else if (videoContainer.msRequestFullscreen) videoContainer.msRequestFullscreen();
-			setFullscreenData(true);
-		}
-	}
-	function toggleFullscreen() {
-		if(video.requestFullScreen){
-			video.requestFullScreen();
-		} else if(video.webkitRequestFullScreen){
-			video.webkitRequestFullScreen();
-		} else if(video.mozRequestFullScreen){
-			video.mozRequestFullScreen();
-		}
-	}
-	var isFullScreen = function() {
-		return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement || video.webkitDisplayingFullscreen);
-	}
-	var setFullscreenData = function(state) {
-		videoContainer.setAttribute('data-fullscreen', !!state);
-		toggleVideoControls(videoControls, videoControlsMask, 1000);
-	}
-	document.addEventListener('fullscreenchange', function(e) {
-		setFullscreenData(!!(document.fullscreen || document.fullscreenElement));
-	});
-	document.addEventListener('webkitfullscreenchange', function() {
-		setFullscreenData(!!document.webkitIsFullScreen);
-	});
-	document.addEventListener('mozfullscreenchange', function() {
-		setFullscreenData(!!document.mozFullScreen);
-	});
-	document.addEventListener('msfullscreenchange', function() {
-		setFullscreenData(!!document.msFullscreenElement);
-	});
-	video.addEventListener('timeupdate', function() {
-		if (!progress.getAttribute('max')) progress.setAttribute('max', video.duration);
-		progress.value = video.currentTime;
-		progressBar.style.width = Math.floor((video.currentTime / video.duration) * 100) + '%';
-	});
-
-	video.addEventListener('click', function(){
-		if(video.played.length != 0)
-		{
-			toggleVideoControls(videoControls, videoControlsMask);
-		}
-	}, false);
-
-	function toggleVideoControls(controls, mask, delay=false)
+	if(video != undefined)
 	{
-		clearTimeout(videoControls_timer);
-		if(!delay)
-		{
-			if(controls.getAttribute('data-state') == 'hidden'){
-				controls.setAttribute('data-state', 'visible');
-				mask.setAttribute('data-state', 'visible');
-			}
-			else if(controls.getAttribute('data-state') == 'visible'){
-				controls.setAttribute('data-state', 'hidden');
-				mask.setAttribute('data-state', 'hidden');
+		videoControls.setAttribute('data-state', 'visible');
+		video.removeAttribute('controls');
+		var supportsProgress = (document.createElement('progress').max !== undefined);
+		if (!supportsProgress) progress.setAttribute('data-state', 'fake');
+		
+
+		window.addEventListener('load', function(){
+			var fullScreenEnabled = !!(document.fullscreenEnabled || document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitSupportsFullscreen || document.webkitFullscreenEnabled || document.createElement('video').webkitRequestFullScreen || video.webkitSupportsFullscreen);
+			if (!fullScreenEnabled)
+				fullscreen.style.display = 'none';
+		});
+		var changeButtonState = function(type) {
+			// Play/Pause button
+			if (type == 'playpause') {
+				if (video.paused || video.ended) 
+					playpause.setAttribute('data-state', 'play');
+				else 
+				 	playpause.setAttribute('data-state', 'pause');
 			}
 		}
-		else
+		video.addEventListener('play', function() {
+			changeButtonState('playpause');
+		}, false);
+		video.addEventListener('pause', function() {
+		   changeButtonState('playpause');
+		}, false);
+		playpause.addEventListener('click', function(e) {
+			if (video.paused || video.ended){
+				video.play();
+				toggleVideoControls(videoControls, videoControlsMask);
+			} 
+			else{
+				video.pause();
+				toggleVideoControls(videoControls, videoControlsMask, 1000);
+			} 
+			
+		});
+		progress.addEventListener('click', function(e) {
+			var pos = (e.pageX  - (this.offsetLeft + this.offsetParent.offsetLeft)) / this.offsetWidth;
+			video.currentTime = pos * video.duration;
+		});
+		fullscreen.addEventListener('click', function(e) {
+			handleFullscreen();
+		});
+		var handleFullscreen = function() {
+			if (isFullScreen()) {
+				if (video.webkitSupportsFullscreen) video.webkitExitFullscreen();
+				else if (document.exitFullscreen) document.exitFullscreen();
+				else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+				else if (document.webkitCancelFullScreen) document.webkitCancelFullScreen();
+				else if (document.msExitFullscreen) document.msExitFullscreen();
+				setFullscreenData(false);
+			}
+			else {
+				if (video.webkitSupportsFullscreen) video.webkitEnterFullscreen();
+				else if (videoContainer.requestFullscreen) videoContainer.requestFullscreen();
+				else if (videoContainer.mozRequestFullScreen) videoContainer.mozRequestFullScreen();
+				else if (videoContainer.webkitRequestFullScreen) videoContainer.webkitRequestFullScreen();
+				else if (videoContainer.msRequestFullscreen) videoContainer.msRequestFullscreen();
+				setFullscreenData(true);
+			}
+		}
+		function toggleFullscreen() {
+			if(video.requestFullScreen){
+				video.requestFullScreen();
+			} else if(video.webkitRequestFullScreen){
+				video.webkitRequestFullScreen();
+			} else if(video.mozRequestFullScreen){
+				video.mozRequestFullScreen();
+			}
+		}
+		var isFullScreen = function() {
+			return !!(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement || video.webkitDisplayingFullscreen);
+		}
+		var setFullscreenData = function(state) {
+			videoContainer.setAttribute('data-fullscreen', !!state);
+			toggleVideoControls(videoControls, videoControlsMask, 1000);
+		}
+		document.addEventListener('fullscreenchange', function(e) {
+			setFullscreenData(!!(document.fullscreen || document.fullscreenElement));
+		});
+		document.addEventListener('webkitfullscreenchange', function() {
+			setFullscreenData(!!document.webkitIsFullScreen);
+		});
+		document.addEventListener('mozfullscreenchange', function() {
+			setFullscreenData(!!document.mozFullScreen);
+		});
+		document.addEventListener('msfullscreenchange', function() {
+			setFullscreenData(!!document.msFullscreenElement);
+		});
+		video.addEventListener('timeupdate', function() {
+			if (!progress.getAttribute('max')) progress.setAttribute('max', video.duration);
+			progress.value = video.currentTime;
+			progressBar.style.width = Math.floor((video.currentTime / video.duration) * 100) + '%';
+		});
+
+		video.addEventListener('click', function(){
+			if(video.played.length != 0)
+			{
+				toggleVideoControls(videoControls, videoControlsMask);
+			}
+		}, false);
+
+		function toggleVideoControls(controls, mask, delay=false)
 		{
-			videoControls_timer = setTimeout(function(){
+			clearTimeout(videoControls_timer);
+			if(!delay)
+			{
 				if(controls.getAttribute('data-state') == 'hidden'){
 					controls.setAttribute('data-state', 'visible');
 					mask.setAttribute('data-state', 'visible');
@@ -642,10 +627,27 @@ body.loading .look img{
 					controls.setAttribute('data-state', 'hidden');
 					mask.setAttribute('data-state', 'hidden');
 				}
-			}, delay);
+			}
+			else
+			{
+				videoControls_timer = setTimeout(function(){
+					if(controls.getAttribute('data-state') == 'hidden'){
+						controls.setAttribute('data-state', 'visible');
+						mask.setAttribute('data-state', 'visible');
+					}
+					else if(controls.getAttribute('data-state') == 'visible'){
+						controls.setAttribute('data-state', 'hidden');
+						mask.setAttribute('data-state', 'hidden');
+					}
+				}, delay);
+			}
+			
 		}
-		
 	}
+	
+
+	
+	
 	function iOS() {
 	  return [
 	    'iPad Simulator',

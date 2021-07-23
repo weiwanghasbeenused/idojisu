@@ -1,0 +1,3 @@
+- fullscreen on mobile homepage
+- transition animation on mobile chrome
++ hide items, gallery, and detail if there's none in the records
