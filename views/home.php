@@ -93,5 +93,8 @@
 	window.addEventListener('load', function(){
 		var sLanding_video_container = document.getElementById('landing-video-container');
 		sLanding_video_container.style.height = window.innerHeight + 'px';
+		let video = sLanding_video_container.querySelector('video');
+		if(video != null && isMobileLayout)
+			video.style.paddingTop = '49px';
 	});
 </script>
