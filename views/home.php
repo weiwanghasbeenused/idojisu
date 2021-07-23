@@ -90,4 +90,8 @@
 			subject.style.height = '100%';
 		}
 	}
+	window.addEventListener('load', function(){
+		var sLanding_video_container = document.getElementById('landing-video-container');
+		sLanding_video_container.style.height = window.innerHeight + 'px';
+	});
 </script>
