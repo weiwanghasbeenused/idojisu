@@ -564,22 +564,20 @@ main[viewing="gallery"] #gallery-frame {
 }
 .empty-cross
 {
-    position: absolute;
+    /*position: absolute;
     background-color: #666;
-    
-    /*top: -1px;*/
     top: 0;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
 }
 .empty-cross-1
 {
-    left: 0;
-    transform-origin: top left;
+    /*left: 0;*/
+    /*transform-origin: top left;*/
 }
 .empty-cross-2
 {
-    right: 0;
-    transform-origin: top right;
+    /*right: 0;*/
+    /*transform-origin: top right;*/
 }
 #detail-container .empty-placeholder
 {
@@ -878,7 +876,7 @@ main[viewing="gallery"] #gallery-frame {
 			});
 		});
 	}
-
+    /*
     var sEmpty_placeholder = document.getElementsByClassName('empty-placeholder');
     [].forEach.call(sEmpty_placeholder, function(el, i){
         let placeholder_w = el.clientWidth + 1; // +1 = border width 
@@ -904,5 +902,5 @@ main[viewing="gallery"] #gallery-frame {
 
         });
     });
-	
+	*/
 </script>
